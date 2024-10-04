@@ -1,0 +1,5 @@
+# Created at 2024-01-23T21:54:29.309
+Boot Manifest-JAR contains absolute paths in classpath 'D:\VovaLearn\Java\test\JDBC-school-app\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

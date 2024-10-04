@@ -1,0 +1,278 @@
+Apple juice
+Apple cider
+Almond milk
+Arnold Palmer
+Apricot juice
+Aperol spritz
+Aquavit
+Amaretto sour
+Absinthe
+Ale (a type of beer)
+Beer
+Bloody Mary
+Black tea
+Butterbeer
+Baileys
+Bellini
+Black coffee
+Bitter lemon
+Bourbon
+Buttermilk
+Birch juice
+Bordeaux wine
+Coffee
+Coca-Cola
+Champagne
+Chardonnay
+Chai tea
+Cranberry juice
+Club soda
+Cider
+Campari
+Cognac
+Clamato juice
+Choco milk
+Daiquiri
+Dark & Stormy
+Dirty Martini
+Dublin Iced Coffee
+Dry Martini
+Dublin Lemonade
+Dublin Irish Whiskey
+Diet cola
+Date shake
+Dongle (alcoholic punch)
+Espresso
+Energy drink
+Eggnog
+Elixir
+Elderflower cordial
+Fruit juice
+Fruit smoothie
+Fresh lemonade
+Frozen margarita
+Fresh iced tea
+Flavored latte
+Fresh orange juice
+French press coffee
+Fireball Cinnamon Whisky
+Fernet
+Five alive juice
+Fresh mint lemonade
+Green tea
+Ginger ale
+Grape juice
+Gatorade
+Grapefruit juice
+Gluhwein
+Ginger beer
+Green smoothie
+Golden milk latte
+Grape soda
+Green juice
+Gourmet coffee
+Granita
+Granny smith apple juice
+Green tea lemonade
+Herbal tea
+Honey lemon tea
+Hard seltzer
+Hot coffee
+Hoppy beer
+Hard lemonade
+Hot chocolate
+Hot tea latte
+Horchata
+Hot cider
+Honeysuckle tea
+Hot toddy
+High energy drinks
+Horchata latte
+Iced Tea
+Italian Espresso
+Irish Hot Whiskey
+Irish Coffee
+Iced Coffee
+Italian Limoncello
+Indian Jaljeera
+Iced Mocha
+Italian Prosecco
+Juice
+Japanese Matcha Tea
+Jamaican Rum Punch
+Juniper Berry Infused Gin
+Jack Daniel’s Tennessee Whiskey
+Jagger Bombs
+Japanese Soba Tea
+Japanese Sake
+Jackfruit Smoothie
+Japanese Hojicha Tea
+Long Island Iced Tea
+Limeade
+Lemonade
+Lemon-Lime soda
+Latte
+Limoncello
+Lager
+Liqueur
+Martini
+Melon Smoothie
+Milk
+Milkshakes
+Matcha Tea
+Mojito
+Mandarin Orange Juice
+Mint Tea
+Mandarin Spritz
+Margarita
+Mint Julep
+Mango Juice
+Mexican Hot Chocolate
+Mulled Wine
+Non-alcoholic wine
+Nescafe
+Nestea
+Non-alcoholic beer
+Nutmeg latte
+Nuka
+Oolong tea
+Orange juice
+Organic smoothie
+Old-fashioned lemonade
+Organic green tea
+Organic milk
+Orgeat
+Pisco Sour
+Pomegranate juice
+Pale Ale
+Pina colada
+Pink lemonade
+Porter
+Punch
+Prosecco
+Root beer
+Rose hip tea
+Rice milk
+Raspberry iced tea
+Red wine
+Rum and coke
+Rhubarb juice
+Red grape juice
+Raspberry lemonade
+Red tea
+Rich hot chocolate
+Soy Milk
+Sparkling Water
+Spiced Tea
+Sweet Tea
+Soda
+Smoothie
+Sparkling Juice
+Sake
+Sangria
+Spritzers
+Sports Drink
+Syrup
+Shakes
+Specialty Coffee
+Tonic with Gin
+Tea Latte
+Tea
+Tonic Water
+Turmeric Latte
+Teguila Sunrise
+Tonic Vodka
+Vanilla smoothie
+Vanilla Latte
+Vodka and tonic
+Vegetable juice
+Vanilla cream soda
+Vanilla rooibos tea
+Vegan almond milk
+Wine
+Whisky sour
+Whiskey
+Water
+Wildberry smoothie
+White tea
+Watermelon juice
+Yoo-hoo
+Yakult
+Yerba Buena Tea
+Yumberry Juice
+Yerba Mate
+Yellow Chartreuse
+Yuzu Juice
+Yuzu Sake
+Yerba Mate Lemonade
+Yumberry Smoothie
+Yellow Energy Drink
+Yuzu Margarita
+Spirit-based cocktails
+Liqueurs
+Beer
+Wine
+Fortified wines
+Spirits
+Coffee
+Hot chocolate
+Juice
+Sports drinks
+Iced tea
+Water
+Tea
+Milk
+Soft drinks
+Energy drinks
+Ice-blended coffee drinks
+Herbal teas
+Probiotic drinks
+Kombucha
+Smoothies
+Milkshakes
+Infused water
+Shakes and malts
+Old Fashioned
+Whiskey Sour
+Pina Colada
+Long Island Iced Tea
+Gin and Tonic
+Martini
+Margarita
+Bloody Mary
+Manhattan
+Negroni
+Bacardi Cocktail
+Sazerac
+Cosmopolitan
+Rusty Nail
+Champagne Cocktail
+Sidecar
+Jalapeño Margarita
+Spritz (Aperol or Campari)
+Screwdriver
+White Russian
+Harvey Wallbanger
+Bellini
+Irish Coffee
+Mojito
+Daiquiri
+Mai Tai
+Kir Royale
+Ale
+Lager
+Stout
+Tequila Sunrise
+Black Russian
+Brandy Alexander
+Tom Collins
+Blue Hawaiian
+Pilsner
+IPA (India Pale Ale)
+Cider
+Wine
+Fuzzy Navel
+French Martini
+Kamikaze
+Russian Standard Vodka
+Jack and Coke

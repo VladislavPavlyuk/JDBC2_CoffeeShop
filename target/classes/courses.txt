@@ -1,0 +1,10 @@
+mathematics
+biology
+physics
+chemical
+philosophy
+linguistics
+radio engineering
+programming
+law
+literature
