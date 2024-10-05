@@ -5,7 +5,7 @@ import org.example.exception.FileException;
 
 import static java.lang.System.setProperty;
 
-public class CoffeeShopInitializer {
+public class CoffeeshopInitializer {
 
     public void coffeeshopInitialize() {
         setProperty("test", "false");

@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.service.CoffeeShopInitializer;
+import org.example.service.CoffeeshopInitializer;
 
 import static org.example.menu.MenuExecutor.startMenu;
 
@@ -14,7 +14,7 @@ public class App
     {
         System.setProperty("test", "false");
 
-        CoffeeShopInitializer coffeeshop = new CoffeeShopInitializer();
+        CoffeeshopInitializer coffeeshop = new CoffeeshopInitializer();
         coffeeshop.coffeeshopInitialize();
         startMenu();
     }
