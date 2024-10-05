@@ -13,11 +13,11 @@ public interface StaffDao {
 
     void update(Staff staff) ;
 
-    void delete(long studentId) ;
+    void delete(long staffId) ;
 
     List<Staff> findAll() ;
 
-    List<Staff> findAllFromCourse(String courseName) ;
+    List<Staff> findAllFromCoffeeshops(String coffeeshop_Title) ;
 
     void deleteAll() ;
 }

@@ -3,10 +3,10 @@ package org.example.menu;
 
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.shiftDAO.ShiftDaoImpl;
+import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDaoImpl;
 import org.example.dao.staffDAO.StaffDao;
 import org.example.dao.staffDAO.StaffDaoImpl;
-import org.example.dao.staffAndCoffeeShopDAO.StaffToCoffeeShopDao;
-import org.example.dao.staffAndCoffeeShopDAO.StaffToCoffeeShopDaoImpl;
+import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;
 import org.example.model.Shift;
 import org.example.model.Staff;
 
@@ -48,47 +48,47 @@ public class MenuExecutor {
 
     public static void menuItem1Execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, enter the number of students");
-        int numberOfStudents = scanner.nextInt();
+        System.out.println("Please, enter the number of staff");
+        int numberOfStaff = scanner.nextInt();
 
         ShiftDao shiftDao = new ShiftDaoImpl();
-        List<String> groups = shiftDao.findAllShiftsWithLessOrEqualStaffNumber(numberOfStudents);
+        List<String> shifts = shiftDao.findAllShiftsWithLessOrEqualStaffNumber(numberOfStaff);
 
-        System.out.println("Groups with less ore equal students nembers are");
-        showStringList(groups);
+        System.out.println("Shifts with less ore equal staff are");
+        showStringList(shifts);
     }
 
     public static void menuItem2Execute() {
-        showCoursesList();
+        showCoffeeshopList();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, enter the courses name");
-        String courseName = scanner.nextLine();
+        System.out.println("Please, enter the coffeshop title");
+        String coffeeshop_title = scanner.nextLine();
 
         StaffDao staffDao = new StaffDaoImpl();
-        List<Staff> staff = staffDao.findAllFromCourse(courseName);
+        List<Staff> staff = staffDao.findAllFromCoffeeshops(coffeeshop_title);
 
-        List<String> studentsList = staff.stream().collect(
+        List<String> staffList = staff.stream().collect(
                 ArrayList::new,
                 (list,item)-> list.add(item.getFirstName() + " " + item.getLastName()),
                 (list1, list2) -> list1.addAll(list2));
 
-        showStringList(studentsList);
+        showStringList(staffList);
     }
 
     public static void menuItem3Execute() {
         Scanner scanner = new Scanner(System.in);
-        showGroupList();
-        System.out.println("Please, enter the group to add student");
-        String groupName = scanner.nextLine();
-        System.out.println("Please, enter the first name of student");
+        showShiftList();
+        System.out.println("Please, enter the shift to add staff");
+        String shiftTitle = scanner.nextLine();
+        System.out.println("Please, enter the first name of staff");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the last name of student");
+        System.out.println("Please, enter the last name of staff");
         String lastName = scanner.nextLine();
 
         ShiftDao shiftDao = new ShiftDaoImpl();
         List<Shift> shifts = shiftDao.findAll();
         try {
-            Shift shiftToAdd = shifts.stream().filter(e -> e.getShiftTitle().equals(groupName)).collect(Collectors.toList()).get(0);
+            Shift shiftToAdd = shifts.stream().filter(e -> e.getShiftTitle().equals(shiftTitle)).collect(Collectors.toList()).get(0);
             StaffDao staffDao = new StaffDaoImpl();
             Staff addStaff = new Staff();
             addStaff.setFirstName(firstName);
@@ -97,49 +97,48 @@ public class MenuExecutor {
             staffDao.save(addStaff);
 
         } catch(IndexOutOfBoundsException e) {
-            System.err.println("Invalid name of group");
+            System.err.println("Invalid title of shift");
         }
     }
 
     public static void menuItem4Execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, enter the student id for delete");
-        long studentId = scanner.nextLong();
+        System.out.println("Please, enter the staff id for delete");
+        long staffId = scanner.nextLong();
 
         StaffDao staffDao = new StaffDaoImpl();
-        staffDao.delete(studentId);
+        staffDao.delete(staffId);
     }
 
     public static void menuItem5Execute() {
         Scanner scanner = new Scanner(System.in);
 
-        showCoursesList();
-        System.out.println("Please, enter the courses name, that assign to student");
-        String courseName = scanner.nextLine();
+        showCoffeeshopList();
+        System.out.println("Please, enter the coffeeshop titles, that assign to staff");
+        String coffeeshop_title = scanner.nextLine();
 
-        System.out.println("Please, enter the student id to assign");
-        long studentId = scanner.nextLong();
+        System.out.println("Please, enter the staff id to assign");
+        long staffId = scanner.nextLong();
 
-        StaffToCoffeeShopDao staffToCoffeeShopDao = new StaffToCoffeeShopDaoImpl();
-        staffToCoffeeShopDao.assignStudentToCourse(studentId,courseName);
+        StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
+        staffToCoffeeshopDao.assignStaffToCoffeeshop(staffId,coffeeshop_title);
     }
 
     public static void menuItem6Execute() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please, enter the student id to assign");
-        long studentId = scanner.nextLong();
+        System.out.println("Please, enter the staff id to assign");
+        long staffId = scanner.nextLong();
         scanner.nextLine();
 
-        showCoursesListStudent(studentId);
-        System.out.println("Please, enter the course name to remove from student");
-        String courseName = scanner.nextLine();
+        showCoffeeshopListStaff(staffId);
+        System.out.println("Please, enter the coffeeshop title to remove from staff");
+        String coffeeshop_title = scanner.nextLine();
 
-        StaffToCoffeeShopDao staffToCoffeeShopDao = new StaffToCoffeeShopDaoImpl();
-        staffToCoffeeShopDao.deleteCourseFromStudent(studentId, courseName);
+        StaffToCoffeeshopDao staffToCoffeeShopDao = new StaffToCoffeeshopDaoImpl();
+        staffToCoffeeShopDao.deleteCoffeeshopFromStaff(staffId, coffeeshop_title);
     }
 
-    private MenuExecutor() {
-    }
+    private MenuExecutor() {    }
 
 }

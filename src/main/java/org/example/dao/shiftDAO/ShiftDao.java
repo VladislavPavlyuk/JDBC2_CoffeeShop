@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ShiftDao extends CRUDInterface<Shift> {
 
-    List<String> findAllShiftsWithLessOrEqualStaffNumber(int numberStudents);
+    List<String> findAllShiftsWithLessOrEqualStaffNumber(int numberStaff);
 }

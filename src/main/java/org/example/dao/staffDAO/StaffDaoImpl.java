@@ -40,10 +40,10 @@ public class StaffDaoImpl implements StaffDao {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
              PreparedStatement ps = conn.prepareStatement(SAVE_STAFF)) {
 
-            for (var currentStudent : staff) {
-                ps.setLong(1, currentStudent.getShift_Id());
-                ps.setString(2, currentStudent.getFirstName());
-                ps.setString(3, currentStudent.getLastName());
+            for (var currentStaff : staff) {
+                ps.setLong(1, currentStaff.getShift_Id());
+                ps.setString(2, currentStaff.getFirstName());
+                ps.setString(3, currentStaff.getLastName());
                 ps.addBatch();
             }
             ps.executeBatch();
@@ -100,12 +100,12 @@ public class StaffDaoImpl implements StaffDao {
     }
 
     @Override
-    public List<Staff> findAllFromCourse(String courseName) {
+    public List<Staff> findAllFromCoffeeshops(String coffeeshop_Title) {
         List<Staff> resultStaff = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
              PreparedStatement ps = conn.prepareStatement(FIND_ALL_STAFF_FROM_COFFEESHOP)) {
 
-            ps.setString(1,courseName);
+            ps.setString(1,coffeeshop_Title);
             try (ResultSet result = ps.executeQuery()) {
                 while (result.next()) {
                     Staff addStaff = new Staff();

@@ -1,20 +1,20 @@
 package org.example.service;
 
 import org.example.dao.ConnectionFactory;
-import org.example.dao.coffeeShopDAO.CoffeeShopDao;
-import org.example.dao.coffeeShopDAO.CoffeeShopDaoImpl;
+import org.example.dao.coffeeshopDAO.CoffeeshopDao;
+import org.example.dao.coffeeshopDAO.CoffeeshopDaoImpl;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.shiftDAO.ShiftDaoImpl;
 import org.example.dao.staffDAO.StaffDao;
 import org.example.dao.staffDAO.StaffDaoImpl;
-import org.example.dao.staffAndCoffeeShopDAO.StaffToCoffeeShopDao;
-import org.example.dao.staffAndCoffeeShopDAO.StaffToCoffeeShopDaoImpl;
+import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;
+import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDaoImpl;
 import org.example.exception.ConnectionDBException;
 import org.example.exception.FileException;
-import org.example.model.CoffeeShop;
+import org.example.model.Coffeeshop;
 import org.example.model.Shift;
 import org.example.model.Staff;
-import org.example.model.StaffToCoffeeShop;
+import org.example.model.StaffToCoffeeshop;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,7 +27,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CoffeeShopDbInitializer {
+public class CoffeeshopDbInitializer {
 
     private static final Random RANDOM_GENERATOR = new Random();
     private static final List<String> TABLES_NAME_ARRAY;
@@ -100,12 +100,12 @@ public class CoffeeShopDbInitializer {
     }
 
     public static void deleteAllRowsInDB() {
-        CoffeeShopDao coffeeShopDao = new CoffeeShopDaoImpl();
+        CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
         ShiftDao shiftDao = new ShiftDaoImpl();
         StaffDao staffDao = new StaffDaoImpl();
-        StaffToCoffeeShopDao staffToCoffeeShopDao = new StaffToCoffeeShopDaoImpl();
-        staffToCoffeeShopDao.deleteAll();
-        coffeeShopDao.deleteAll();
+        StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
+        staffToCoffeeshopDao.deleteAll();
+        coffeeshopDao.deleteAll();
         staffDao.deleteAll();
         shiftDao.deleteAll();
     }
@@ -130,20 +130,20 @@ public class CoffeeShopDbInitializer {
         shiftDao.saveMany(shifts);
     }
 
-    public static void createCoffeeShops() throws FileException {
-        String coursesFileName = PropertyFactory.getInstance().getProperty().getProperty("data.courses");
-        CoffeeShopDao coffeeShopDao = new CoffeeShopDaoImpl();
+    public static void createCoffeeshops() throws FileException {
+        String coffeshopFileName = PropertyFactory.getInstance().getProperty().getProperty("data.coffeeshops");
+        CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
 
-        List<CoffeeShop> courses = new ArrayList<>();
-        try (Stream<String> lineStream = Files.lines(Paths.get(coursesFileName))) {
+        List<Coffeeshop> coffeeshops = new ArrayList<>();
+        try (Stream<String> lineStream = Files.lines(Paths.get(coffeshopFileName))) {
             for (var currentString : lineStream.collect(Collectors.toList())) {
-                CoffeeShop course = new CoffeeShop();
-                course.setCoffeeshopName(currentString);
-                course.setCoffeeshopDescription("This is " + currentString + " faculty");
+                Coffeeshop coffeeshop = new Coffeeshop();
+                coffeeshop.setCoffeeshopTitle(currentString);
+                coffeeshop.setCoffeeshopDescription("This is " + currentString + " description");
 
-                courses.add(course);
+                coffeeshops.add(coffeeshop);
             }
-            coffeeShopDao.saveMany(courses);
+            coffeeshopDao.saveMany(coffeeshops);
         } catch (IOException exception) {
             throw new FileException("Error with createTables.sql");
         }
@@ -173,18 +173,18 @@ public class CoffeeShopDbInitializer {
     }
 
     public static void assignStaffToCoffeeshops() {
-        CoffeeShopDao coffeeShopDao = new CoffeeShopDaoImpl();
-        List<CoffeeShop> courses = coffeeShopDao.findAll();
+        CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
+        List<Coffeeshop> coffeeshops = coffeeshopDao.findAll();
         StaffDao staffDao = new StaffDaoImpl();
         List<Staff> staff = staffDao.findAll();
 
-        StaffToCoffeeShopDao staffToCoffeeShopDao = new StaffToCoffeeShopDaoImpl();
-        for (var currentStudent : staff) {
+        StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
+        for (var currentStaff : staff) {
             for (int count = 0; count < (RANDOM_GENERATOR.nextInt(2) + 1); count++) {
-                StaffToCoffeeShop staffToCoffeeShop = new StaffToCoffeeShop();
-                staffToCoffeeShop.setStaff_Id(currentStudent.getId());
-                staffToCoffeeShop.setCoffeeshop_Id(courses.get(RANDOM_GENERATOR.nextInt(courses.size())).getId());
-                staffToCoffeeShopDao.save(staffToCoffeeShop);
+                StaffToCoffeeshop staffToCoffeeshop = new StaffToCoffeeshop();
+                staffToCoffeeshop.setStaff_Id(currentStaff.getId());
+                staffToCoffeeshop.setCoffeeshop_Id(coffeeshops.get(RANDOM_GENERATOR.nextInt(coffeeshops.size())).getId());
+                staffToCoffeeshopDao.save(staffToCoffeeshop);
             }
         }
     }
@@ -199,7 +199,6 @@ public class CoffeeShopDbInitializer {
         }
     }
 
-    private CoffeeShopDbInitializer() {
+    private CoffeeshopDbInitializer() {
     }
-
 }

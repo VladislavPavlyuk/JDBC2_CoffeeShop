@@ -21,7 +21,7 @@ public class TxtFileReaderTest {
     @Test
     void readFile_ShouldReturnListOfStringsFromFile_WenCalled() {
 
-        TxtFileReader txtFileReader = new TxtFileReader("data.courses");
+        TxtFileReader txtFileReader = new TxtFileReader("data.coffeeshops");
         try {
             List<String> actual =  txtFileReader.readFile();
             List<String> expected = new ArrayList<>();

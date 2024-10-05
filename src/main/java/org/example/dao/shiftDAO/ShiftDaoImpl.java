@@ -13,23 +13,23 @@ import java.util.List;
 
 public class ShiftDaoImpl implements ShiftDao {
 
-    private static final String SAVE_GROUP = "INSERT INTO groups(group_name) VALUES(?)";
-    private static final String FIND_ALL_GROUPS = "SELECT * FROM groups";
-    private static final String DELETE_ALL_GROUPS = "DELETE FROM groups";
-    private static final String FIND_ALL_GROUPS_WITH_LESS_ORE_EQUAL_STUDENTS =
-            "SELECT groups.group_name, COUNT(*) AS count_students\n" +
-                    "FROM groups JOIN students ON groups.id = students.group_id\n" +
-                    "GROUP BY groups.group_name\n" +
+    private static final String SAVE_SHIFT = "INSERT INTO shifts(shift_title) VALUES(?)";
+    private static final String FIND_ALL_SHIFTS = "SELECT * FROM shifts";
+    private static final String DELETE_ALL_SHIFTS = "DELETE FROM shifts";
+    private static final String FIND_ALL_SHIFTS_WITH_LESS_ORE_EQUAL_STAFF =
+            "SELECT shifts.shift_title, COUNT(*) AS count_staff\n" +
+                    "FROM shifts JOIN staff ON shifts.id = staff.shift_id\n" +
+                    "GROUP BY shifts.shift_title\n" +
                     "HAVING COUNT(*) <= (?)";
-    private static final String UPDATE_GROUP = "UPDATE groups SET group_name = ? " +
-            " WHERE groups.id = ? ";
-    private static final String DELETE_GROUP = "DELETE FROM groups WHERE groups.id = ?";
+    private static final String UPDATE_SHIFT = "UPDATE shifts SET shift_title = ? " +
+            " WHERE shifts.id = ? ";
+    private static final String DELETE_SHIFT = "DELETE FROM shifts WHERE shifts.id = ?";
 
     @Override
     public void save(Shift shift) {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(SAVE_GROUP)) {
-            ps.setString(1, shift.getShiftName());
+             PreparedStatement ps = conn.prepareStatement(SAVE_SHIFT)) {
+            ps.setString(1, shift.getShiftTitle());
             ps.execute();
         } catch (ConnectionDBException | SQLException e) {
             System.err.println(e.getMessage());
@@ -39,10 +39,10 @@ public class ShiftDaoImpl implements ShiftDao {
     @Override
     public void saveMany(List<Shift> shifts) {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(SAVE_GROUP)) {
+             PreparedStatement ps = conn.prepareStatement(SAVE_SHIFT)) {
 
-            for (var currentGroup : shifts) {
-                ps.setString(1, currentGroup.getShiftName());
+            for (var currentShift : shifts) {
+                ps.setString(1, currentShift.getShiftTitle());
                 ps.addBatch();
             }
             ps.executeBatch();
@@ -54,8 +54,8 @@ public class ShiftDaoImpl implements ShiftDao {
     @Override
     public void update(Shift shift) {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(UPDATE_GROUP)) {
-            ps.setString(1, shift.getShiftName());
+             PreparedStatement ps = conn.prepareStatement(UPDATE_SHIFT)) {
+            ps.setString(1, shift.getShiftTitle());
             ps.setLong(2, shift.getId());
             ps.execute();
         } catch (ConnectionDBException |SQLException e) {
@@ -66,7 +66,7 @@ public class ShiftDaoImpl implements ShiftDao {
     @Override
     public void delete(Shift shift) {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(DELETE_GROUP)) {
+             PreparedStatement ps = conn.prepareStatement(DELETE_SHIFT)) {
             ps.setLong(1, shift.getId());
             ps.execute();
         } catch (ConnectionDBException |SQLException e) {
@@ -78,7 +78,7 @@ public class ShiftDaoImpl implements ShiftDao {
     public List<Shift> findAll() {
         List<Shift> resultShifts = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(FIND_ALL_GROUPS)) {
+             PreparedStatement ps = conn.prepareStatement(FIND_ALL_SHIFTS)) {
 
             ResultSet result = ps.executeQuery();
 
@@ -98,7 +98,7 @@ public class ShiftDaoImpl implements ShiftDao {
     @Override
     public void deleteAll() {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(DELETE_ALL_GROUPS)) {
+             PreparedStatement ps = conn.prepareStatement(DELETE_ALL_SHIFTS)) {
             ps.execute();
         } catch (ConnectionDBException | SQLException e) {
             System.err.println(e.getMessage());
@@ -106,20 +106,20 @@ public class ShiftDaoImpl implements ShiftDao {
     }
 
     @Override
-    public List<String> findAllShiftsWithLessOrEqualStaffNumber(int numberStudents) {
-        List<String> resultGroupNames = new ArrayList<>();
+    public List<String> findAllShiftsWithLessOrEqualStaffNumber(int numberStaff) {
+        List<String> resultShiftTitles = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(FIND_ALL_GROUPS_WITH_LESS_ORE_EQUAL_STUDENTS)) {
-            ps.setInt(1, numberStudents);
+             PreparedStatement ps = conn.prepareStatement(FIND_ALL_SHIFTS_WITH_LESS_ORE_EQUAL_STAFF)) {
+            ps.setInt(1, numberStaff);
             ResultSet result = ps.executeQuery();
 
             while (result.next()) {
-                resultGroupNames.add(result.getString(1));
+                resultShiftTitles.add(result.getString(1));
             }
-            return resultGroupNames;
+            return resultShiftTitles;
         } catch (ConnectionDBException | SQLException e) {
             System.err.println(e.getMessage());
         }
-        return resultGroupNames;
+        return resultShiftTitles;
     }
 }

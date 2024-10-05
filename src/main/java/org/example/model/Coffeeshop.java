@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CoffeeShop {
+public class Coffeeshop {
 
     private Long id;
-    private String coffeeshopName;
+    private String coffeeshopTitle;
     private String coffeeshopDescription;
 
 }

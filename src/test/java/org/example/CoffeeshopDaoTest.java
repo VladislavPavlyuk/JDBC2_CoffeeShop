@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.dao.coffeeShopDAO.CoffeeShopDao;
-import org.example.dao.coffeeShopDAO.CoffeeShopDaoImpl;
-import org.example.model.CoffeeShop;
-import org.example.service.CoffeeShopDbInitializer;
+import org.example.dao.coffeeshopDAO.CoffeeshopDao;
+import org.example.dao.coffeeshopDAO.CoffeeshopDaoImpl;
+import org.example.model.Coffeeshop;
+import org.example.service.CoffeeshopDbInitializer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,32 +18,32 @@ public class CoffeeshopDaoTest {
     @BeforeAll
     static void initTestDB() {
         setProperty("test", "true");
-        CoffeeShopDbInitializer.createTablesForTests();
+        CoffeeshopDbInitializer.createTablesForTests();
     }
 
     @Test
-    void save_ShouldInsertCourseIntoTable_WhenCalled() {
+    void save_ShouldInsertCoffeshopIntoTable_WhenCalled() {
 
-        CoffeeShopDao coffeeShopDao = new CoffeeShopDaoImpl();
+        CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
 
-        CoffeeShop addCource = new CoffeeShop();
-        addCource.setCourseDescription("description");
-        addCource.setId(1L);
-        addCource.setCourseName("course1");
+        Coffeeshop addCoffeeshop = new Coffeeshop();
+        addCoffeeshop.setCoffeeshopDescription("description");
+        addCoffeeshop.setId(1L);
+        addCoffeeshop.setCoffeeshopTitle("coffeeshop");
 
-        coffeeShopDao.save(addCource);
+        coffeeshopDao.save(addCoffeeshop);
 
-        List<CoffeeShop> allCourses = coffeeShopDao.findAll();
+        List<Coffeeshop> allCoffeeshops = coffeeshopDao.findAll();
 
         int expected = 1;
-        int actual = allCourses.size();
+        int actual = allCoffeeshops.size();
 
         Assertions.assertEquals(expected,actual);
 
-        List<CoffeeShop> expectedList = new ArrayList<>();
-        expectedList.add(addCource);
+        List<Coffeeshop> expectedList = new ArrayList<>();
+        expectedList.add(addCoffeeshop);
 
-        Assertions.assertEquals(expectedList,allCourses);
+        Assertions.assertEquals(expectedList,allCoffeeshops);
 
     }
 }

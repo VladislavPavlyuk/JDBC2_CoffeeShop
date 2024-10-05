@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StaffToCoffeeShop {
+public class StaffToCoffeeshop {
 
     private Long id;
     private long staff_Id;
