@@ -1,10 +1,10 @@
-Gulab Jamun - Deep-fried dough balls soaked in sugar syrup flavored with cardamom and rose
-Rasgulla - Soft, spongy cheese balls soaked in light sugar syrup.
-Jalebi - Crispy, spiral-shaped fried batter soaked in saffron-flavored sugar syrup.
-Kaju Katli - Diamond-shaped cashew fudge often garnished with edible silver foil.
-Ladoo - Round sweets made from various ingredients like gram flour, semolina, or coconut.
-Halwa - A dense, sweet pudding made from ingredients like semolina, lentils, or carrots.
-Peda - Soft, milk-based sweets often flavored with cardamom and saffron.
-Soan Papdi - Flaky, cube-shaped sweet made from gram flour, sugar, and ghee.
-Mysore Pak - Rich, buttery sweet made from gram flour, sugar, and ghee.
-Phirni - Creamy rice pudding flavored with cardamom and saffron, often garnished with nuts.
+Gulab Jamun - Гулаб джамун - Deep-fried dough balls soaked in sugar syrup flavored with cardamom and rose - Смажені в глибокому фритюрі кульки з тіста, замочені в цукровому сиропі з ароматом кардамону та троянди
+Rasgulla - Расгулла - Soft, spongy cheese balls soaked in light sugar syrup. - М'які, губчасті сирні кульки, замочені в легкому цукровому сиропі.
+Jalebi - Джалебі - Crispy, spiral-shaped fried batter soaked in saffron-flavored sugar syrup. - Хрустке, спіралеподібне смажене тісто, замочене в цукровому сиропі з ароматом шафрану.
+Kaju Katli - Каджу катлі - Diamond-shaped cashew fudge often garnished with edible silver foil. - Алмазоподібна помадка з кеш'ю, часто прикрашена їстівною срібною фольгою.
+Ladoo - Ладу - Round sweets made from various ingredients like gram flour, semolina, or coconut. - Круглі солодощі, виготовлені з різних інгредієнтів, таких як борошно з нуту, манна крупа або кокос.
+Halwa - Халва - A dense, sweet pudding made from ingredients like semolina, lentils, or carrots. - Густий солодкий пудинг, виготовлений з інгредієнтів, таких як манна крупа, сочевиця або морква.
+Peda - Педа - Soft, milk-based sweets often flavored with cardamom and saffron. - М'які молочні солодощі, часто з ароматом кардамону та шафрану.
+Soan Papdi - Соан папді - Flaky, cube-shaped sweet made from gram flour, sugar, and ghee. - Сипке, кубоподібне солодке, виготовлене з борошна з нуту, цукру та гі.
+Mysore Pak - Майсур пак - Rich, buttery sweet made from gram flour, sugar, and ghee. - Багата, вершкова солодка страва, виготовлена з борошна з нуту, цукру та гі.
+Phirni - Фірні - Creamy rice pudding flavored with cardamom and saffron, often garnished with nuts. - Вершковий рисовий пудинг з ароматом кардамону та шафрану, часто прикрашений горіхами.

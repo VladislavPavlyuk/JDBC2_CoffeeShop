@@ -13,15 +13,15 @@ import java.util.List;
 
 public class ShiftDaoImpl implements ShiftDao {
 
-    private static final String SAVE_SHIFT = "INSERT INTO shifts(shift_title) VALUES(?)";
+    private static final String SAVE_SHIFT = "INSERT INTO shifts(shift_code) VALUES(?)";
     private static final String FIND_ALL_SHIFTS = "SELECT * FROM shifts";
     private static final String DELETE_ALL_SHIFTS = "DELETE FROM shifts";
     private static final String FIND_ALL_SHIFTS_WITH_LESS_ORE_EQUAL_STAFF =
-            "SELECT shifts.shift_title, COUNT(*) AS count_staff\n" +
+            "SELECT shifts.shift_code, COUNT(*) AS count_staff\n" +
                     "FROM shifts JOIN staff ON shifts.id = staff.shift_id\n" +
-                    "GROUP BY shifts.shift_title\n" +
+                    "GROUP BY shifts.shift_code\n" +
                     "HAVING COUNT(*) <= (?)";
-    private static final String UPDATE_SHIFT = "UPDATE shifts SET shift_title = ? " +
+    private static final String UPDATE_SHIFT = "UPDATE shifts SET shift_code = ? " +
             " WHERE shifts.id = ? ";
     private static final String DELETE_SHIFT = "DELETE FROM shifts WHERE shifts.id = ?";
 
@@ -84,8 +84,8 @@ public class ShiftDaoImpl implements ShiftDao {
 
             while (result.next()) {
                 Shift addShift = new Shift();
-                addShift.setId(result.getLong(1));
-                addShift.setShiftTitle(result.getString(2));
+                addShift.setId(result.getLong("id"));
+                addShift.setShiftTitle(result.getString("shift_code"));
                 resultShifts.add(addShift);
             }
             return resultShifts;

@@ -21,19 +21,28 @@ public class CoffeeshopDaoImpl implements CoffeeshopDao {
             "WHERE staff.id = ? ";
 
     private static final String DELETE_ALL_COFFEESHOPS = "DELETE FROM coffeeshops";
-    private static final String UPDATE_COFFEESHOPS = "UPDATE coffeeshops SET coffeeshop_Title = ?, coffeeshop_description = ? " +
+    private static final String UPDATE_COFFEESHOPS = "UPDATE coffeeshops SET coffeeshop_title = ?, coffeeshop_description = ? " +
             " WHERE coffeeshops.id = ? ";
     private static final String DELETE_COFFEESHOP = "DELETE FROM coffeeshops WHERE coffeeshops.id = ?";
 
     @Override
     public void save(Coffeeshop coffeeshop) {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
-             PreparedStatement ps = conn.prepareStatement(SAVE_COFFEESHOP)) {
+             PreparedStatement ps = conn.prepareStatement(SAVE_COFFEESHOP, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, coffeeshop.getCoffeeshopTitle());
             ps.setString(2, coffeeshop.getCoffeeshopDescription());
-            ps.execute();
+            int rowsAffected = ps.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        coffeeshop.setId(generatedKeys.getLong(1));
+                    }
+                }
+            }
         } catch (ConnectionDBException | SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error saving coffeeshop: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -85,9 +94,9 @@ public class CoffeeshopDaoImpl implements CoffeeshopDao {
 
             while (result.next()) {
                 Coffeeshop addCoffeeshop = new Coffeeshop();
-                addCoffeeshop.setId(result.getLong(1));
-                addCoffeeshop.setCoffeeshopTitle(result.getString(2));
-                addCoffeeshop.setCoffeeshopDescription(result.getString(3));
+                addCoffeeshop.setId(result.getLong("id"));
+                addCoffeeshop.setCoffeeshopTitle(result.getString("coffeeshop_Title"));
+                addCoffeeshop.setCoffeeshopDescription(result.getString("coffeeshop_description"));
                 resultAddCoffeeshops.add(addCoffeeshop);
             }
             return resultAddCoffeeshops;
@@ -108,9 +117,9 @@ public class CoffeeshopDaoImpl implements CoffeeshopDao {
             try (ResultSet result = ps.executeQuery()) {
                 while (result.next()) {
                     Coffeeshop addCoffeeshop = new Coffeeshop();
-                    addCoffeeshop.setId(result.getLong(1));
-                    addCoffeeshop.setCoffeeshopTitle(result.getString(2));
-                    addCoffeeshop.setCoffeeshopDescription(result.getString(3));
+                    addCoffeeshop.setId(result.getLong("id"));
+                    addCoffeeshop.setCoffeeshopTitle(result.getString("coffeeshop_Title"));
+                    addCoffeeshop.setCoffeeshopDescription(result.getString("coffeeshop_description"));
                     resultCoffeeshops.add(addCoffeeshop);
                 }
                 return resultCoffeeshops;
@@ -125,9 +134,10 @@ public class CoffeeshopDaoImpl implements CoffeeshopDao {
     public void deleteAll() {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
              PreparedStatement ps = conn.prepareStatement(DELETE_ALL_COFFEESHOPS)) {
-            ps.execute();
+            ps.executeUpdate();
         } catch (ConnectionDBException | SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error deleting all coffeeshops: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -13,6 +13,7 @@ public class Staff {
 
     private Long id;
     private long shift_Id;
+    private long positionId;
     private String firstName;
     private String lastName;
 

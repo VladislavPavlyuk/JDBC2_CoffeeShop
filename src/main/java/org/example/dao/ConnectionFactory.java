@@ -10,7 +10,8 @@ import java.util.Properties;
 
 import static java.lang.Class.forName;
 
-public class ConnectionFactory {
+// creates database connections
+public class ConnectionFactory implements ConnectionProvider {
 
     private static final String DRIVER;
     private static final String DBURL;
@@ -18,8 +19,6 @@ public class ConnectionFactory {
     private static final String PASSWORD;
 
     private static ConnectionFactory factory;
-
-    private Connection conn;
 
     static {
         Properties prop = PropertyFactory.getInstance().getProperty();
@@ -29,19 +28,38 @@ public class ConnectionFactory {
         PASSWORD = prop.getProperty("db.password");
     }
 
-    public Connection makeConnection() throws ConnectionDBException {
+    @Override
+    public Connection getConnection() throws ConnectionDBException {
         try {
+            if (DRIVER == null || DRIVER.isEmpty()) {
+                throw new ConnectionDBException("Database driver is not configured");
+            }
+            if (DBURL == null || DBURL.isEmpty()) {
+                throw new ConnectionDBException("Database URL is not configured");
+            }
+            
             forName(DRIVER);
-            conn = DriverManager.getConnection(DBURL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new ConnectionDBException("Error with connect to DataBase");
+            return DriverManager.getConnection(DBURL, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            throw new ConnectionDBException("Database driver not found: " + DRIVER + ". Please check if PostgreSQL driver is in classpath.", e);
+        } catch (SQLException e) {
+            String errorMsg = String.format("Cannot connect to database at %s. Error: %s", DBURL, e.getMessage());
+            throw new ConnectionDBException(errorMsg, e);
         }
-    return conn;
     }
 
-    public static ConnectionFactory getInstance () {
+    @Deprecated
+    public Connection makeConnection() throws ConnectionDBException {
+        return getConnection();
+    }
+
+    public static ConnectionFactory getInstance() {
         if (factory == null) {
-            factory = new ConnectionFactory();
+            synchronized (ConnectionFactory.class) {
+                if (factory == null) {
+                    factory = new ConnectionFactory();
+                }
+            }
         }
         return factory;
     }

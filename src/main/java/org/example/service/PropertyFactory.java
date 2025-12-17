@@ -4,29 +4,39 @@ import org.example.exception.PropertyFileException;
 
 import java.util.Properties;
 
+// singleton that provides app configuration
 public class PropertyFactory {
 
     private static PropertyFactory propertyFactory;
-    private static Properties properties;
-    private static final PropertyReader PROPERTY_READER;
+    private final Properties properties;
+    private final PropertyReader propertyReader;
 
-    static {
-        PROPERTY_READER = new PropertyReader();
+    private PropertyFactory() {
+        this.propertyReader = new PropertyReader();
         try {
-            properties = PROPERTY_READER.readProperties();
+            this.properties = propertyReader.readProperties();
         } catch (PropertyFileException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to initialize properties", e);
         }
     }
 
     public static PropertyFactory getInstance() {
         if (propertyFactory == null) {
-            propertyFactory = new PropertyFactory();
+            synchronized (PropertyFactory.class) {
+                if (propertyFactory == null) {
+                    propertyFactory = new PropertyFactory();
+                }
+            }
         }
         return propertyFactory;
     }
 
+    public Properties getProperties() {
+        return new Properties(properties);
+    }
+
+    @Deprecated
     public Properties getProperty() {
-        return properties;
+        return getProperties();
     }
 }

@@ -1,12 +1,17 @@
 package org.example.menu;
 
 
+import org.example.dao.ConnectionFactory;
+import org.example.dao.coffeeshopDAO.CoffeeshopDao;
+import org.example.dao.coffeeshopDAO.CoffeeshopDaoImpl;
+import org.example.dao.menuDAO.MenuDao;
+import org.example.dao.menuDAO.MenuDaoImpl;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.shiftDAO.ShiftDaoImpl;
+import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;
 import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDaoImpl;
 import org.example.dao.staffDAO.StaffDao;
 import org.example.dao.staffDAO.StaffDaoImpl;
-import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;
 import org.example.model.Shift;
 import org.example.model.Staff;
 
@@ -16,55 +21,89 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static org.example.menu.MenuPublisher.*;
+import org.example.menu.DaoMethodsTester;
 
 
 public class MenuExecutor {
+    
+    // create DAO objects once to reuse them
+    private static final org.example.dao.ConnectionProvider connectionProvider = ConnectionFactory.getInstance();
+    private static final ShiftDao shiftDao = new ShiftDaoImpl();
+    private static final StaffDao staffDao = new StaffDaoImpl(connectionProvider);
+    private static final CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
+    private static final StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
+    private static final MenuDao menuDao = new MenuDaoImpl(connectionProvider);
 
     public static void startMenu() {
-        showMenu();
-
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        boolean running = true;
 
-        if (choice == 1) {
-            menuItem1Execute();
+        while (running) {
+            try {
+                showMenu();
+                
+                if (!scanner.hasNextInt()) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    scanner.nextLine();
+                    continue;
+                }
+                
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // consume newline after number
+
+                if (choice == 1) {
+                    menuItem1Execute(scanner);
+                } else if (choice == 2) {
+                    menuItem2Execute(scanner);
+                } else if (choice == 3) {
+                    menuItem3Execute(scanner);
+                } else if (choice == 4) {
+                    menuItem4Execute(scanner);
+                } else if (choice == 5) {
+                    menuItem5Execute(scanner);
+                } else if (choice == 6) {
+                    menuItem6Execute(scanner);
+                } else if (choice == 7) {
+                    menuItem7Execute();
+                } else if (choice == 8) {
+                    menuItem8Execute();
+                } else if (choice == 9) {
+                    menuItem9Execute();
+                } else if (choice == 10) {
+                    menuItem10Execute();
+                } else if (choice == 11) {
+                    running = false;
+                    System.out.println("Exiting application. Goodbye!");
+                } else {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } catch (java.util.NoSuchElementException e) {
+                System.out.println("\nInput stream closed. Exiting application.");
+                running = false;
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+                e.printStackTrace();
+                scanner.nextLine(); // consume any remaining input
+            }
         }
-        if (choice == 2) {
-            menuItem2Execute();
-        }
-        if (choice == 3) {
-            menuItem3Execute();
-        }
-        if (choice == 4) {
-            menuItem4Execute();
-        }
-        if (choice == 5) {
-            menuItem5Execute();
-        }
-        if (choice == 6) {
-            menuItem6Execute();
-        }
+        scanner.close();
     }
 
-    public static void menuItem1Execute() {
-        Scanner scanner = new Scanner(System.in);
+    public static void menuItem1Execute(Scanner scanner) {
         System.out.println("Please, enter the number of staff");
         int numberOfStaff = scanner.nextInt();
 
-        ShiftDao shiftDao = new ShiftDaoImpl();
         List<String> shifts = shiftDao.findAllShiftsWithLessOrEqualStaffNumber(numberOfStaff);
 
         System.out.println("Shifts with less ore equal staff are");
         showStringList(shifts);
     }
 
-    public static void menuItem2Execute() {
-        showCoffeeshopList();
-        Scanner scanner = new Scanner(System.in);
+    public static void menuItem2Execute(Scanner scanner) {
+        showCoffeeshopList(coffeeshopDao);
         System.out.println("Please, enter the coffeshop title");
         String coffeeshop_title = scanner.nextLine();
 
-        StaffDao staffDao = new StaffDaoImpl();
         List<Staff> staff = staffDao.findAllFromCoffeeshops(coffeeshop_title);
 
         List<String> staffList = staff.stream().collect(
@@ -75,9 +114,8 @@ public class MenuExecutor {
         showStringList(staffList);
     }
 
-    public static void menuItem3Execute() {
-        Scanner scanner = new Scanner(System.in);
-        showShiftList();
+    public static void menuItem3Execute(Scanner scanner) {
+        showShiftList(shiftDao);
         System.out.println("Please, enter the shift to add staff");
         String shiftTitle = scanner.nextLine();
         System.out.println("Please, enter the first name of staff");
@@ -85,11 +123,9 @@ public class MenuExecutor {
         System.out.println("Please, enter the last name of staff");
         String lastName = scanner.nextLine();
 
-        ShiftDao shiftDao = new ShiftDaoImpl();
         List<Shift> shifts = shiftDao.findAll();
         try {
             Shift shiftToAdd = shifts.stream().filter(e -> e.getShiftTitle().equals(shiftTitle)).collect(Collectors.toList()).get(0);
-            StaffDao staffDao = new StaffDaoImpl();
             Staff addStaff = new Staff();
             addStaff.setFirstName(firstName);
             addStaff.setLastName(lastName);
@@ -101,42 +137,50 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem4Execute() {
-        Scanner scanner = new Scanner(System.in);
+    public static void menuItem4Execute(Scanner scanner) {
         System.out.println("Please, enter the staff id for delete");
         long staffId = scanner.nextLong();
 
-        StaffDao staffDao = new StaffDaoImpl();
         staffDao.delete(staffId);
     }
 
-    public static void menuItem5Execute() {
-        Scanner scanner = new Scanner(System.in);
-
-        showCoffeeshopList();
+    public static void menuItem5Execute(Scanner scanner) {
+        showCoffeeshopList(coffeeshopDao);
         System.out.println("Please, enter the coffeeshop titles, that assign to staff");
         String coffeeshop_title = scanner.nextLine();
 
         System.out.println("Please, enter the staff id to assign");
         long staffId = scanner.nextLong();
 
-        StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
         staffToCoffeeshopDao.assignStaffToCoffeeshop(staffId,coffeeshop_title);
     }
 
-    public static void menuItem6Execute() {
-        Scanner scanner = new Scanner(System.in);
-
+    public static void menuItem6Execute(Scanner scanner) {
         System.out.println("Please, enter the staff id to assign");
         long staffId = scanner.nextLong();
         scanner.nextLine();
 
-        showCoffeeshopListStaff(staffId);
+        showCoffeeshopListStaff(coffeeshopDao, staffId);
         System.out.println("Please, enter the coffeeshop title to remove from staff");
         String coffeeshop_title = scanner.nextLine();
 
-        StaffToCoffeeshopDao staffToCoffeeShopDao = new StaffToCoffeeshopDaoImpl();
-        staffToCoffeeShopDao.deleteCoffeeshopFromStaff(staffId, coffeeshop_title);
+        staffToCoffeeshopDao.deleteCoffeeshopFromStaff(staffId, coffeeshop_title);
+    }
+
+    public static void menuItem7Execute() {
+        showStaffList(staffDao);
+    }
+
+    public static void menuItem8Execute() {
+        showDesertsList(menuDao);
+    }
+
+    public static void menuItem9Execute() {
+        showDrinksList(menuDao);
+    }
+
+    public static void menuItem10Execute() {
+        DaoMethodsTester.testAllMethods();
     }
 
     private MenuExecutor() {    }

@@ -1,278 +1,278 @@
-Apple juice
-Apple cider
-Almond milk
-Arnold Palmer
-Apricot juice
-Aperol spritz
-Aquavit
-Amaretto sour
-Absinthe
-Ale (a type of beer)
-Beer
-Bloody Mary
-Black tea
-Butterbeer
-Baileys
-Bellini
-Black coffee
-Bitter lemon
-Bourbon
-Buttermilk
-Birch juice
-Bordeaux wine
-Coffee
-Coca-Cola
-Champagne
-Chardonnay
-Chai tea
-Cranberry juice
-Club soda
-Cider
-Campari
-Cognac
-Clamato juice
-Choco milk
-Daiquiri
-Dark & Stormy
-Dirty Martini
-Dublin Iced Coffee
-Dry Martini
-Dublin Lemonade
-Dublin Irish Whiskey
-Diet cola
-Date shake
-Dongle (alcoholic punch)
-Espresso
-Energy drink
-Eggnog
-Elixir
-Elderflower cordial
-Fruit juice
-Fruit smoothie
-Fresh lemonade
-Frozen margarita
-Fresh iced tea
-Flavored latte
-Fresh orange juice
-French press coffee
-Fireball Cinnamon Whisky
-Fernet
-Five alive juice
-Fresh mint lemonade
-Green tea
-Ginger ale
-Grape juice
-Gatorade
-Grapefruit juice
-Gluhwein
-Ginger beer
-Green smoothie
-Golden milk latte
-Grape soda
-Green juice
-Gourmet coffee
-Granita
-Granny smith apple juice
-Green tea lemonade
-Herbal tea
-Honey lemon tea
-Hard seltzer
-Hot coffee
-Hoppy beer
-Hard lemonade
-Hot chocolate
-Hot tea latte
-Horchata
-Hot cider
-Honeysuckle tea
-Hot toddy
-High energy drinks
-Horchata latte
-Iced Tea
-Italian Espresso
-Irish Hot Whiskey
-Irish Coffee
-Iced Coffee
-Italian Limoncello
-Indian Jaljeera
-Iced Mocha
-Italian Prosecco
-Juice
-Japanese Matcha Tea
-Jamaican Rum Punch
-Juniper Berry Infused Gin
-Jack Daniel’s Tennessee Whiskey
-Jagger Bombs
-Japanese Soba Tea
-Japanese Sake
-Jackfruit Smoothie
-Japanese Hojicha Tea
-Long Island Iced Tea
-Limeade
-Lemonade
-Lemon-Lime soda
-Latte
-Limoncello
-Lager
-Liqueur
-Martini
-Melon Smoothie
-Milk
-Milkshakes
-Matcha Tea
-Mojito
-Mandarin Orange Juice
-Mint Tea
-Mandarin Spritz
-Margarita
-Mint Julep
-Mango Juice
-Mexican Hot Chocolate
-Mulled Wine
-Non-alcoholic wine
-Nescafe
-Nestea
-Non-alcoholic beer
-Nutmeg latte
-Nuka
-Oolong tea
-Orange juice
-Organic smoothie
-Old-fashioned lemonade
-Organic green tea
-Organic milk
-Orgeat
-Pisco Sour
-Pomegranate juice
-Pale Ale
-Pina colada
-Pink lemonade
-Porter
-Punch
-Prosecco
-Root beer
-Rose hip tea
-Rice milk
-Raspberry iced tea
-Red wine
-Rum and coke
-Rhubarb juice
-Red grape juice
-Raspberry lemonade
-Red tea
-Rich hot chocolate
-Soy Milk
-Sparkling Water
-Spiced Tea
-Sweet Tea
-Soda
-Smoothie
-Sparkling Juice
-Sake
-Sangria
-Spritzers
-Sports Drink
-Syrup
-Shakes
-Specialty Coffee
-Tonic with Gin
-Tea Latte
-Tea
-Tonic Water
-Turmeric Latte
-Teguila Sunrise
-Tonic Vodka
-Vanilla smoothie
-Vanilla Latte
-Vodka and tonic
-Vegetable juice
-Vanilla cream soda
-Vanilla rooibos tea
-Vegan almond milk
-Wine
-Whisky sour
-Whiskey
-Water
-Wildberry smoothie
-White tea
-Watermelon juice
-Yoo-hoo
-Yakult
-Yerba Buena Tea
-Yumberry Juice
-Yerba Mate
-Yellow Chartreuse
-Yuzu Juice
-Yuzu Sake
-Yerba Mate Lemonade
-Yumberry Smoothie
-Yellow Energy Drink
-Yuzu Margarita
-Spirit-based cocktails
-Liqueurs
-Beer
-Wine
-Fortified wines
-Spirits
-Coffee
-Hot chocolate
-Juice
-Sports drinks
-Iced tea
-Water
-Tea
-Milk
-Soft drinks
-Energy drinks
-Ice-blended coffee drinks
-Herbal teas
-Probiotic drinks
-Kombucha
-Smoothies
-Milkshakes
-Infused water
-Shakes and malts
-Old Fashioned
-Whiskey Sour
-Pina Colada
-Long Island Iced Tea
-Gin and Tonic
-Martini
-Margarita
-Bloody Mary
-Manhattan
-Negroni
-Bacardi Cocktail
-Sazerac
-Cosmopolitan
-Rusty Nail
-Champagne Cocktail
-Sidecar
-Jalapeño Margarita
-Spritz (Aperol or Campari)
-Screwdriver
-White Russian
-Harvey Wallbanger
-Bellini
-Irish Coffee
-Mojito
-Daiquiri
-Mai Tai
-Kir Royale
-Ale
-Lager
-Stout
-Tequila Sunrise
-Black Russian
-Brandy Alexander
-Tom Collins
-Blue Hawaiian
-Pilsner
-IPA (India Pale Ale)
-Cider
-Wine
-Fuzzy Navel
-French Martini
-Kamikaze
-Russian Standard Vodka
-Jack and Coke
+Apple juice - Яблучний сік
+Apple cider - Яблучний сидр
+Almond milk - Мігдальне молоко
+Arnold Palmer - Арнольд Палмер
+Apricot juice - Абрикосовий сік
+Aperol spritz - Апероль спріц
+Aquavit - Аквавіт
+Amaretto sour - Амаретто сауер
+Absinthe - Абсент
+Ale (a type of beer) - Ель (вид пива)
+Beer - Пиво
+Bloody Mary - Кривава Мері
+Black tea - Чорний чай
+Butterbeer - Вершкове пиво
+Baileys - Бейліз
+Bellini - Белліні
+Black coffee - Чорна кава
+Bitter lemon - Гіркий лимон
+Bourbon - Бурбон
+Buttermilk - Пахта
+Birch juice - Березовий сік
+Bordeaux wine - Бордо вино
+Coffee - Кава
+Coca-Cola - Кока-Кола
+Champagne - Шампанське
+Chardonnay - Шардоне
+Chai tea - Чай чай
+Cranberry juice - Журавлиновий сік
+Club soda - Содова вода
+Cider - Сидр
+Campari - Кампарі
+Cognac - Коньяк
+Clamato juice - Кламато сік
+Choco milk - Шоколадне молоко
+Daiquiri - Дайкірі
+Dark & Stormy - Темний і бурхливий
+Dirty Martini - Брудний мартіні
+Dublin Iced Coffee - Дублінська холодна кава
+Dry Martini - Сухий мартіні
+Dublin Lemonade - Дублінський лимонад
+Dublin Irish Whiskey - Дублінський ірландський віскі
+Diet cola - Дієтична кола
+Date shake - Фініковий коктейль
+Dongle (alcoholic punch) - Донгл (алкогольний пунш)
+Espresso - Еспресо
+Energy drink - Енергетичний напій
+Eggnog - Яєчний коктейль
+Elixir - Еліксир
+Elderflower cordial - Сироп з бузини
+Fruit juice - Фруктовий сік
+Fruit smoothie - Фруктовий смузі
+Fresh lemonade - Свіжий лимонад
+Frozen margarita - Заморожена маргарита
+Fresh iced tea - Свіжий холодний чай
+Flavored latte - Ароматизований лате
+Fresh orange juice - Свіжий апельсиновий сік
+French press coffee - Кава з френч-пресу
+Fireball Cinnamon Whisky - Вогняна куля коричневий віскі
+Fernet - Фернет
+Five alive juice - П'ять живих сік
+Fresh mint lemonade - Свіжий м'ятний лимонад
+Green tea - Зелений чай
+Ginger ale - Імбирне пиво
+Grape juice - Виноградний сік
+Gatorade - Гаторад
+Grapefruit juice - Грейпфрутовий сік
+Gluhwein - Глінтвейн
+Ginger beer - Імбирне пиво
+Green smoothie - Зелений смузі
+Golden milk latte - Золотий молочний лате
+Grape soda - Виноградна содова
+Green juice - Зелений сік
+Gourmet coffee - Гурманська кава
+Granita - Граніта
+Granny smith apple juice - Яблучний сік Гренні Сміт
+Green tea lemonade - Зелений чай лимонад
+Herbal tea - Трав'яний чай
+Honey lemon tea - Медово-лимонний чай
+Hard seltzer - Алкогольна содова
+Hot coffee - Гаряча кава
+Hoppy beer - Хмельове пиво
+Hard lemonade - Алкогольний лимонад
+Hot chocolate - Гарячий шоколад
+Hot tea latte - Гарячий чай лате
+Horchata - Орчата
+Hot cider - Гарячий сидр
+Honeysuckle tea - Чай з жимолості
+Hot toddy - Гарячий тодді
+High energy drinks - Високоенергетичні напої
+Horchata latte - Орчата лате
+Iced Tea - Холодний чай
+Italian Espresso - Італійський еспресо
+Irish Hot Whiskey - Ірландський гарячий віскі
+Irish Coffee - Ірландська кава
+Iced Coffee - Холодна кава
+Italian Limoncello - Італійський лимончелло
+Indian Jaljeera - Індійський джалджера
+Iced Mocha - Холодний мокко
+Italian Prosecco - Італійський просекко
+Juice - Сік
+Japanese Matcha Tea - Японський чай матча
+Jamaican Rum Punch - Ямайський ромовий пунш
+Juniper Berry Infused Gin - Джин з ялівцевими ягодами
+Jack Daniel's Tennessee Whiskey - Джек Деніелс теннессійський віскі
+Jagger Bombs - Джаггер бомби
+Japanese Soba Tea - Японський чай соба
+Japanese Sake - Японське саке
+Jackfruit Smoothie - Джекфрутовий смузі
+Japanese Hojicha Tea - Японський чай ходзіча
+Long Island Iced Tea - Довгий острів холодний чай
+Limeade - Лаймад
+Lemonade - Лимонад
+Lemon-Lime soda - Лимонно-лаймова содова
+Latte - Лате
+Limoncello - Лимончелло
+Lager - Лагер
+Liqueur - Лікер
+Martini - Мартіні
+Melon Smoothie - Динний смузі
+Milk - Молоко
+Milkshakes - Молочні коктейлі
+Matcha Tea - Чай матча
+Mojito - Мохіто
+Mandarin Orange Juice - Мандариновий сік
+Mint Tea - М'ятний чай
+Mandarin Spritz - Мандариновий спріц
+Margarita - Маргарита
+Mint Julep - М'ятний джулеп
+Mango Juice - Манговий сік
+Mexican Hot Chocolate - Мексиканський гарячий шоколад
+Mulled Wine - Глінтвейн
+Non-alcoholic wine - Безалкогольне вино
+Nescafe - Нескафе
+Nestea - Несті
+Non-alcoholic beer - Безалкогольне пиво
+Nutmeg latte - Мускатний лате
+Nuka - Нука
+Oolong tea - Улун чай
+Orange juice - Апельсиновий сік
+Organic smoothie - Органічний смузі
+Old-fashioned lemonade - Старомодний лимонад
+Organic green tea - Органічний зелений чай
+Organic milk - Органічне молоко
+Orgeat - Оржеат
+Pisco Sour - Піско сауер
+Pomegranate juice - Гранатовий сік
+Pale Ale - Світлий ель
+Pina colada - Піна колада
+Pink lemonade - Рожевий лимонад
+Porter - Портер
+Punch - Пунш
+Prosecco - Просекко
+Root beer - Кореневе пиво
+Rose hip tea - Чай з шипшини
+Rice milk - Рисове молоко
+Raspberry iced tea - Малиновий холодний чай
+Red wine - Червоне вино
+Rum and coke - Ром з колою
+Rhubarb juice - Ревеневий сік
+Red grape juice - Червоний виноградний сік
+Raspberry lemonade - Малиновий лимонад
+Red tea - Червоний чай
+Rich hot chocolate - Насичений гарячий шоколад
+Soy Milk - Соеве молоко
+Sparkling Water - Газована вода
+Spiced Tea - Пряний чай
+Sweet Tea - Солодкий чай
+Soda - Содова
+Smoothie - Смузі
+Sparkling Juice - Газований сік
+Sake - Саке
+Sangria - Сангрія
+Spritzers - Спріцери
+Sports Drink - Спортивний напій
+Syrup - Сироп
+Shakes - Коктейлі
+Specialty Coffee - Спеціальна кава
+Tonic with Gin - Тонік з джином
+Tea Latte - Чай лате
+Tea - Чай
+Tonic Water - Тонічна вода
+Turmeric Latte - Куркумовий лате
+Teguila Sunrise - Текіла санрайз
+Tonic Vodka - Тонік з горілкою
+Vanilla smoothie - Ванільний смузі
+Vanilla Latte - Ванільний лате
+Vodka and tonic - Горілка з тоніком
+Vegetable juice - Овочевий сік
+Vanilla cream soda - Ванільна вершкова содова
+Vanilla rooibos tea - Ванільний чай ройбуш
+Vegan almond milk - Веганське мігдальне молоко
+Wine - Вино
+Whisky sour - Віскі сауер
+Whiskey - Віскі
+Water - Вода
+Wildberry smoothie - Лісовий ягідний смузі
+White tea - Білий чай
+Watermelon juice - Кавуновий сік
+Yoo-hoo - Ю-ху
+Yakult - Якулт
+Yerba Buena Tea - Чай Єрба Буена
+Yumberry Juice - Юмберрі сік
+Yerba Mate - Єрба мате
+Yellow Chartreuse - Жовтий шартрез
+Yuzu Juice - Юдзу сік
+Yuzu Sake - Юдзу саке
+Yerba Mate Lemonade - Єрба мате лимонад
+Yumberry Smoothie - Юмберрі смузі
+Yellow Energy Drink - Жовтий енергетичний напій
+Yuzu Margarita - Юдзу маргарита
+Spirit-based cocktails - Коктейлі на основі спирту
+Liqueurs - Лікери
+Beer - Пиво
+Wine - Вино
+Fortified wines - Кріплені вина
+Spirits - Міцні напої
+Coffee - Кава
+Hot chocolate - Гарячий шоколад
+Juice - Сік
+Sports drinks - Спортивні напої
+Iced tea - Холодний чай
+Water - Вода
+Tea - Чай
+Milk - Молоко
+Soft drinks - Безалкогольні напої
+Energy drinks - Енергетичні напої
+Ice-blended coffee drinks - Холодні кавові напої
+Herbal teas - Трав'яні чаї
+Probiotic drinks - Пробіотичні напої
+Kombucha - Комбуча
+Smoothies - Смузі
+Milkshakes - Молочні коктейлі
+Infused water - Настоянка на воді
+Shakes and malts - Коктейлі та солод
+Old Fashioned - Олд фешенд
+Whiskey Sour - Віскі сауер
+Pina Colada - Піна колада
+Long Island Iced Tea - Довгий острів холодний чай
+Gin and Tonic - Джин з тоніком
+Martini - Мартіні
+Margarita - Маргарита
+Bloody Mary - Кривава Мері
+Manhattan - Манхеттен
+Negroni - Негроні
+Bacardi Cocktail - Коктейль Бакарді
+Sazerac - Сазерак
+Cosmopolitan - Космополітен
+Rusty Nail - Іржавий цвях
+Champagne Cocktail - Шампанський коктейль
+Sidecar - Сайдкар
+Jalapeño Margarita - Халапеньо маргарита
+Spritz (Aperol or Campari) - Спріц (Апероль або Кампарі)
+Screwdriver - Відвертка
+White Russian - Білий росіянин
+Harvey Wallbanger - Гарві Волбенгер
+Bellini - Белліні
+Irish Coffee - Ірландська кава
+Mojito - Мохіто
+Daiquiri - Дайкірі
+Mai Tai - Май тай
+Kir Royale - Кір рояль
+Ale - Ель
+Lager - Лагер
+Stout - Стаут
+Tequila Sunrise - Текіла санрайз
+Black Russian - Чорний росіянин
+Brandy Alexander - Бренді Олександр
+Tom Collins - Том Коллінз
+Blue Hawaiian - Блакитний гавайський
+Pilsner - Пільзнер
+IPA (India Pale Ale) - ІПА (Індійський світлий ель)
+Cider - Сидр
+Wine - Вино
+Fuzzy Navel - Пухнастий пупок
+French Martini - Французький мартіні
+Kamikaze - Камікадзе
+Russian Standard Vodka - Російський стандарт горілка
+Jack and Coke - Джек і кола

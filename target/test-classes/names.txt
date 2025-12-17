@@ -1,20 +1,40 @@
-Ivan
-Andrey
-Oleg
-Pavel
-Mikhail
-Vladimir
-Vyacheslav
-Igor
-Timur
-Aleksey
-Aleksandr
-Sergey
-Dmirtiy
-Egor
-Broneslav
-Svyatoslav
-Kiril
-Anatoliy
-Bogdan
-Iosif
+Aarav - Аарав - Peaceful - Мирний
+Vihaan - Віхаан - Dawn, morning - Світанок, ранок
+Arjun - Арджун - Bright, shining - Яскравий, сяючий
+Rohan - Рохан - Ascending, growing - Висхідний, зростаючий
+Dev - Дев - Divine - Божественний
+Ayaan - Аяан - Gift of God - Дар Божий
+Samir - Самір - Breeze, cool wind - Вітерець, прохолодний вітер
+Raj - Радж - King, kingdom - Король, королівство
+Sanjay - Санджай - Victorious, triumphant - Переможний, тріумфальний
+Amit - Аміт - Endless - Безкінечний
+Aanya - Ааня - Grace - Грація
+Aaradhya - Аарадх'я - One who is worth worshipping - Той, хто гідний поклоніння
+Diya - Дія - Lamp, light - Лампа, світло
+Priya - Прія - Beloved, dear - Кохані, дорогі
+Ananya - Анан'я - Unique; Goddess Parvati - Унікальна; Богиня Парваті
+Saanvi - Саанві - Goddess Lakshmi - Богиня Лакшмі
+Myra - Міра - Sweet, beloved - Солодка, кохана
+Ishani - Ішані - Goddess Durga - Богиня Дурга
+Kavya - Кав'я - Poem - Вірш
+Nisha - Ніша - Night - Ніч
+Devi - Деві - Goddess - Богиня
+Singh - Сінгх - Lion or hero - Лев або герой
+Kumar - Кумар - Child, son, prince - Дитина, син, принц
+Das - Дас - Servant or devotee - Слуга або послідовник
+Kaur - Каур - Princess - Принцеса
+Ram - Рам - Pleasing or charming - Приємний або чарівний
+Yadav - Ядав - Descendant of Yadu - Нащадок Яду
+Sharma - Шарма - Protection, refuge, joy - Захист, притулок, радість
+Patel - Патель - Village chief or landowner - Сільський голова або землевласник
+Gupta - Гупта - Protected - Захищений
+Jain - Джайн - Follower of Jainism - Послідовник джайнізму
+Mandal - Мандал - Circle or region - Коло або регіон
+Ray - Рай - King - Король
+Sahu - Сагу - Honest - Чесний
+Prasad - Прасад - Offering to God - Жертвоприношення Богу
+Choudhury - Чоудхурі - Chief or landowner - Голова або землевласник
+Reddy - Редді - Of the Reddy caste - З касти Редді
+Roy - Рой - King - Король
+Pandey - Пандей - Priest - Священик
+Nayak - Наяк - Leader or hero - Лідер або герой

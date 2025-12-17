@@ -10,13 +10,14 @@ import java.sql.SQLException;
 
 public class StaffToCoffeeshopDaoImpl implements StaffToCoffeeshopDao {
 
-    private static final String SAVE_STAFF_TO_COFFEESHOP = "INSERT INTO staffandcoffeeshops(staff_id,coffeshop_id) VALUES(?,?)";
+    private static final String SAVE_STAFF_TO_COFFEESHOP = "INSERT INTO staffandcoffeeshops(staff_id,coffeeshops_id) VALUES(?,?) ON CONFLICT (staff_id, coffeeshops_id) DO NOTHING";
     private static final String DELETE_ALL_STAFF_TO_COFFEESHOP = "DELETE FROM staffandcoffeeshops";
-    private static final String ASSIGN_STAFF_TO_COFFEESHOP = "INSERT INTO staffandcoffeeshops(staff_id,coffeeshop_id) " +
-                " VALUES(?, (SELECT coffeeshops.id FROM coffeeshops WHERE coffeeshops.coffeeshop_title = ?))";
+    private static final String ASSIGN_STAFF_TO_COFFEESHOP = "INSERT INTO staffandcoffeeshops(staff_id,coffeeshops_id) " +
+                " VALUES(?, (SELECT coffeeshops.id FROM coffeeshops WHERE coffeeshops.coffeeshop_title = ?)) " +
+                "ON CONFLICT (staff_id, coffeeshops_id) DO NOTHING";
     private static final String DELETE_COFFEESHOP_FROM_STAFF = "DELETE FROM staffandcoffeeshops " +
             " WHERE  staffandcoffeeshops.staff_id = ? AND " +
-            " staffandcoffeeshops.coffeeshop_id = (SELECT coffeeshops.id FROM coffeeshops WHERE coffeeshops.coffeeshop_title = ?) ";
+            " staffandcoffeeshops.coffeeshops_id = (SELECT coffeeshops.id FROM coffeeshops WHERE coffeeshops.coffeeshop_title = ?) ";
 
     @Override
     public void save(StaffToCoffeeshop staffToCoffeeshop) {
