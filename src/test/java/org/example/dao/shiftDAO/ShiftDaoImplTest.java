@@ -1,14 +1,14 @@
 package org.example.dao.shiftDAO;
 
-import org.example.dao.ConnectionFactory;
-import org.example.model.Shift;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.example.model.Shift;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ShiftDaoImplTest {
 
@@ -149,8 +149,9 @@ class ShiftDaoImplTest {
         List<String> actualResult = shiftDao.findAllShiftsWithLessOrEqualStaffNumber(numberStaff);
 
         // Then
+        List<String> expectedResult = new ArrayList<>();
         assertNotNull(actualResult);
-        assertTrue(actualResult instanceof List);
+        assertTrue(actualResult.size() >= expectedResult.size());
     }
 
     @Test

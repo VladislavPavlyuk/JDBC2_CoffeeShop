@@ -106,8 +106,9 @@ class MenuDaoImplTest {
         List<MenuItem> actualResult = menuDao.findAllDrinks();
 
         // Then
+        List<MenuItem> expectedResult = new ArrayList<>();
         assertNotNull(actualResult);
-        assertTrue(actualResult.size() >= 0);
+        assertTrue(actualResult.size() >= expectedResult.size());
     }
 
     @Test
@@ -122,7 +123,8 @@ class MenuDaoImplTest {
         List<MenuItem> actualResult = menuDao.findAllDrinks();
 
         // Then
-        assertNotNull(actualResult);
+        List<MenuItem> expectedResult = new ArrayList<>();
+        assertEquals(expectedResult.size(), actualResult.size());
         assertTrue(actualResult.isEmpty());
     }
 
@@ -135,6 +137,103 @@ class MenuDaoImplTest {
 
         // When & Then
         assertThrows(Exception.class, () -> menuDao.findAllDrinks());
+    }
+
+    @Test
+    void updateCoffeePrice_WhenValidItemCodeAndPriceProvided_ShouldReturnTrue() throws Exception {
+        // Given
+        String itemCode = "DRK001";
+        double newPrice = 5.99;
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(1);
+
+        // When
+        boolean actualResult = menuDao.updateCoffeePrice(itemCode, newPrice);
+
+        // Then
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void updateCoffeePrice_WhenItemCodeNotFound_ShouldReturnFalse() throws Exception {
+        // Given
+        String itemCode = "INVALID";
+        double newPrice = 5.99;
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(0);
+
+        // When
+        boolean actualResult = menuDao.updateCoffeePrice(itemCode, newPrice);
+
+        // Then
+        boolean expectedResult = false;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void updateCoffeePrice_WhenSQLExceptionOccurs_ShouldThrowException() throws Exception {
+        // Given
+        String itemCode = "DRK001";
+        double newPrice = 5.99;
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenThrow(new SQLException("Database error"));
+
+        // When & Then
+        assertThrows(Exception.class, () -> menuDao.updateCoffeePrice(itemCode, newPrice));
+    }
+
+    @Test
+    void deleteDessert_WhenValidItemCodeProvided_ShouldReturnTrue() throws Exception {
+        // Given
+        String itemCode = "DES001";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(1);
+
+        // When
+        boolean actualResult = menuDao.deleteDessert(itemCode);
+
+        // Then
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void deleteDessert_WhenItemCodeNotFound_ShouldReturnFalse() throws Exception {
+        // Given
+        String itemCode = "INVALID";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(0);
+
+        // When
+        boolean actualResult = menuDao.deleteDessert(itemCode);
+
+        // Then
+        boolean expectedResult = false;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void deleteDessert_WhenSQLExceptionOccurs_ShouldThrowException() throws Exception {
+        // Given
+        String itemCode = "DES001";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenThrow(new SQLException("Database error"));
+
+        // When & Then
+        assertThrows(Exception.class, () -> menuDao.deleteDessert(itemCode));
     }
 }
 

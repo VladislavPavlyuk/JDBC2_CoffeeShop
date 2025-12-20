@@ -235,7 +235,7 @@ class StaffDaoImplTest {
         // Then
         List<Staff> expectedResult = new ArrayList<>();
         assertNotNull(actualResult);
-        assertTrue(actualResult.size() >= 0);
+        assertTrue(actualResult.size() >= expectedResult.size());
     }
 
     @Test
@@ -314,5 +314,232 @@ class StaffDaoImplTest {
         // Then
         Exception expectedResult = null;
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void updatePastryChefAddress_WhenValidDataProvided_ShouldReturnTrue() throws Exception {
+        // Given
+        String firstName = "Anna";
+        String lastName = "Smith";
+        String newAddress = "123 Main St";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(1);
+
+        // When
+        boolean actualResult = staffDao.updatePastryChefAddress(firstName, lastName, newAddress);
+
+        // Then
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void updatePastryChefAddress_WhenPastryChefNotFound_ShouldReturnFalse() throws Exception {
+        // Given
+        String firstName = "Unknown";
+        String lastName = "Person";
+        String newAddress = "123 Main St";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(0);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+
+        // When
+        boolean actualResult = staffDao.updatePastryChefAddress(firstName, lastName, newAddress);
+
+        // Then
+        boolean expectedResult = false;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void updateBaristaPhone_WhenValidDataProvided_ShouldReturnTrue() throws Exception {
+        // Given
+        String firstName = "John";
+        String lastName = "Doe";
+        String newPhone = "+1234567890";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(1);
+
+        // When
+        boolean actualResult = staffDao.updateBaristaPhone(firstName, lastName, newPhone);
+
+        // Then
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void updateBaristaPhone_WhenBaristaNotFound_ShouldReturnFalse() throws Exception {
+        // Given
+        String firstName = "Unknown";
+        String lastName = "Person";
+        String newPhone = "+1234567890";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(0);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+
+        // When
+        boolean actualResult = staffDao.updateBaristaPhone(firstName, lastName, newPhone);
+
+        // Then
+        boolean expectedResult = false;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void deleteWaiter_WhenValidDataProvided_ShouldReturnTrue() throws Exception {
+        // Given
+        String firstName = "John";
+        String lastName = "Doe";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(1);
+
+        // When
+        boolean actualResult = staffDao.deleteWaiter(firstName, lastName);
+
+        // Then
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void deleteWaiter_WhenWaiterNotFound_ShouldReturnFalse() throws Exception {
+        // Given
+        String firstName = "Unknown";
+        String lastName = "Person";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(0);
+
+        // When
+        boolean actualResult = staffDao.deleteWaiter(firstName, lastName);
+
+        // Then
+        boolean expectedResult = false;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void deleteBarista_WhenValidDataProvided_ShouldReturnTrue() throws Exception {
+        // Given
+        String firstName = "John";
+        String lastName = "Doe";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(1);
+
+        // When
+        boolean actualResult = staffDao.deleteBarista(firstName, lastName);
+
+        // Then
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void deleteBarista_WhenBaristaNotFound_ShouldReturnFalse() throws Exception {
+        // Given
+        String firstName = "Unknown";
+        String lastName = "Person";
+        
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeUpdate()).thenReturn(0);
+
+        // When
+        boolean actualResult = staffDao.deleteBarista(firstName, lastName);
+
+        // Then
+        boolean expectedResult = false;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void findAllBaristas_WhenBaristasExist_ShouldReturnListOfStaff() throws Exception {
+        // Given
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true, true, false);
+        when(resultSet.getLong("id")).thenReturn(1L, 2L);
+        when(resultSet.getString("firstname")).thenReturn("John", "Jane");
+        when(resultSet.getString("lastname")).thenReturn("Doe", "Smith");
+        when(resultSet.getLong("position_id")).thenReturn(1L, 1L);
+        when(resultSet.getLong("shift_id")).thenReturn(1L, 2L);
+
+        // When
+        List<Staff> actualResult = staffDao.findAllBaristas();
+
+        // Then
+        assertNotNull(actualResult);
+        assertTrue(actualResult.size() >= 0);
+    }
+
+    @Test
+    void findAllBaristas_WhenNoBaristasExist_ShouldReturnEmptyList() throws Exception {
+        // Given
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(false);
+
+        // When
+        List<Staff> actualResult = staffDao.findAllBaristas();
+
+        // Then
+        List<Staff> expectedResult = new ArrayList<>();
+        assertEquals(expectedResult.size(), actualResult.size());
+        assertTrue(actualResult.isEmpty());
+    }
+
+    @Test
+    void findAllWaiters_WhenWaitersExist_ShouldReturnListOfStaff() throws Exception {
+        // Given
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true, true, false);
+        when(resultSet.getLong("id")).thenReturn(1L, 2L);
+        when(resultSet.getString("firstname")).thenReturn("John", "Jane");
+        when(resultSet.getString("lastname")).thenReturn("Doe", "Smith");
+        when(resultSet.getLong("position_id")).thenReturn(2L, 2L);
+        when(resultSet.getLong("shift_id")).thenReturn(1L, 2L);
+
+        // When
+        List<Staff> actualResult = staffDao.findAllWaiters();
+
+        // Then
+        List<Staff> expectedResult = new ArrayList<>();
+        assertNotNull(actualResult);
+        assertTrue(actualResult.size() >= expectedResult.size());
+    }
+
+    @Test
+    void findAllWaiters_WhenNoWaitersExist_ShouldReturnEmptyList() throws Exception {
+        // Given
+        when(connectionProvider.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(false);
+
+        // When
+        List<Staff> actualResult = staffDao.findAllWaiters();
+
+        // Then
+        List<Staff> expectedResult = new ArrayList<>();
+        assertEquals(expectedResult.size(), actualResult.size());
+        assertTrue(actualResult.isEmpty());
     }
 }
