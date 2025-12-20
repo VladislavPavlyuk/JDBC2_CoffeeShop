@@ -44,6 +44,10 @@ public class MenuPublisher {
     private static final String  DELETE_WAITER = "Delete waiter";
     private static final String  DELETE_BARISTA = "Delete barista";
     private static final String  DELETE_CUSTOMER = "Delete customer";
+    private static final String  SHOW_ORDERS_BY_DATE = "Show orders by date";
+    private static final String  SHOW_ORDERS_BY_DATE_RANGE = "Show orders by date range";
+    private static final String  SHOW_DESSERT_ORDERS_COUNT_BY_DATE = "Show dessert orders count by date";
+    private static final String  SHOW_DRINK_ORDERS_COUNT_BY_DATE = "Show drink orders count by date";
     private static final String  TEST_ALL_DAO_METHODS = "Test all DAO methods";
     private static final String  EXIT = "Exit";
     private static final String  INVATION_STRING = "Please enter the number";
@@ -176,6 +180,22 @@ public class MenuPublisher {
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(DELETE_CUSTOMER)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_ORDERS_BY_DATE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_ORDERS_BY_DATE_RANGE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_DESSERT_ORDERS_COUNT_BY_DATE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_DRINK_ORDERS_COUNT_BY_DATE)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
@@ -545,6 +565,60 @@ public class MenuPublisher {
             }
         }
         
+        System.out.println("============================================================");
+    }
+
+    public static void showOrdersByDate(OrderDao orderDao, java.sql.Date date) {
+        List<Order> orders = orderDao.getOrdersByDate(date);
+        
+        System.out.println("============================================================");
+        System.out.println("Orders for date: " + date);
+        System.out.println("============================================================");
+        
+        if (orders.isEmpty()) {
+            System.out.println("No orders found for this date.");
+        } else {
+            int menuLine = 1;
+            for (var order : orders) {
+                System.out.println(menuLine++ + ".  " + order.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showOrdersByDateRange(OrderDao orderDao, java.sql.Date startDate, java.sql.Date endDate) {
+        List<Order> orders = orderDao.getOrdersByDateRange(startDate, endDate);
+        
+        System.out.println("============================================================");
+        System.out.println("Orders from " + startDate + " to " + endDate + ":");
+        System.out.println("============================================================");
+        
+        if (orders.isEmpty()) {
+            System.out.println("No orders found for this date range.");
+        } else {
+            int menuLine = 1;
+            for (var order : orders) {
+                System.out.println(menuLine++ + ".  " + order.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showDessertOrdersCountByDate(OrderDao orderDao, java.sql.Date date) {
+        int count = orderDao.getDessertOrdersCountByDate(date);
+        
+        System.out.println("============================================================");
+        System.out.println("Dessert orders count for date " + date + ": " + count);
+        System.out.println("============================================================");
+    }
+
+    public static void showDrinkOrdersCountByDate(OrderDao orderDao, java.sql.Date date) {
+        int count = orderDao.getDrinkOrdersCountByDate(date);
+        
+        System.out.println("============================================================");
+        System.out.println("Drink orders count for date " + date + ": " + count);
         System.out.println("============================================================");
     }
 

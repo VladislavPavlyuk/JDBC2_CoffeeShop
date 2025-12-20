@@ -54,6 +54,7 @@ public class MenuExecutor {
     private static final MenuDao menuDao = new MenuDaoImpl(connectionProvider);
     private static final CustomerDiscountDao customerDiscountDao = new CustomerDiscountDaoImpl(connectionProvider);
     private static final CustomerDao customerDao = new CustomerDaoImpl(connectionProvider);
+    private static final OrderDao orderDao = new OrderDaoImpl(connectionProvider);
 
     public static void startMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -129,8 +130,16 @@ public class MenuExecutor {
                 } else if (choice == 28) {
                     menuItem28Execute(scanner);
                 } else if (choice == 29) {
-                    menuItem29Execute();
+                    menuItem29Execute(scanner);
                 } else if (choice == 30) {
+                    menuItem30Execute(scanner);
+                } else if (choice == 31) {
+                    menuItem31Execute(scanner);
+                } else if (choice == 32) {
+                    menuItem32Execute(scanner);
+                } else if (choice == 33) {
+                    menuItem33Execute();
+                } else if (choice == 34) {
                     running = false;
                     System.out.println("Exiting application. Goodbye!");
                 } else {
@@ -283,22 +292,6 @@ public class MenuExecutor {
     }
 
     public static void menuItem21Execute(Scanner scanner) {
-        System.out.println("Please, enter the barista first name:");
-        String firstName = scanner.nextLine();
-        System.out.println("Please, enter the barista last name:");
-        String lastName = scanner.nextLine();
-        System.out.println("Please, enter the new phone number:");
-        String newPhone = scanner.nextLine();
-        
-        boolean success = staffDao.updateBaristaPhone(firstName, lastName, newPhone);
-        if (success) {
-            System.out.println("Phone updated successfully!");
-        } else {
-            System.out.println("Failed to update phone. Barista not found.");
-        }
-    }
-
-    public static void menuItem22Execute(Scanner scanner) {
         showDrinksList(menuDao);
         System.out.println("Please, enter the coffee item code:");
         String itemCode = scanner.nextLine();
@@ -314,7 +307,7 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem23Execute(Scanner scanner) {
+    public static void menuItem22Execute(Scanner scanner) {
         System.out.println("Please, enter the pastry chef first name:");
         String firstName = scanner.nextLine();
         System.out.println("Please, enter the pastry chef last name:");
@@ -330,7 +323,7 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem24Execute(Scanner scanner) {
+    public static void menuItem23Execute(Scanner scanner) {
         System.out.println("Please, enter the barista first name:");
         String firstName = scanner.nextLine();
         System.out.println("Please, enter the barista last name:");
@@ -346,7 +339,7 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem25Execute(Scanner scanner) {
+    public static void menuItem24Execute(Scanner scanner) {
         System.out.println("Please, enter the customer first name:");
         String firstName = scanner.nextLine();
         System.out.println("Please, enter the customer last name:");
@@ -364,21 +357,7 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem26Execute(Scanner scanner) {
-        System.out.println("Please, enter the customer first name:");
-        String firstName = scanner.nextLine();
-        System.out.println("Please, enter the customer last name:");
-        String lastName = scanner.nextLine();
-        
-        boolean success = customerDao.deleteCustomer(firstName, lastName);
-        if (success) {
-            System.out.println("Customer deleted successfully!");
-        } else {
-            System.out.println("Failed to delete customer. Customer not found.");
-        }
-    }
-
-    public static void menuItem27Execute(Scanner scanner) {
+    public static void menuItem25Execute(Scanner scanner) {
         showDesertsList(menuDao);
         System.out.println("Please, enter the dessert item code to delete:");
         String itemCode = scanner.nextLine();
@@ -388,6 +367,34 @@ public class MenuExecutor {
             System.out.println("Dessert deleted successfully!");
         } else {
             System.out.println("Failed to delete dessert. Dessert not found or invalid item code.");
+        }
+    }
+
+    public static void menuItem26Execute(Scanner scanner) {
+        System.out.println("Please, enter the waiter first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the waiter last name:");
+        String lastName = scanner.nextLine();
+        
+        boolean success = staffDao.deleteWaiter(firstName, lastName);
+        if (success) {
+            System.out.println("Waiter deleted successfully!");
+        } else {
+            System.out.println("Failed to delete waiter. Waiter not found.");
+        }
+    }
+
+    public static void menuItem27Execute(Scanner scanner) {
+        System.out.println("Please, enter the barista first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the barista last name:");
+        String lastName = scanner.nextLine();
+        
+        boolean success = staffDao.deleteBarista(firstName, lastName);
+        if (success) {
+            System.out.println("Barista deleted successfully!");
+        } else {
+            System.out.println("Failed to delete barista. Barista not found.");
         }
     }
 
@@ -405,7 +412,54 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem29Execute() {
+    public static void menuItem29Execute(Scanner scanner) {
+        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        String dateStr = scanner.nextLine();
+        try {
+            java.sql.Date date = java.sql.Date.valueOf(dateStr);
+            MenuPublisher.showOrdersByDate(orderDao, date);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem30Execute(Scanner scanner) {
+        System.out.println("Please, enter the start date (YYYY-MM-DD):");
+        String startDateStr = scanner.nextLine();
+        System.out.println("Please, enter the end date (YYYY-MM-DD):");
+        String endDateStr = scanner.nextLine();
+        try {
+            java.sql.Date startDate = java.sql.Date.valueOf(startDateStr);
+            java.sql.Date endDate = java.sql.Date.valueOf(endDateStr);
+            MenuPublisher.showOrdersByDateRange(orderDao, startDate, endDate);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem31Execute(Scanner scanner) {
+        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        String dateStr = scanner.nextLine();
+        try {
+            java.sql.Date date = java.sql.Date.valueOf(dateStr);
+            MenuPublisher.showDessertOrdersCountByDate(orderDao, date);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem32Execute(Scanner scanner) {
+        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        String dateStr = scanner.nextLine();
+        try {
+            java.sql.Date date = java.sql.Date.valueOf(dateStr);
+            MenuPublisher.showDrinkOrdersCountByDate(orderDao, date);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem33Execute() {
         DaoMethodsTester.testAllMethods();
     }
 
