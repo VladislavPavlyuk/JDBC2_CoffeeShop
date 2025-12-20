@@ -94,6 +94,19 @@ public class CustomerDiscountDaoImpl implements CustomerDiscountDao {
         "AND CURRENT_DATE >= cd.valid_from " +
         "AND (cd.valid_to IS NULL OR CURRENT_DATE <= cd.valid_to)";
     
+    private static final String UPDATE_CUSTOMER_DISCOUNT_SQL = 
+        "UPDATE customer_discounts " +
+        "SET discount_value = ? " +
+        "WHERE customer_id = (" +
+        "  SELECT id FROM customers " +
+        "  WHERE firstname = ? " +
+        "  AND lastname = ? " +
+        "  AND is_active = TRUE" +
+        ") " +
+        "AND discount_type_id = (SELECT id FROM discount_types WHERE type_code = 'PERCENTAGE') " +
+        "AND is_active = TRUE " +
+        "AND (valid_to IS NULL OR valid_to >= CURRENT_DATE)";
+    
     public CustomerDiscountDaoImpl(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
@@ -181,6 +194,41 @@ public class CustomerDiscountDaoImpl implements CustomerDiscountDao {
             return BigDecimal.ZERO;
         } catch (ConnectionDBException | SQLException e) {
             ExceptionHandler.handleAndLog(e, "getAverageDiscountValue");
+            throw ExceptionHandler.handleException(e);
+        }
+    }
+    
+    @Override
+    public boolean updateCustomerDiscount(String firstName, String lastName, BigDecimal newDiscountValue) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_CUSTOMER_DISCOUNT_SQL)) {
+            
+            ps.setBigDecimal(1, newDiscountValue);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                // try to insert if doesn't exist
+                try (PreparedStatement insertPs = conn.prepareStatement(
+                    "INSERT INTO customer_discounts (customer_id, discount_type_id, discount_value, valid_from, valid_to, is_active) " +
+                    "SELECT c.id, " +
+                    "  (SELECT id FROM discount_types WHERE type_code = 'PERCENTAGE'), " +
+                    "  ?, CURRENT_DATE, NULL, TRUE " +
+                    "FROM customers c " +
+                    "WHERE c.firstname = ? " +
+                    "AND c.lastname = ? " +
+                    "AND c.is_active = TRUE")) {
+                    insertPs.setBigDecimal(1, newDiscountValue);
+                    insertPs.setString(2, firstName);
+                    insertPs.setString(3, lastName);
+                    insertPs.executeUpdate();
+                    return true;
+                }
+            }
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            ExceptionHandler.handleAndLog(e, "updateCustomerDiscount");
             throw ExceptionHandler.handleException(e);
         }
     }

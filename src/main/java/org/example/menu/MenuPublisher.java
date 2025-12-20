@@ -2,6 +2,7 @@ package org.example.menu;
 
 
 import org.example.dao.coffeeshopDAO.CoffeeshopDao;
+import org.example.dao.customerDAO.CustomerDao;
 import org.example.dao.customerDiscountDAO.CustomerDiscountDao;
 import org.example.dao.menuDAO.MenuDao;
 import org.example.dao.shiftDAO.ShiftDao;
@@ -33,6 +34,10 @@ public class MenuPublisher {
     private static final String  SHOW_OLDEST_CUSTOMER = "Show oldest customer";
     private static final String  SHOW_CUSTOMERS_BIRTHDAY_TODAY = "Show customers with birthday today";
     private static final String  SHOW_CUSTOMERS_WITHOUT_EMAIL = "Show customers without email";
+    private static final String  UPDATE_COFFEE_PRICE = "Update coffee price";
+    private static final String  UPDATE_PASTRY_CHEF_ADDRESS = "Update pastry chef address";
+    private static final String  UPDATE_BARISTA_PHONE = "Update barista phone";
+    private static final String  UPDATE_CUSTOMER_DISCOUNT = "Update customer discount";
     private static final String  TEST_ALL_DAO_METHODS = "Test all DAO methods";
     private static final String  EXIT = "Exit";
     private static final String  INVATION_STRING = "Please enter the number";
@@ -125,6 +130,22 @@ public class MenuPublisher {
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(SHOW_CUSTOMERS_WITHOUT_EMAIL)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(UPDATE_COFFEE_PRICE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(UPDATE_PASTRY_CHEF_ADDRESS)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(UPDATE_BARISTA_PHONE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(UPDATE_CUSTOMER_DISCOUNT)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)

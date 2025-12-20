@@ -9,5 +9,7 @@ public interface MenuDao {
     List<MenuItem> findAllDesserts();
     
     List<MenuItem> findAllDrinks();
+    
+    boolean updateCoffeePrice(String itemCode, double newPrice);
 }
 

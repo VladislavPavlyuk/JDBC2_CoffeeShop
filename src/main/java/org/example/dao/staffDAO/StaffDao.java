@@ -20,4 +20,8 @@ public interface StaffDao {
     List<Staff> findAllFromCoffeeshops(String coffeeshop_Title) ;
 
     void deleteAll() ;
+    
+    boolean updatePastryChefAddress(String firstName, String lastName, String newAddress);
+    
+    boolean updateBaristaPhone(String firstName, String lastName, String newPhone);
 }

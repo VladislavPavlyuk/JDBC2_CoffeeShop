@@ -16,4 +16,6 @@ public interface CustomerDiscountDao {
     List<CustomerDiscount> getCustomersWithMaxDiscount();
     
     BigDecimal getAverageDiscountValue();
+    
+    boolean updateCustomerDiscount(String firstName, String lastName, BigDecimal newDiscountValue);
 }

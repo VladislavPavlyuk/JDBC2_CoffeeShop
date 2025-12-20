@@ -25,6 +25,34 @@ public class StaffDaoImpl implements StaffDao {
             " JOIN coffeeshops ON coffeeshops.id = staffandcoffeeshops.coffeeshops_id WHERE coffeeshops.coffeeshop_title = ? ";
     private static final String DELETE_ALL_STAFF = "DELETE FROM staff";
     private static final String DELETE_STAFF = "DELETE FROM staff WHERE staff.id = ?";
+    private static final String UPDATE_PASTRY_CHEF_ADDRESS_SQL = 
+        "UPDATE staff_contacts " +
+        "SET contact_value = ? " +
+        "WHERE staff_id = (" +
+        "  SELECT s.id " +
+        "  FROM staff s " +
+        "  JOIN positions p ON s.position_id = p.id " +
+        "  WHERE p.position_code = 'PASTRY_CHEF' " +
+        "  AND s.firstname = ? " +
+        "  AND s.lastname = ? " +
+        "  AND s.is_active = TRUE" +
+        ") " +
+        "AND contact_type = 'ADDRESS' " +
+        "AND is_active = TRUE";
+    private static final String UPDATE_BARISTA_PHONE_SQL = 
+        "UPDATE staff_contacts " +
+        "SET contact_value = ? " +
+        "WHERE staff_id = (" +
+        "  SELECT s.id " +
+        "  FROM staff s " +
+        "  JOIN positions p ON s.position_id = p.id " +
+        "  WHERE p.position_code = 'BARISTA' " +
+        "  AND s.firstname = ? " +
+        "  AND s.lastname = ? " +
+        "  AND s.is_active = TRUE" +
+        ") " +
+        "AND contact_type = 'PHONE' " +
+        "AND is_active = TRUE";
 
     public StaffDaoImpl(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
@@ -166,6 +194,88 @@ public class StaffDaoImpl implements StaffDao {
             ps.execute();
         } catch (ConnectionDBException | SQLException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean updatePastryChefAddress(String firstName, String lastName, String newAddress) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_PASTRY_CHEF_ADDRESS_SQL)) {
+            
+            ps.setString(1, newAddress);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                // try to insert if doesn't exist
+                try (PreparedStatement insertPs = conn.prepareStatement(
+                    "INSERT INTO staff_contacts (staff_id, contact_type, contact_value, is_primary, is_active) " +
+                    "SELECT s.id, 'ADDRESS', ?, FALSE, TRUE " +
+                    "FROM staff s " +
+                    "JOIN positions p ON s.position_id = p.id " +
+                    "WHERE p.position_code = 'PASTRY_CHEF' " +
+                    "AND s.firstname = ? " +
+                    "AND s.lastname = ? " +
+                    "AND s.is_active = TRUE " +
+                    "ON CONFLICT (staff_id, contact_type, contact_value) " +
+                    "WHERE is_active = TRUE " +
+                    "DO UPDATE SET contact_value = EXCLUDED.contact_value")) {
+                    insertPs.setString(1, newAddress);
+                    insertPs.setString(2, firstName);
+                    insertPs.setString(3, lastName);
+                    insertPs.executeUpdate();
+                    return true;
+                } catch (SQLException e) {
+                    // if insert fails, return false
+                    return false;
+                }
+            }
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println("Error updating pastry chef address: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateBaristaPhone(String firstName, String lastName, String newPhone) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_BARISTA_PHONE_SQL)) {
+            
+            ps.setString(1, newPhone);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                // try to insert if doesn't exist
+                try (PreparedStatement insertPs = conn.prepareStatement(
+                    "INSERT INTO staff_contacts (staff_id, contact_type, contact_value, is_primary, is_active) " +
+                    "SELECT s.id, 'PHONE', ?, TRUE, TRUE " +
+                    "FROM staff s " +
+                    "JOIN positions p ON s.position_id = p.id " +
+                    "WHERE p.position_code = 'BARISTA' " +
+                    "AND s.firstname = ? " +
+                    "AND s.lastname = ? " +
+                    "AND s.is_active = TRUE " +
+                    "ON CONFLICT (staff_id, contact_type, contact_value) " +
+                    "WHERE is_active = TRUE " +
+                    "DO UPDATE SET contact_value = EXCLUDED.contact_value")) {
+                    insertPs.setString(1, newPhone);
+                    insertPs.setString(2, firstName);
+                    insertPs.setString(3, lastName);
+                    insertPs.executeUpdate();
+                    return true;
+                } catch (SQLException e) {
+                    // if insert fails, return false
+                    return false;
+                }
+            }
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println("Error updating barista phone: " + e.getMessage());
+            return false;
         }
     }
 }

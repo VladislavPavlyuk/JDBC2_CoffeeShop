@@ -58,6 +58,13 @@ public class MenuDaoImpl implements MenuDao {
         "WHERE mit_type.type_code = 'DRINK' " +
         "ORDER BY mi.is_active DESC, mi.sort_order, mi.item_code";
     
+    private static final String UPDATE_COFFEE_PRICE_SQL = 
+        "UPDATE menu_items " +
+        "SET base_price = ? " +
+        "WHERE item_code = ? " +
+        "AND type_id = (SELECT id FROM menu_item_types WHERE type_code = 'DRINK') " +
+        "AND is_active = TRUE";
+    
     public MenuDaoImpl(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
@@ -96,6 +103,22 @@ public class MenuDaoImpl implements MenuDao {
             throw ExceptionHandler.handleException(e);
         }
         return drinks;
+    }
+    
+    @Override
+    public boolean updateCoffeePrice(String itemCode, double newPrice) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_COFFEE_PRICE_SQL)) {
+            
+            ps.setDouble(1, newPrice);
+            ps.setString(2, itemCode);
+            
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            ExceptionHandler.handleAndLog(e, "updateCoffeePrice");
+            throw ExceptionHandler.handleException(e);
+        }
     }
     
     private MenuItem mapResultSetToMenuItem(ResultSet rs) throws SQLException {
