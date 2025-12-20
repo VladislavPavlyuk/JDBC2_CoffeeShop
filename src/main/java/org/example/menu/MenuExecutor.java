@@ -1,9 +1,16 @@
 package org.example.menu;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import org.example.dao.ConnectionFactory;
 import org.example.dao.coffeeshopDAO.CoffeeshopDao;
 import org.example.dao.coffeeshopDAO.CoffeeshopDaoImpl;
+import org.example.dao.customerDiscountDAO.CustomerDiscountDao;
+import org.example.dao.customerDiscountDAO.CustomerDiscountDaoImpl;
 import org.example.dao.menuDAO.MenuDao;
 import org.example.dao.menuDAO.MenuDaoImpl;
 import org.example.dao.shiftDAO.ShiftDao;
@@ -12,16 +19,26 @@ import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;
 import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDaoImpl;
 import org.example.dao.staffDAO.StaffDao;
 import org.example.dao.staffDAO.StaffDaoImpl;
+import static org.example.menu.MenuPublisher.showAverageDiscount;
+import static org.example.menu.MenuPublisher.showCoffeeshopList;
+import static org.example.menu.MenuPublisher.showCoffeeshopListStaff;
+import static org.example.menu.MenuPublisher.showCustomersWithMaxDiscount;
+import static org.example.menu.MenuPublisher.showCustomersWithMinDiscount;
+import static org.example.menu.MenuPublisher.showCustomersWithBirthdayToday;
+import static org.example.menu.MenuPublisher.showCustomersWithoutEmail;
+import static org.example.menu.MenuPublisher.showDesertsList;
+import static org.example.menu.MenuPublisher.showDrinksList;
+import static org.example.menu.MenuPublisher.showMaxDiscount;
+import static org.example.menu.MenuPublisher.showMenu;
+import static org.example.menu.MenuPublisher.showMinDiscount;
+import static org.example.menu.MenuPublisher.showOldestCustomers;
+import static org.example.menu.MenuPublisher.showShiftList;
+import static org.example.menu.MenuPublisher.showStaffList;
+import static org.example.menu.MenuPublisher.showStringList;
+import static org.example.menu.MenuPublisher.showYoungestCustomers;
+import org.example.menu.DaoMethodsTester;
 import org.example.model.Shift;
 import org.example.model.Staff;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import static org.example.menu.MenuPublisher.*;
-import org.example.menu.DaoMethodsTester;
 
 
 public class MenuExecutor {
@@ -33,6 +50,8 @@ public class MenuExecutor {
     private static final CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
     private static final StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
     private static final MenuDao menuDao = new MenuDaoImpl(connectionProvider);
+    private static final CustomerDiscountDao customerDiscountDao = new CustomerDiscountDaoImpl(connectionProvider);
+    private static final CustomerDao customerDao = new CustomerDaoImpl(connectionProvider);
 
     public static void startMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -72,6 +91,16 @@ public class MenuExecutor {
                 } else if (choice == 10) {
                     menuItem10Execute();
                 } else if (choice == 11) {
+                    menuItem11Execute();
+                } else if (choice == 12) {
+                    menuItem12Execute();
+                } else if (choice == 13) {
+                    menuItem13Execute();
+                } else if (choice == 14) {
+                    menuItem14Execute();
+                } else if (choice == 15) {
+                    menuItem15Execute();
+                } else if (choice == 16) {
                     running = false;
                     System.out.println("Exiting application. Goodbye!");
                 } else {
@@ -180,6 +209,42 @@ public class MenuExecutor {
     }
 
     public static void menuItem10Execute() {
+        showMinDiscount(customerDiscountDao);
+    }
+
+    public static void menuItem11Execute() {
+        showMaxDiscount(customerDiscountDao);
+    }
+
+    public static void menuItem12Execute() {
+        showCustomersWithMinDiscount(customerDiscountDao);
+    }
+
+    public static void menuItem13Execute() {
+        showCustomersWithMaxDiscount(customerDiscountDao);
+    }
+
+    public static void menuItem14Execute() {
+        showAverageDiscount(customerDiscountDao);
+    }
+
+    public static void menuItem15Execute() {
+        showYoungestCustomers(customerDao);
+    }
+
+    public static void menuItem16Execute() {
+        showOldestCustomers(customerDao);
+    }
+
+    public static void menuItem17Execute() {
+        showCustomersWithBirthdayToday(customerDao);
+    }
+
+    public static void menuItem18Execute() {
+        showCustomersWithoutEmail(customerDao);
+    }
+
+    public static void menuItem19Execute() {
         DaoMethodsTester.testAllMethods();
     }
 

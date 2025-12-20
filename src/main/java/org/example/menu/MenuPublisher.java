@@ -2,14 +2,13 @@ package org.example.menu;
 
 
 import org.example.dao.coffeeshopDAO.CoffeeshopDao;
+import org.example.dao.customerDiscountDAO.CustomerDiscountDao;
 import org.example.dao.menuDAO.MenuDao;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.staffDAO.StaffDao;
-import org.example.model.Coffeeshop;
-import org.example.model.MenuItem;
-import org.example.model.Shift;
-import org.example.model.Staff;
+import org.example.model.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +24,15 @@ public class MenuPublisher {
     private static final String  SHOW_ALL_STAFF = "Show all staff";
     private static final String  SHOW_ALL_DESERTS = "Show all deserts";
     private static final String  SHOW_ALL_DRINKS = "Show all drinks and beverages";
+    private static final String  SHOW_MIN_DISCOUNT = "Show minimum discount for customer";
+    private static final String  SHOW_MAX_DISCOUNT = "Show maximum discount for customer";
+    private static final String  SHOW_CUSTOMERS_MIN_DISCOUNT = "Show customers with minimum discount";
+    private static final String  SHOW_CUSTOMERS_MAX_DISCOUNT = "Show customers with maximum discount";
+    private static final String  SHOW_AVG_DISCOUNT = "Show average discount value";
+    private static final String  SHOW_YOUNGEST_CUSTOMER = "Show youngest customer";
+    private static final String  SHOW_OLDEST_CUSTOMER = "Show oldest customer";
+    private static final String  SHOW_CUSTOMERS_BIRTHDAY_TODAY = "Show customers with birthday today";
+    private static final String  SHOW_CUSTOMERS_WITHOUT_EMAIL = "Show customers without email";
     private static final String  TEST_ALL_DAO_METHODS = "Test all DAO methods";
     private static final String  EXIT = "Exit";
     private static final String  INVATION_STRING = "Please enter the number";
@@ -81,6 +89,42 @@ public class MenuPublisher {
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(SHOW_ALL_DRINKS)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_MIN_DISCOUNT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_MAX_DISCOUNT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_CUSTOMERS_MIN_DISCOUNT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_CUSTOMERS_MAX_DISCOUNT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_AVG_DISCOUNT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_YOUNGEST_CUSTOMER)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_OLDEST_CUSTOMER)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_CUSTOMERS_BIRTHDAY_TODAY)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_CUSTOMERS_WITHOUT_EMAIL)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
@@ -272,6 +316,141 @@ public class MenuPublisher {
                 .append(END_LINE);
         
         System.out.println(resultString.toString());
+    }
+
+    public static void showMinDiscount(CustomerDiscountDao customerDiscountDao) {
+        BigDecimal minDiscount = customerDiscountDao.getMinDiscountValue();
+        System.out.println("============================================================");
+        System.out.println("Minimum discount for customer: " + minDiscount);
+        System.out.println("============================================================");
+    }
+
+    public static void showMaxDiscount(CustomerDiscountDao customerDiscountDao) {
+        BigDecimal maxDiscount = customerDiscountDao.getMaxDiscountValue();
+        System.out.println("============================================================");
+        System.out.println("Maximum discount for customer: " + maxDiscount);
+        System.out.println("============================================================");
+    }
+
+    public static void showCustomersWithMinDiscount(CustomerDiscountDao customerDiscountDao) {
+        List<CustomerDiscount> customers = customerDiscountDao.getCustomersWithMinDiscount();
+        
+        System.out.println("============================================================");
+        System.out.println("Customers with minimum discount:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("No customers found with minimum discount.");
+        } else {
+            int menuLine = 1;
+            for (var customer : customers) {
+                System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showCustomersWithMaxDiscount(CustomerDiscountDao customerDiscountDao) {
+        List<CustomerDiscount> customers = customerDiscountDao.getCustomersWithMaxDiscount();
+        
+        System.out.println("============================================================");
+        System.out.println("Customers with maximum discount:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("No customers found with maximum discount.");
+        } else {
+            int menuLine = 1;
+            for (var customer : customers) {
+                System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showAverageDiscount(CustomerDiscountDao customerDiscountDao) {
+        BigDecimal avgDiscount = customerDiscountDao.getAverageDiscountValue();
+        System.out.println("============================================================");
+        System.out.println("Average discount value: " + avgDiscount);
+        System.out.println("============================================================");
+    }
+
+    public static void showYoungestCustomers(CustomerDao customerDao) {
+        List<Customer> customers = customerDao.getYoungestCustomers();
+        
+        System.out.println("============================================================");
+        System.out.println("Youngest customers:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("No customers found.");
+        } else {
+            int menuLine = 1;
+            for (var customer : customers) {
+                System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showOldestCustomers(CustomerDao customerDao) {
+        List<Customer> customers = customerDao.getOldestCustomers();
+        
+        System.out.println("============================================================");
+        System.out.println("Oldest customers:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("No customers found.");
+        } else {
+            int menuLine = 1;
+            for (var customer : customers) {
+                System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showCustomersWithBirthdayToday(CustomerDao customerDao) {
+        List<Customer> customers = customerDao.getCustomersWithBirthdayToday();
+        
+        System.out.println("============================================================");
+        System.out.println("Customers with birthday today:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("No customers have birthday today.");
+        } else {
+            int menuLine = 1;
+            for (var customer : customers) {
+                System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showCustomersWithoutEmail(CustomerDao customerDao) {
+        List<Customer> customers = customerDao.getCustomersWithoutEmail();
+        
+        System.out.println("============================================================");
+        System.out.println("Customers without email:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("All customers have email addresses.");
+        } else {
+            int menuLine = 1;
+            for (var customer : customers) {
+                System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
     }
 
    // private MenuPublisher() {    }

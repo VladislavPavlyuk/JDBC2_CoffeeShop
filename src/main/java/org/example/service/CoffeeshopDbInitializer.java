@@ -387,8 +387,10 @@ public class CoffeeshopDbInitializer {
 
         StaffDao staffDAO = new StaffDaoImpl();
 
+        int maxStaffCount = RANDOM_GENERATOR.nextInt(5,15);
+
         List<Staff> staffToAdd = new ArrayList<>();
-        for (int count = 0; count < 200; count++) {
+        for (int count = 0; count < maxStaffCount; count++) {
             Staff addStaff = new Staff();
             // limit names to 50 chars (database field size)
             String firstName = randomNames.get(RANDOM_GENERATOR.nextInt(randomNames.size()));

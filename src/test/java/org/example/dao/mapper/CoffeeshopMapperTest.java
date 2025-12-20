@@ -81,3 +81,4 @@ class CoffeeshopMapperTest {
         assertEquals(expectedDescription, actualResult.getCoffeeshopDescription());
     }
 }
+

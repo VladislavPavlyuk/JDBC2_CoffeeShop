@@ -72,3 +72,4 @@ public class MenuItem {
         return String.format("%s - $%.2f (%s)", name, basePrice, status);
     }
 }
+

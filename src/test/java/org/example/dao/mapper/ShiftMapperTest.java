@@ -75,3 +75,4 @@ class ShiftMapperTest {
         assertEquals(expectedShiftTitle, actualResult.getShiftTitle());
     }
 }
+

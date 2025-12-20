@@ -10,3 +10,4 @@ public interface MenuDao {
     
     List<MenuItem> findAllDrinks();
 }
+

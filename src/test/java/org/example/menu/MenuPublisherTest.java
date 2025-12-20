@@ -264,3 +264,4 @@ class MenuPublisherTest {
         assertFalse(actualResult.isEmpty());
     }
 }
+

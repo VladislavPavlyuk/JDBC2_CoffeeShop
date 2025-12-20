@@ -137,3 +137,4 @@ class MenuDaoImplTest {
         assertThrows(Exception.class, () -> menuDao.findAllDrinks());
     }
 }
+
