@@ -17,6 +17,8 @@ import org.example.dao.menuDAO.MenuDao;
 import org.example.dao.menuDAO.MenuDaoImpl;
 import org.example.dao.orderDAO.OrderDao;
 import org.example.dao.orderDAO.OrderDaoImpl;
+import org.example.dao.scheduleDAO.ScheduleDao;
+import org.example.dao.scheduleDAO.ScheduleDaoImpl;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.shiftDAO.ShiftDaoImpl;
 import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;

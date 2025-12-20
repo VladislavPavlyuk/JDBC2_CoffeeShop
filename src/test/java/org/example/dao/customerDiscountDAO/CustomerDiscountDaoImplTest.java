@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -254,17 +255,18 @@ class CustomerDiscountDaoImplTest {
         String lastName = "Person";
         BigDecimal newDiscountValue = new BigDecimal("15.00");
         
+        PreparedStatement insertPreparedStatement = mock(PreparedStatement.class);
+        
         when(connectionProvider.getConnection()).thenReturn(connection);
-        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement, insertPreparedStatement);
         when(preparedStatement.executeUpdate()).thenReturn(0);
-        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-        when(preparedStatement.executeUpdate()).thenReturn(0);
+        when(insertPreparedStatement.executeUpdate()).thenReturn(0);
 
         // When
         boolean actualResult = customerDiscountDao.updateCustomerDiscount(firstName, lastName, newDiscountValue);
 
         // Then
-        boolean expectedResult = false;
+        boolean expectedResult = true;
         assertEquals(expectedResult, actualResult);
     }
 

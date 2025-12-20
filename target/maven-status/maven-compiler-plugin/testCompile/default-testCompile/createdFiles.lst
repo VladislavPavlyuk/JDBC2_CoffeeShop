@@ -2,10 +2,7 @@ org\example\service\PropertyReaderTest.class
 org\example\dao\mapper\StaffMapperTest.class
 org\example\dao\exception\ExceptionHandlerTest.class
 org\example\TxtFileReaderTest.class
-org\example\CoffeeshopDaoTest.class
 org\example\dao\mapper\ShiftMapperTest.class
 org\example\dao\base\AbstractDaoTest.class
 org\example\dao\mapper\CoffeeshopMapperTest.class
-org\example\dao\coffeeshopDAO\CoffeeshopDaoRefactoredTest.class
 org\example\dao\base\AbstractDaoTest$TestDao.class
-org\example\dao\staffDAO\StaffDaoRefactoredTest.class

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.example.dao.staffDAO.StaffDaoImplTest
 -------------------------------------------------------------------------------
-Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.654 s - in org.example.dao.staffDAO.StaffDaoImplTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.56 s - in org.example.dao.staffDAO.StaffDaoImplTest

@@ -25,10 +25,10 @@ class ShiftMapperTest {
     void map_WhenResultSetHasValidData_ShouldReturnShiftWithCorrectValues() throws SQLException {
         // Given
         Long expectedId = 1L;
-        String expectedShiftTitle = "Morning Shift";
+        String expectedShiftCode = "MORNING";
         
         when(resultSet.getLong("id")).thenReturn(expectedId);
-        when(resultSet.getString("shift_title")).thenReturn(expectedShiftTitle);
+        when(resultSet.getString("shift_code")).thenReturn(expectedShiftCode);
 
         // When
         Shift actualResult = mapper.map(resultSet);
@@ -36,7 +36,8 @@ class ShiftMapperTest {
         // Then
         assertNotNull(actualResult);
         assertEquals(expectedId, actualResult.getId());
-        assertEquals(expectedShiftTitle, actualResult.getShiftTitle());
+        String expectedResult = expectedShiftCode;
+        assertEquals(expectedResult, actualResult.getShiftTitle());
     }
 
     @Test
@@ -61,10 +62,10 @@ class ShiftMapperTest {
     void map_WhenResultSetHasNullFields_ShouldReturnShiftWithNullValues() throws SQLException {
         // Given
         Long expectedId = 1L;
-        String expectedShiftTitle = null;
+        String expectedShiftCode = null;
         
         when(resultSet.getLong("id")).thenReturn(expectedId);
-        when(resultSet.getString("shift_title")).thenReturn(expectedShiftTitle);
+        when(resultSet.getString("shift_code")).thenReturn(expectedShiftCode);
 
         // When
         Shift actualResult = mapper.map(resultSet);
@@ -72,7 +73,8 @@ class ShiftMapperTest {
         // Then
         assertNotNull(actualResult);
         assertEquals(expectedId, actualResult.getId());
-        assertEquals(expectedShiftTitle, actualResult.getShiftTitle());
+        String expectedResult = expectedShiftCode;
+        assertEquals(expectedResult, actualResult.getShiftTitle());
     }
 }
 

@@ -6,6 +6,7 @@ import org.example.dao.customerDAO.CustomerDao;
 import org.example.dao.customerDiscountDAO.CustomerDiscountDao;
 import org.example.dao.menuDAO.MenuDao;
 import org.example.dao.orderDAO.OrderDao;
+import org.example.dao.scheduleDAO.ScheduleDao;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.staffDAO.StaffDao;
 import org.example.model.*;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.dao.shiftDAO.ShiftDaoImplTest" time="5.47" tests="18" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.dao.shiftDAO.ShiftDaoImplTest" time="2.518" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,10 +16,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25\bin"/>
-    <property name="sun.java.command" value="C:\Users\vladp\AppData\Local\Temp\surefire1839848004299491629\surefirebooter-20251217141523537_3.jar C:\Users\vladp\AppData\Local\Temp\surefire1839848004299491629 2025-12-17T14-15-22_160-jvmRun1 surefire-20251217141523537_1tmp surefire_0-20251217141523537_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\vladp\AppData\Local\Temp\surefire17659983532003805574\surefirebooter-20251220132142583_3.jar C:\Users\vladp\AppData\Local\Temp\surefire17659983532003805574 2025-12-20T13-21-41_459-jvmRun1 surefire-20251220132142583_1tmp surefire_0-20251220132142583_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\vladp\IdeaProjects\JDBC2_CoffeeShop\target\test-classes;C:\Users\vladp\IdeaProjects\JDBC2_CoffeeShop\target\classes;C:\Users\vladp\.m2\repository\org\mockito\mockito-junit-jupiter\4.6.1\mockito-junit-jupiter-4.6.1.jar;C:\Users\vladp\.m2\repository\org\mockito\mockito-core\4.6.1\mockito-core-4.6.1.jar;C:\Users\vladp\.m2\repository\net\bytebuddy\byte-buddy\1.12.10\byte-buddy-1.12.10.jar;C:\Users\vladp\.m2\repository\net\bytebuddy\byte-buddy-agent\1.12.10\byte-buddy-agent-1.12.10.jar;C:\Users\vladp\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.jar;C:\Users\vladp\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\vladp\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\vladp\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\vladp\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\vladp\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-suite\1.8.1\junit-platform-suite-1.8.1.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-suite-api\1.8.1\junit-platform-suite-api-1.8.1.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-suite-engine\1.8.1\junit-platform-suite-engine-1.8.1.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-suite-commons\1.8.1\junit-platform-suite-commons-1.8.1.jar;C:\Users\vladp\.m2\repository\org\junit\platform\junit-platform-launcher\1.8.1\junit-platform-launcher-1.8.1.jar;C:\Users\vladp\.m2\repository\org\postgresql\postgresql\42.2.27\postgresql-42.2.27.jar;C:\Users\vladp\.m2\repository\org\checkerframework\checker-qual\3.5.0\checker-qual-3.5.0.jar;C:\Users\vladp\.m2\repository\org\projectlombok\lombok\1.18.40\lombok-1.18.40.jar;"/>
-    <property name="test" value="true"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\vladp"/>
     <property name="user.language" value="en"/>
@@ -32,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\vladp\AppData\Local\Temp\surefire1839848004299491629\surefirebooter-20251217141523537_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\vladp\AppData\Local\Temp\surefire17659983532003805574\surefirebooter-20251220132142583_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.1+8-LTS-27"/>
@@ -61,38 +60,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="findAllShiftsWithLessOrEqualStaffNumber_ShouldReturnEmptyList_WhenNoShiftsMatch" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.302"/>
-  <testcase name="findAllShiftsWithLessOrEqualStaffNumber_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.178"/>
-  <testcase name="findAll_ShouldReturnListOfShifts_WhenShiftsExist" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.214"/>
-  <testcase name="findAllShiftsWithLessOrEqualStaffNumber_ShouldReturnShiftTitles_WhenMultipleShiftsMatch" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.404"/>
-  <testcase name="saveMany_ShouldSaveAllShifts_WhenValidListProvided" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.557">
-    <system-err><![CDATA[Batch entry 0 INSERT INTO shifts(shift_title) VALUES('Morning Shift') was aborted: ERROR: null value in column "start_time" of relation "shifts" violates not-null constraint
-  Detail: Failing row contains (214, null, Morning Shift, null, null, t).  Call getNextException to see other errors in the batch.
+  <testcase name="findAllShiftsWithLessOrEqualStaffNumber_WhenNumberProvided_ShouldReturnListOfShiftTitles" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.224"/>
+  <testcase name="save_WhenValidShiftProvided_ShouldNotThrowException" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.158"/>
+  <testcase name="findAll_WhenShiftsExist_ShouldReturnListOfShifts" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.089"/>
+  <testcase name="saveMany_WhenEmptyListProvided_ShouldNotThrowException" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.169"/>
+  <testcase name="delete_WhenValidShiftProvided_ShouldNotThrowException" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.056"/>
+  <testcase name="saveMany_WhenValidListProvided_ShouldNotThrowException" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.131">
+    <system-err><![CDATA[Batch entry 0 INSERT INTO shifts(shift_code) VALUES('Morning Shift') was aborted: ERROR: duplicate key value violates unique constraint "shifts_shift_code_key"
+  Detail: Key (shift_code)=(Morning Shift) already exists.  Call getNextException to see other errors in the batch.
 ]]></system-err>
   </testcase>
-  <testcase name="saveMany_ShouldHandleEmptyList_WhenEmptyListProvided" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.22"/>
-  <testcase name="save_ShouldSaveShift_WhenValidShiftProvided" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.241">
-    <system-err><![CDATA[ERROR: null value in column "start_time" of relation "shifts" violates not-null constraint
-  Detail: Failing row contains (215, null, Morning Shift, null, null, t).
-]]></system-err>
-  </testcase>
-  <testcase name="deleteAll_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.573"/>
-  <testcase name="update_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.374"/>
-  <testcase name="deleteAll_ShouldDeleteAllShifts_WhenCalled" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.303"/>
-  <testcase name="delete_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.662"/>
-  <testcase name="findAllShiftsWithLessOrEqualStaffNumber_ShouldReturnShiftTitles_WhenCalled" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.09"/>
-  <testcase name="update_ShouldUpdateShift_WhenValidShiftProvided" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.65"/>
-  <testcase name="save_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.247">
-    <system-err><![CDATA[ERROR: null value in column "start_time" of relation "shifts" violates not-null constraint
-  Detail: Failing row contains (216, null, Morning Shift, null, null, t).
-]]></system-err>
-  </testcase>
-  <testcase name="findAll_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.084"/>
-  <testcase name="findAll_ShouldReturnEmptyList_WhenNoShiftsExist" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.065"/>
-  <testcase name="delete_ShouldDeleteShift_WhenValidShiftProvided" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.108"/>
-  <testcase name="saveMany_ShouldHandleException_WhenSQLExceptionOccurs" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.169">
-    <system-err><![CDATA[Batch entry 0 INSERT INTO shifts(shift_title) VALUES('Morning Shift') was aborted: ERROR: null value in column "start_time" of relation "shifts" violates not-null constraint
-  Detail: Failing row contains (217, null, Morning Shift, null, null, t).  Call getNextException to see other errors in the batch.
-]]></system-err>
-  </testcase>
+  <testcase name="findAll_WhenNoShiftsExist_ShouldReturnEmptyList" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.636"/>
+  <testcase name="deleteAll_WhenCalled_ShouldNotThrowException" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.326"/>
+  <testcase name="findAllShiftsWithLessOrEqualStaffNumber_WhenNoShiftsMatch_ShouldReturnEmptyList" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.272"/>
+  <testcase name="update_WhenValidShiftProvided_ShouldNotThrowException" classname="org.example.dao.shiftDAO.ShiftDaoImplTest" time="0.437"/>
 </testsuite>

@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -74,7 +75,8 @@ class MenuDaoImplTest {
         List<MenuItem> actualResult = menuDao.findAllDesserts();
 
         // Then
-        assertNotNull(actualResult);
+        List<MenuItem> expectedResult = new ArrayList<>();
+        assertEquals(expectedResult.size(), actualResult.size());
         assertTrue(actualResult.isEmpty());
     }
 
