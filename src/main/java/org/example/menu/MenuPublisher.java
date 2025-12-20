@@ -25,6 +25,8 @@ public class MenuPublisher {
     private static final String  SHOW_ALL_STAFF = "Show all staff";
     private static final String  SHOW_ALL_DESERTS = "Show all deserts";
     private static final String  SHOW_ALL_DRINKS = "Show all drinks and beverages";
+    private static final String  SHOW_ALL_BARISTAS = "Show all baristas";
+    private static final String  SHOW_ALL_WAITERS = "Show all waiters";
     private static final String  SHOW_MIN_DISCOUNT = "Show minimum discount for customer";
     private static final String  SHOW_MAX_DISCOUNT = "Show maximum discount for customer";
     private static final String  SHOW_CUSTOMERS_MIN_DISCOUNT = "Show customers with minimum discount";
@@ -38,6 +40,10 @@ public class MenuPublisher {
     private static final String  UPDATE_PASTRY_CHEF_ADDRESS = "Update pastry chef address";
     private static final String  UPDATE_BARISTA_PHONE = "Update barista phone";
     private static final String  UPDATE_CUSTOMER_DISCOUNT = "Update customer discount";
+    private static final String  DELETE_DESSERT = "Delete dessert";
+    private static final String  DELETE_WAITER = "Delete waiter";
+    private static final String  DELETE_BARISTA = "Delete barista";
+    private static final String  DELETE_CUSTOMER = "Delete customer";
     private static final String  TEST_ALL_DAO_METHODS = "Test all DAO methods";
     private static final String  EXIT = "Exit";
     private static final String  INVATION_STRING = "Please enter the number";
@@ -97,6 +103,14 @@ public class MenuPublisher {
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
+                .append(SHOW_ALL_BARISTAS)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_ALL_WAITERS)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
                 .append(SHOW_MIN_DISCOUNT)
                 .append(END_LINE)
                 .append(menuLine++)
@@ -146,6 +160,22 @@ public class MenuPublisher {
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(UPDATE_CUSTOMER_DISCOUNT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(DELETE_DESSERT)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(DELETE_WAITER)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(DELETE_BARISTA)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(DELETE_CUSTOMER)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
@@ -468,6 +498,50 @@ public class MenuPublisher {
             int menuLine = 1;
             for (var customer : customers) {
                 System.out.println(menuLine++ + ".  " + customer.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showAllBaristas(StaffDao staffDao) {
+        List<Staff> baristas = staffDao.findAllBaristas();
+        
+        System.out.println("============================================================");
+        System.out.println("All baristas:");
+        System.out.println("============================================================");
+        
+        if (baristas.isEmpty()) {
+            System.out.println("No baristas found.");
+        } else {
+            int menuLine = 1;
+            for (var barista : baristas) {
+                System.out.println(menuLine++ + ".  ID: " + barista.getId() + 
+                    ", Name: " + barista.getFirstName() + " " + barista.getLastName() +
+                    ", Position ID: " + barista.getPositionId() +
+                    ", Shift ID: " + barista.getShift_Id());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showAllWaiters(StaffDao staffDao) {
+        List<Staff> waiters = staffDao.findAllWaiters();
+        
+        System.out.println("============================================================");
+        System.out.println("All waiters:");
+        System.out.println("============================================================");
+        
+        if (waiters.isEmpty()) {
+            System.out.println("No waiters found.");
+        } else {
+            int menuLine = 1;
+            for (var waiter : waiters) {
+                System.out.println(menuLine++ + ".  ID: " + waiter.getId() + 
+                    ", Name: " + waiter.getFirstName() + " " + waiter.getLastName() +
+                    ", Position ID: " + waiter.getPositionId() +
+                    ", Shift ID: " + waiter.getShift_Id());
             }
         }
         

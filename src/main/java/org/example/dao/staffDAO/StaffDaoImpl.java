@@ -53,6 +53,70 @@ public class StaffDaoImpl implements StaffDao {
         ") " +
         "AND contact_type = 'PHONE' " +
         "AND is_active = TRUE";
+    private static final String DELETE_WAITER_SQL = 
+        "UPDATE staff " +
+        "SET is_active = FALSE, " +
+        "    updated_at = CURRENT_TIMESTAMP " +
+        "WHERE id = (" +
+        "  SELECT s.id " +
+        "  FROM staff s " +
+        "  JOIN positions p ON s.position_id = p.id " +
+        "  WHERE p.position_code = 'WAITER' " +
+        "  AND s.firstname = ? " +
+        "  AND s.lastname = ? " +
+        "  AND s.is_active = TRUE" +
+        ")";
+    private static final String DELETE_BARISTA_SQL = 
+        "UPDATE staff " +
+        "SET is_active = FALSE, " +
+        "    updated_at = CURRENT_TIMESTAMP " +
+        "WHERE id = (" +
+        "  SELECT s.id " +
+        "  FROM staff s " +
+        "  JOIN positions p ON s.position_id = p.id " +
+        "  WHERE p.position_code = 'BARISTA' " +
+        "  AND s.firstname = ? " +
+        "  AND s.lastname = ? " +
+        "  AND s.is_active = TRUE" +
+        ")";
+    private static final String FIND_ALL_BARISTAS_SQL = 
+        "SELECT " +
+        "s.id, " +
+        "s.firstname, " +
+        "s.lastname, " +
+        "s.middlename, " +
+        "s.position_id, " +
+        "s.shift_id, " +
+        "s.hired_date, " +
+        "s.is_active, " +
+        "MAX(CASE WHEN sc.contact_type = 'PHONE' AND sc.is_primary = TRUE THEN sc.contact_value END) AS phone, " +
+        "MAX(CASE WHEN sc.contact_type = 'EMAIL' AND sc.is_primary = TRUE THEN sc.contact_value END) AS email, " +
+        "MAX(CASE WHEN sc.contact_type = 'ADDRESS' AND sc.is_primary = TRUE THEN sc.contact_value END) AS address " +
+        "FROM staff s " +
+        "JOIN positions p ON s.position_id = p.id " +
+        "LEFT JOIN staff_contacts sc ON s.id = sc.staff_id AND sc.is_active = TRUE " +
+        "WHERE p.position_code = 'BARISTA' " +
+        "GROUP BY s.id, s.firstname, s.lastname, s.middlename, s.position_id, s.shift_id, s.hired_date, s.is_active " +
+        "ORDER BY s.is_active DESC, s.lastname, s.firstname";
+    private static final String FIND_ALL_WAITERS_SQL = 
+        "SELECT " +
+        "s.id, " +
+        "s.firstname, " +
+        "s.lastname, " +
+        "s.middlename, " +
+        "s.position_id, " +
+        "s.shift_id, " +
+        "s.hired_date, " +
+        "s.is_active, " +
+        "MAX(CASE WHEN sc.contact_type = 'PHONE' AND sc.is_primary = TRUE THEN sc.contact_value END) AS phone, " +
+        "MAX(CASE WHEN sc.contact_type = 'EMAIL' AND sc.is_primary = TRUE THEN sc.contact_value END) AS email, " +
+        "MAX(CASE WHEN sc.contact_type = 'ADDRESS' AND sc.is_primary = TRUE THEN sc.contact_value END) AS address " +
+        "FROM staff s " +
+        "JOIN positions p ON s.position_id = p.id " +
+        "LEFT JOIN staff_contacts sc ON s.id = sc.staff_id AND sc.is_active = TRUE " +
+        "WHERE p.position_code = 'WAITER' " +
+        "GROUP BY s.id, s.firstname, s.lastname, s.middlename, s.position_id, s.shift_id, s.hired_date, s.is_active " +
+        "ORDER BY s.is_active DESC, s.lastname, s.firstname";
 
     public StaffDaoImpl(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
@@ -277,5 +341,123 @@ public class StaffDaoImpl implements StaffDao {
             System.err.println("Error updating barista phone: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public boolean deleteWaiter(String firstName, String lastName) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(DELETE_WAITER_SQL)) {
+            
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            
+            int rowsAffected = ps.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                // deactivate contacts
+                try (PreparedStatement contactPs = conn.prepareStatement(
+                    "UPDATE staff_contacts " +
+                    "SET is_active = FALSE " +
+                    "WHERE staff_id = (" +
+                    "  SELECT s.id " +
+                    "  FROM staff s " +
+                    "  JOIN positions p ON s.position_id = p.id " +
+                    "  WHERE p.position_code = 'WAITER' " +
+                    "  AND s.firstname = ? " +
+                    "  AND s.lastname = ?" +
+                    ") " +
+                    "AND is_active = TRUE")) {
+                    contactPs.setString(1, firstName);
+                    contactPs.setString(2, lastName);
+                    contactPs.executeUpdate();
+                }
+            }
+            
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println("Error deleting waiter: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteBarista(String firstName, String lastName) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(DELETE_BARISTA_SQL)) {
+            
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            
+            int rowsAffected = ps.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                // deactivate contacts
+                try (PreparedStatement contactPs = conn.prepareStatement(
+                    "UPDATE staff_contacts " +
+                    "SET is_active = FALSE " +
+                    "WHERE staff_id = (" +
+                    "  SELECT s.id " +
+                    "  FROM staff s " +
+                    "  JOIN positions p ON s.position_id = p.id " +
+                    "  WHERE p.position_code = 'BARISTA' " +
+                    "  AND s.firstname = ? " +
+                    "  AND s.lastname = ?" +
+                    ") " +
+                    "AND is_active = TRUE")) {
+                    contactPs.setString(1, firstName);
+                    contactPs.setString(2, lastName);
+                    contactPs.executeUpdate();
+                }
+            }
+            
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println("Error deleting barista: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public List<Staff> findAllBaristas() {
+        List<Staff> baristas = new ArrayList<>();
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(FIND_ALL_BARISTAS_SQL);
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                Staff barista = new Staff();
+                barista.setId(rs.getLong("id"));
+                barista.setFirstName(rs.getString("firstname"));
+                barista.setLastName(rs.getString("lastname"));
+                barista.setPositionId(rs.getLong("position_id"));
+                barista.setShift_Id(rs.getLong("shift_id"));
+                baristas.add(barista);
+            }
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println("Error finding all baristas: " + e.getMessage());
+        }
+        return baristas;
+    }
+
+    @Override
+    public List<Staff> findAllWaiters() {
+        List<Staff> waiters = new ArrayList<>();
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(FIND_ALL_WAITERS_SQL);
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                Staff waiter = new Staff();
+                waiter.setId(rs.getLong("id"));
+                waiter.setFirstName(rs.getString("firstname"));
+                waiter.setLastName(rs.getString("lastname"));
+                waiter.setPositionId(rs.getLong("position_id"));
+                waiter.setShift_Id(rs.getLong("shift_id"));
+                waiters.add(waiter);
+            }
+        } catch (ConnectionDBException | SQLException e) {
+            System.err.println("Error finding all waiters: " + e.getMessage());
+        }
+        return waiters;
     }
 }

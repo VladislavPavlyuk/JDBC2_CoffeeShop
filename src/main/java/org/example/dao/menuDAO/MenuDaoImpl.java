@@ -65,6 +65,15 @@ public class MenuDaoImpl implements MenuDao {
         "AND type_id = (SELECT id FROM menu_item_types WHERE type_code = 'DRINK') " +
         "AND is_active = TRUE";
     
+    private static final String DELETE_DESSERT_SQL = 
+        "UPDATE menu_items " +
+        "SET is_active = FALSE, " +
+        "    is_available = FALSE, " +
+        "    updated_at = CURRENT_TIMESTAMP " +
+        "WHERE item_code = ? " +
+        "AND type_id = (SELECT id FROM menu_item_types WHERE type_code = 'DESSERT') " +
+        "AND is_active = TRUE";
+    
     public MenuDaoImpl(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
@@ -121,6 +130,21 @@ public class MenuDaoImpl implements MenuDao {
         }
     }
     
+    @Override
+    public boolean deleteDessert(String itemCode) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(DELETE_DESSERT_SQL)) {
+            
+            ps.setString(1, itemCode);
+            
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            ExceptionHandler.handleAndLog(e, "deleteDessert");
+            throw ExceptionHandler.handleException(e);
+        }
+    }
+    
     private MenuItem mapResultSetToMenuItem(ResultSet rs) throws SQLException {
         MenuItem item = new MenuItem();
         item.setId(rs.getLong("id"));
@@ -131,4 +155,5 @@ public class MenuDaoImpl implements MenuDao {
         return item;
     }
 }
+
 

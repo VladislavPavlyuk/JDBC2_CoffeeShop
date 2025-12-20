@@ -60,6 +60,14 @@ public class CustomerDaoImpl implements CustomerDao {
         ") " +
         "ORDER BY c.lastname, c.firstname";
     
+    private static final String DELETE_CUSTOMER_SQL = 
+        "UPDATE customers " +
+        "SET is_active = FALSE, " +
+        "    updated_at = CURRENT_TIMESTAMP " +
+        "WHERE firstname = ? " +
+        "AND lastname = ? " +
+        "AND is_active = TRUE";
+    
     public CustomerDaoImpl(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
@@ -136,6 +144,55 @@ public class CustomerDaoImpl implements CustomerDao {
         return customers;
     }
     
+    @Override
+    public boolean deleteCustomer(String firstName, String lastName) {
+        try (Connection conn = connectionProvider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(DELETE_CUSTOMER_SQL)) {
+            
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            
+            int rowsAffected = ps.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                // deactivate contacts
+                try (PreparedStatement contactPs = conn.prepareStatement(
+                    "UPDATE customer_contacts " +
+                    "SET is_active = FALSE " +
+                    "WHERE customer_id = (" +
+                    "  SELECT id FROM customers " +
+                    "  WHERE firstname = ? " +
+                    "  AND lastname = ?" +
+                    ") " +
+                    "AND is_active = TRUE")) {
+                    contactPs.setString(1, firstName);
+                    contactPs.setString(2, lastName);
+                    contactPs.executeUpdate();
+                }
+                
+                // deactivate discounts
+                try (PreparedStatement discountPs = conn.prepareStatement(
+                    "UPDATE customer_discounts " +
+                    "SET is_active = FALSE " +
+                    "WHERE customer_id = (" +
+                    "  SELECT id FROM customers " +
+                    "  WHERE firstname = ? " +
+                    "  AND lastname = ?" +
+                    ") " +
+                    "AND is_active = TRUE")) {
+                    discountPs.setString(1, firstName);
+                    discountPs.setString(2, lastName);
+                    discountPs.executeUpdate();
+                }
+            }
+            
+            return rowsAffected > 0;
+        } catch (ConnectionDBException | SQLException e) {
+            ExceptionHandler.handleAndLog(e, "deleteCustomer");
+            throw ExceptionHandler.handleException(e);
+        }
+    }
+    
     private Customer mapResultSetToCustomer(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
         customer.setId(rs.getLong("id"));
@@ -151,3 +208,4 @@ public class CustomerDaoImpl implements CustomerDao {
         return customer;
     }
 }
+

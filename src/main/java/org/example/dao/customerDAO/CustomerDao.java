@@ -13,4 +13,7 @@ public interface CustomerDao {
     List<Customer> getCustomersWithBirthdayToday();
     
     List<Customer> getCustomersWithoutEmail();
+    
+    boolean deleteCustomer(String firstName, String lastName);
 }
+

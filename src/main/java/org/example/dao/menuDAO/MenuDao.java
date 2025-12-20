@@ -11,5 +11,8 @@ public interface MenuDao {
     List<MenuItem> findAllDrinks();
     
     boolean updateCoffeePrice(String itemCode, double newPrice);
+    
+    boolean deleteDessert(String itemCode);
 }
+
 

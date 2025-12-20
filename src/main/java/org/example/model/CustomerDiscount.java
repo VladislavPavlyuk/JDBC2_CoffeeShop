@@ -102,3 +102,4 @@ public class CustomerDiscount {
             customerId, name, discountValue, discountType, discountType, validPeriod);
     }
 }
+

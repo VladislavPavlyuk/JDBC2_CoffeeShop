@@ -67,3 +67,4 @@ public class Customer {
             id, name, dateOfBirth != null ? dateOfBirth.toString() : "N/A");
     }
 }
+

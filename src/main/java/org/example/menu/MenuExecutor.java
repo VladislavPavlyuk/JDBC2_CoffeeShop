@@ -109,16 +109,28 @@ public class MenuExecutor {
                 } else if (choice == 18) {
                     menuItem18Execute();
                 } else if (choice == 19) {
-                    menuItem19Execute(scanner);
+                    menuItem19Execute();
                 } else if (choice == 20) {
-                    menuItem20Execute(scanner);
+                    menuItem20Execute();
                 } else if (choice == 21) {
                     menuItem21Execute(scanner);
                 } else if (choice == 22) {
                     menuItem22Execute(scanner);
                 } else if (choice == 23) {
-                    menuItem23Execute();
+                    menuItem23Execute(scanner);
                 } else if (choice == 24) {
+                    menuItem24Execute(scanner);
+                } else if (choice == 25) {
+                    menuItem25Execute(scanner);
+                } else if (choice == 26) {
+                    menuItem26Execute(scanner);
+                } else if (choice == 27) {
+                    menuItem27Execute(scanner);
+                } else if (choice == 28) {
+                    menuItem28Execute(scanner);
+                } else if (choice == 29) {
+                    menuItem29Execute();
+                } else if (choice == 30) {
                     running = false;
                     System.out.println("Exiting application. Goodbye!");
                 } else {
@@ -227,71 +239,47 @@ public class MenuExecutor {
     }
 
     public static void menuItem10Execute() {
-        showMinDiscount(customerDiscountDao);
+        MenuPublisher.showAllBaristas(staffDao);
     }
 
     public static void menuItem11Execute() {
-        showMaxDiscount(customerDiscountDao);
+        MenuPublisher.showAllWaiters(staffDao);
     }
 
     public static void menuItem12Execute() {
-        showCustomersWithMinDiscount(customerDiscountDao);
+        showMinDiscount(customerDiscountDao);
     }
 
     public static void menuItem13Execute() {
-        showCustomersWithMaxDiscount(customerDiscountDao);
+        showMaxDiscount(customerDiscountDao);
     }
 
     public static void menuItem14Execute() {
-        showAverageDiscount(customerDiscountDao);
+        showCustomersWithMinDiscount(customerDiscountDao);
     }
 
     public static void menuItem15Execute() {
-        showYoungestCustomers(customerDao);
+        showCustomersWithMaxDiscount(customerDiscountDao);
     }
 
     public static void menuItem16Execute() {
-        showOldestCustomers(customerDao);
+        showAverageDiscount(customerDiscountDao);
     }
 
     public static void menuItem17Execute() {
-        showCustomersWithBirthdayToday(customerDao);
+        showYoungestCustomers(customerDao);
     }
 
     public static void menuItem18Execute() {
+        showOldestCustomers(customerDao);
+    }
+
+    public static void menuItem19Execute() {
+        showCustomersWithBirthdayToday(customerDao);
+    }
+
+    public static void menuItem20Execute() {
         showCustomersWithoutEmail(customerDao);
-    }
-
-    public static void menuItem19Execute(Scanner scanner) {
-        showDrinksList(menuDao);
-        System.out.println("Please, enter the coffee item code:");
-        String itemCode = scanner.nextLine();
-        System.out.println("Please, enter the new price:");
-        double newPrice = scanner.nextDouble();
-        scanner.nextLine();
-        
-        boolean success = menuDao.updateCoffeePrice(itemCode, newPrice);
-        if (success) {
-            System.out.println("Price updated successfully!");
-        } else {
-            System.out.println("Failed to update price. Coffee not found or invalid item code.");
-        }
-    }
-
-    public static void menuItem20Execute(Scanner scanner) {
-        System.out.println("Please, enter the pastry chef first name:");
-        String firstName = scanner.nextLine();
-        System.out.println("Please, enter the pastry chef last name:");
-        String lastName = scanner.nextLine();
-        System.out.println("Please, enter the new address:");
-        String newAddress = scanner.nextLine();
-        
-        boolean success = staffDao.updatePastryChefAddress(firstName, lastName, newAddress);
-        if (success) {
-            System.out.println("Address updated successfully!");
-        } else {
-            System.out.println("Failed to update address. Pastry chef not found.");
-        }
     }
 
     public static void menuItem21Execute(Scanner scanner) {
@@ -311,6 +299,54 @@ public class MenuExecutor {
     }
 
     public static void menuItem22Execute(Scanner scanner) {
+        showDrinksList(menuDao);
+        System.out.println("Please, enter the coffee item code:");
+        String itemCode = scanner.nextLine();
+        System.out.println("Please, enter the new price:");
+        double newPrice = scanner.nextDouble();
+        scanner.nextLine();
+        
+        boolean success = menuDao.updateCoffeePrice(itemCode, newPrice);
+        if (success) {
+            System.out.println("Price updated successfully!");
+        } else {
+            System.out.println("Failed to update price. Coffee not found or invalid item code.");
+        }
+    }
+
+    public static void menuItem23Execute(Scanner scanner) {
+        System.out.println("Please, enter the pastry chef first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the pastry chef last name:");
+        String lastName = scanner.nextLine();
+        System.out.println("Please, enter the new address:");
+        String newAddress = scanner.nextLine();
+        
+        boolean success = staffDao.updatePastryChefAddress(firstName, lastName, newAddress);
+        if (success) {
+            System.out.println("Address updated successfully!");
+        } else {
+            System.out.println("Failed to update address. Pastry chef not found.");
+        }
+    }
+
+    public static void menuItem24Execute(Scanner scanner) {
+        System.out.println("Please, enter the barista first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the barista last name:");
+        String lastName = scanner.nextLine();
+        System.out.println("Please, enter the new phone number:");
+        String newPhone = scanner.nextLine();
+        
+        boolean success = staffDao.updateBaristaPhone(firstName, lastName, newPhone);
+        if (success) {
+            System.out.println("Phone updated successfully!");
+        } else {
+            System.out.println("Failed to update phone. Barista not found.");
+        }
+    }
+
+    public static void menuItem25Execute(Scanner scanner) {
         System.out.println("Please, enter the customer first name:");
         String firstName = scanner.nextLine();
         System.out.println("Please, enter the customer last name:");
@@ -328,7 +364,48 @@ public class MenuExecutor {
         }
     }
 
-    public static void menuItem23Execute() {
+    public static void menuItem26Execute(Scanner scanner) {
+        System.out.println("Please, enter the customer first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the customer last name:");
+        String lastName = scanner.nextLine();
+        
+        boolean success = customerDao.deleteCustomer(firstName, lastName);
+        if (success) {
+            System.out.println("Customer deleted successfully!");
+        } else {
+            System.out.println("Failed to delete customer. Customer not found.");
+        }
+    }
+
+    public static void menuItem27Execute(Scanner scanner) {
+        showDesertsList(menuDao);
+        System.out.println("Please, enter the dessert item code to delete:");
+        String itemCode = scanner.nextLine();
+        
+        boolean success = menuDao.deleteDessert(itemCode);
+        if (success) {
+            System.out.println("Dessert deleted successfully!");
+        } else {
+            System.out.println("Failed to delete dessert. Dessert not found or invalid item code.");
+        }
+    }
+
+    public static void menuItem28Execute(Scanner scanner) {
+        System.out.println("Please, enter the customer first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the customer last name:");
+        String lastName = scanner.nextLine();
+        
+        boolean success = customerDao.deleteCustomer(firstName, lastName);
+        if (success) {
+            System.out.println("Customer deleted successfully!");
+        } else {
+            System.out.println("Failed to delete customer. Customer not found.");
+        }
+    }
+
+    public static void menuItem29Execute() {
         DaoMethodsTester.testAllMethods();
     }
 

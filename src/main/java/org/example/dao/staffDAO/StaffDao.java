@@ -24,4 +24,12 @@ public interface StaffDao {
     boolean updatePastryChefAddress(String firstName, String lastName, String newAddress);
     
     boolean updateBaristaPhone(String firstName, String lastName, String newPhone);
+    
+    boolean deleteWaiter(String firstName, String lastName);
+    
+    boolean deleteBarista(String firstName, String lastName);
+    
+    List<Staff> findAllBaristas();
+    
+    List<Staff> findAllWaiters();
 }
