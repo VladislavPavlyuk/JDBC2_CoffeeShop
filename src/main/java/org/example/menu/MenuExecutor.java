@@ -15,6 +15,8 @@ import org.example.dao.customerDiscountDAO.CustomerDiscountDao;
 import org.example.dao.customerDiscountDAO.CustomerDiscountDaoImpl;
 import org.example.dao.menuDAO.MenuDao;
 import org.example.dao.menuDAO.MenuDaoImpl;
+import org.example.dao.orderDAO.OrderDao;
+import org.example.dao.orderDAO.OrderDaoImpl;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.shiftDAO.ShiftDaoImpl;
 import org.example.dao.staffAndCoffeeshopDAO.StaffToCoffeeshopDao;
@@ -55,6 +57,7 @@ public class MenuExecutor {
     private static final CustomerDiscountDao customerDiscountDao = new CustomerDiscountDaoImpl(connectionProvider);
     private static final CustomerDao customerDao = new CustomerDaoImpl(connectionProvider);
     private static final OrderDao orderDao = new OrderDaoImpl(connectionProvider);
+    private static final ScheduleDao scheduleDao = new ScheduleDaoImpl(connectionProvider);
 
     public static void startMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -140,6 +143,20 @@ public class MenuExecutor {
                 } else if (choice == 33) {
                     menuItem33Execute();
                 } else if (choice == 34) {
+                    menuItem34Execute(scanner);
+                } else if (choice == 35) {
+                    menuItem35Execute(scanner);
+                } else if (choice == 36) {
+                    menuItem36Execute(scanner);
+                } else if (choice == 37) {
+                    menuItem37Execute(scanner);
+                } else if (choice == 38) {
+                    menuItem38Execute();
+                } else if (choice == 39) {
+                    menuItem39Execute();
+                } else if (choice == 40) {
+                    menuItem40Execute();
+                } else if (choice == 41) {
                     running = false;
                     System.out.println("Exiting application. Goodbye!");
                 } else {
@@ -460,6 +477,60 @@ public class MenuExecutor {
     }
 
     public static void menuItem33Execute() {
+        MenuPublisher.showCustomersWithDrinksToday(orderDao);
+    }
+
+    public static void menuItem34Execute(Scanner scanner) {
+        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        String dateStr = scanner.nextLine();
+        try {
+            java.sql.Date date = java.sql.Date.valueOf(dateStr);
+            MenuPublisher.showAverageOrderAmountByDate(orderDao, date);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem35Execute(Scanner scanner) {
+        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        String dateStr = scanner.nextLine();
+        try {
+            java.sql.Date date = java.sql.Date.valueOf(dateStr);
+            MenuPublisher.showMaxOrderAmountByDate(orderDao, date);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem36Execute(Scanner scanner) {
+        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        String dateStr = scanner.nextLine();
+        try {
+            java.sql.Date date = java.sql.Date.valueOf(dateStr);
+            MenuPublisher.showCustomerWithMaxOrderByDate(orderDao, date);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
+        }
+    }
+
+    public static void menuItem37Execute(Scanner scanner) {
+        System.out.println("Please, enter the barista first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please, enter the barista last name:");
+        String lastName = scanner.nextLine();
+        
+        MenuPublisher.showBaristaScheduleForWeek(scheduleDao, firstName, lastName);
+    }
+
+    public static void menuItem38Execute() {
+        MenuPublisher.showAllBaristasScheduleForWeek(scheduleDao);
+    }
+
+    public static void menuItem39Execute() {
+        MenuPublisher.showAllStaffScheduleForWeek(scheduleDao);
+    }
+
+    public static void menuItem40Execute() {
         DaoMethodsTester.testAllMethods();
     }
 

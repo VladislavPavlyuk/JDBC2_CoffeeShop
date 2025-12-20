@@ -5,6 +5,7 @@ import org.example.dao.coffeeshopDAO.CoffeeshopDao;
 import org.example.dao.customerDAO.CustomerDao;
 import org.example.dao.customerDiscountDAO.CustomerDiscountDao;
 import org.example.dao.menuDAO.MenuDao;
+import org.example.dao.orderDAO.OrderDao;
 import org.example.dao.shiftDAO.ShiftDao;
 import org.example.dao.staffDAO.StaffDao;
 import org.example.model.*;
@@ -48,6 +49,13 @@ public class MenuPublisher {
     private static final String  SHOW_ORDERS_BY_DATE_RANGE = "Show orders by date range";
     private static final String  SHOW_DESSERT_ORDERS_COUNT_BY_DATE = "Show dessert orders count by date";
     private static final String  SHOW_DRINK_ORDERS_COUNT_BY_DATE = "Show drink orders count by date";
+    private static final String  SHOW_CUSTOMERS_WITH_DRINKS_TODAY = "Show customers with drinks today";
+    private static final String  SHOW_AVERAGE_ORDER_AMOUNT_BY_DATE = "Show average order amount by date";
+    private static final String  SHOW_MAX_ORDER_AMOUNT_BY_DATE = "Show max order amount by date";
+    private static final String  SHOW_CUSTOMER_WITH_MAX_ORDER_BY_DATE = "Show customer with max order by date";
+    private static final String  SHOW_BARISTA_SCHEDULE_FOR_WEEK = "Show barista schedule for week";
+    private static final String  SHOW_ALL_BARISTAS_SCHEDULE_FOR_WEEK = "Show all baristas schedule for week";
+    private static final String  SHOW_ALL_STAFF_SCHEDULE_FOR_WEEK = "Show all staff schedule for week";
     private static final String  TEST_ALL_DAO_METHODS = "Test all DAO methods";
     private static final String  EXIT = "Exit";
     private static final String  INVATION_STRING = "Please enter the number";
@@ -196,6 +204,34 @@ public class MenuPublisher {
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(SHOW_DRINK_ORDERS_COUNT_BY_DATE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_CUSTOMERS_WITH_DRINKS_TODAY)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_AVERAGE_ORDER_AMOUNT_BY_DATE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_MAX_ORDER_AMOUNT_BY_DATE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_CUSTOMER_WITH_MAX_ORDER_BY_DATE)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_BARISTA_SCHEDULE_FOR_WEEK)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_ALL_BARISTAS_SCHEDULE_FOR_WEEK)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_ALL_STAFF_SCHEDULE_FOR_WEEK)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
@@ -619,6 +655,114 @@ public class MenuPublisher {
         
         System.out.println("============================================================");
         System.out.println("Drink orders count for date " + date + ": " + count);
+        System.out.println("============================================================");
+    }
+
+    public static void showCustomersWithDrinksToday(OrderDao orderDao) {
+        List<CustomerBaristaInfo> customers = orderDao.getCustomersWithDrinksToday();
+        
+        System.out.println("============================================================");
+        System.out.println("Customers who ordered drinks today:");
+        System.out.println("============================================================");
+        
+        if (customers.isEmpty()) {
+            System.out.println("No customers found who ordered drinks today.");
+        } else {
+            int menuLine = 1;
+            for (var info : customers) {
+                System.out.println(menuLine++ + ".  " + info.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showAverageOrderAmountByDate(OrderDao orderDao, java.sql.Date date) {
+        BigDecimal avgAmount = orderDao.getAverageOrderAmountByDate(date);
+        
+        System.out.println("============================================================");
+        System.out.println("Average order amount for date " + date + ": " + avgAmount);
+        System.out.println("============================================================");
+    }
+
+    public static void showMaxOrderAmountByDate(OrderDao orderDao, java.sql.Date date) {
+        BigDecimal maxAmount = orderDao.getMaxOrderAmountByDate(date);
+        
+        System.out.println("============================================================");
+        System.out.println("Maximum order amount for date " + date + ": " + maxAmount);
+        System.out.println("============================================================");
+    }
+
+    public static void showCustomerWithMaxOrderByDate(OrderDao orderDao, java.sql.Date date) {
+        CustomerBaristaInfo customer = orderDao.getCustomerWithMaxOrderAmountByDate(date);
+        
+        System.out.println("============================================================");
+        System.out.println("Customer with maximum order amount for date " + date + ":");
+        System.out.println("============================================================");
+        
+        if (customer == null) {
+            System.out.println("No customer found with orders on this date.");
+        } else {
+            System.out.println(customer.toString());
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showBaristaScheduleForWeek(ScheduleDao scheduleDao, String firstName, String lastName) {
+        List<StaffSchedule> schedules = scheduleDao.getBaristaScheduleForWeek(firstName, lastName);
+        
+        System.out.println("============================================================");
+        System.out.println("Barista " + firstName + " " + lastName + " schedule for this week:");
+        System.out.println("============================================================");
+        
+        if (schedules.isEmpty()) {
+            System.out.println("No schedule found for this barista for this week.");
+        } else {
+            int menuLine = 1;
+            for (var schedule : schedules) {
+                System.out.println(menuLine++ + ".  " + schedule.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showAllBaristasScheduleForWeek(ScheduleDao scheduleDao) {
+        List<StaffSchedule> schedules = scheduleDao.getAllBaristasScheduleForWeek();
+        
+        System.out.println("============================================================");
+        System.out.println("All baristas schedule for this week:");
+        System.out.println("============================================================");
+        
+        if (schedules.isEmpty()) {
+            System.out.println("No schedule found for baristas for this week.");
+        } else {
+            int menuLine = 1;
+            for (var schedule : schedules) {
+                System.out.println(menuLine++ + ".  " + schedule.toString());
+            }
+        }
+        
+        System.out.println("============================================================");
+    }
+
+    public static void showAllStaffScheduleForWeek(ScheduleDao scheduleDao) {
+        List<StaffSchedule> schedules = scheduleDao.getAllStaffScheduleForWeek();
+        
+        System.out.println("============================================================");
+        System.out.println("All staff schedule for this week:");
+        System.out.println("============================================================");
+        
+        if (schedules.isEmpty()) {
+            System.out.println("No schedule found for staff for this week.");
+        } else {
+            int menuLine = 1;
+            for (var schedule : schedules) {
+                System.out.println(menuLine++ + ".  " + schedule.toString());
+            }
+        }
+        
         System.out.println("============================================================");
     }
 
