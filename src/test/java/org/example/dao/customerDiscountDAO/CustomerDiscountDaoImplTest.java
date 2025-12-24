@@ -285,3 +285,5 @@ class CustomerDiscountDaoImplTest {
         assertThrows(Exception.class, () -> customerDiscountDao.updateCustomerDiscount(firstName, lastName, newDiscountValue));
     }
 }
+
+

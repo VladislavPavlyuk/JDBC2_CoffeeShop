@@ -12,3 +12,5 @@ public interface ScheduleDao {
     
     List<StaffSchedule> getAllStaffScheduleForWeek();
 }
+
+

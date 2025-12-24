@@ -393,8 +393,11 @@ public class CoffeeshopDbInitializer {
         for (int count = 0; count < maxStaffCount; count++) {
             Staff addStaff = new Staff();
             // limit names to 50 chars (database field size)
-            String firstName = randomNames.get(RANDOM_GENERATOR.nextInt(randomNames.size()));
-            String lastName = randomLastNames.get(RANDOM_GENERATOR.nextInt(randomLastNames.size()));
+            String firstNameLine = randomNames.get(RANDOM_GENERATOR.nextInt(randomNames.size()));
+            String lastNameLine = randomLastNames.get(RANDOM_GENERATOR.nextInt(randomLastNames.size()));
+            // extract only the name part (before first dash if exists)
+            String firstName = firstNameLine.contains(" - ") ? firstNameLine.split(" - ")[0].trim() : firstNameLine.trim();
+            String lastName = lastNameLine.contains(" - ") ? lastNameLine.split(" - ")[0].trim() : lastNameLine.trim();
             addStaff.setFirstName(firstName.length() > 50 ? firstName.substring(0, 50) : firstName);
             addStaff.setLastName(lastName.length() > 50 ? lastName.substring(0, 50) : lastName);
             addStaff.setPositionId(positionIds.get(RANDOM_GENERATOR.nextInt(positionIds.size())));

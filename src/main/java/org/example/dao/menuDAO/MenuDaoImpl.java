@@ -1,7 +1,6 @@
 package org.example.dao.menuDAO;
 
 import org.example.dao.ConnectionProvider;
-import org.example.dao.exception.DaoException;
 import org.example.dao.exception.ExceptionHandler;
 import org.example.exception.ConnectionDBException;
 import org.example.model.MenuItem;
@@ -155,5 +154,7 @@ public class MenuDaoImpl implements MenuDao {
         return item;
     }
 }
+
+
 
 

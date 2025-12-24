@@ -20,3 +20,5 @@ public interface CustomerDiscountDao {
     boolean updateCustomerDiscount(String firstName, String lastName, BigDecimal newDiscountValue);
 }
 
+
+

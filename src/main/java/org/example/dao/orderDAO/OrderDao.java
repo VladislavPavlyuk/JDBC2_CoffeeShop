@@ -25,3 +25,5 @@ public interface OrderDao {
     
     CustomerBaristaInfo getCustomerWithMaxOrderAmountByDate(Date date);
 }
+
+

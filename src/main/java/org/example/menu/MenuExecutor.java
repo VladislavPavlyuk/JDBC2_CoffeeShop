@@ -62,123 +62,61 @@ public class MenuExecutor {
     private static final ScheduleDao scheduleDao = new ScheduleDaoImpl(connectionProvider);
 
     public static void startMenu() {
-        Scanner scanner = new Scanner(System.in);
-        boolean running = true;
-
-        while (running) {
-            try {
-                showMenu();
-                
-                if (!scanner.hasNextInt()) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    scanner.nextLine();
-                    continue;
-                }
-                
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // consume newline after number
-
-                if (choice == 1) {
-                    menuItem1Execute(scanner);
-                } else if (choice == 2) {
-                    menuItem2Execute(scanner);
-                } else if (choice == 3) {
-                    menuItem3Execute(scanner);
-                } else if (choice == 4) {
-                    menuItem4Execute(scanner);
-                } else if (choice == 5) {
-                    menuItem5Execute(scanner);
-                } else if (choice == 6) {
-                    menuItem6Execute(scanner);
-                } else if (choice == 7) {
-                    menuItem7Execute();
-                } else if (choice == 8) {
-                    menuItem8Execute();
-                } else if (choice == 9) {
-                    menuItem9Execute();
-                } else if (choice == 10) {
-                    menuItem10Execute();
-                } else if (choice == 11) {
-                    menuItem11Execute();
-                } else if (choice == 12) {
-                    menuItem12Execute();
-                } else if (choice == 13) {
-                    menuItem13Execute();
-                } else if (choice == 14) {
-                    menuItem14Execute();
-                } else if (choice == 15) {
-                    menuItem15Execute();
-                } else if (choice == 16) {
-                    menuItem16Execute();
-                } else if (choice == 17) {
-                    menuItem17Execute();
-                } else if (choice == 18) {
-                    menuItem18Execute();
-                } else if (choice == 19) {
-                    menuItem19Execute();
-                } else if (choice == 20) {
-                    menuItem20Execute();
-                } else if (choice == 21) {
-                    menuItem21Execute(scanner);
-                } else if (choice == 22) {
-                    menuItem22Execute(scanner);
-                } else if (choice == 23) {
-                    menuItem23Execute(scanner);
-                } else if (choice == 24) {
-                    menuItem24Execute(scanner);
-                } else if (choice == 25) {
-                    menuItem25Execute(scanner);
-                } else if (choice == 26) {
-                    menuItem26Execute(scanner);
-                } else if (choice == 27) {
-                    menuItem27Execute(scanner);
-                } else if (choice == 28) {
-                    menuItem28Execute(scanner);
-                } else if (choice == 29) {
-                    menuItem29Execute(scanner);
-                } else if (choice == 30) {
-                    menuItem30Execute(scanner);
-                } else if (choice == 31) {
-                    menuItem31Execute(scanner);
-                } else if (choice == 32) {
-                    menuItem32Execute(scanner);
-                } else if (choice == 33) {
-                    menuItem33Execute();
-                } else if (choice == 34) {
-                    menuItem34Execute(scanner);
-                } else if (choice == 35) {
-                    menuItem35Execute(scanner);
-                } else if (choice == 36) {
-                    menuItem36Execute(scanner);
-                } else if (choice == 37) {
-                    menuItem37Execute(scanner);
-                } else if (choice == 38) {
-                    menuItem38Execute();
-                } else if (choice == 39) {
-                    menuItem39Execute();
-                } else if (choice == 40) {
-                    menuItem40Execute();
-                } else if (choice == 41) {
-                    running = false;
-                    System.out.println("Exiting application. Goodbye!");
-                } else {
-                    System.out.println("Invalid choice. Please try again.");
-                }
-            } catch (java.util.NoSuchElementException e) {
-                System.out.println("\nInput stream closed. Exiting application.");
-                running = false;
-            } catch (Exception e) {
-                System.err.println("Error: " + e.getMessage());
-                e.printStackTrace();
-                scanner.nextLine(); // consume any remaining input
-            }
-        }
-        scanner.close();
+        startInteractiveMenu();
+    }
+    
+    public static void startInteractiveMenu() {
+        InteractiveMenu menu = new InteractiveMenu();
+        
+        menu.addMenuItem(MenuPublisher.FIND_ALL_SHIFTS, s -> menuItem1Execute(s));
+        menu.addMenuItem(MenuPublisher.FIND_ALL_STAFF, s -> menuItem2Execute(s));
+        menu.addMenuItem(MenuPublisher.ADD_STAFF, s -> menuItem3Execute(s));
+        menu.addMenuItem(MenuPublisher.DELETE_STAFF, s -> menuItem4Execute(s));
+        menu.addMenuItem(MenuPublisher.ADD_STAFF_TO_COFFESHOP, s -> menuItem5Execute(s));
+        menu.addMenuItem(MenuPublisher.REMOVE_STAFF_FROM_COFFEESHOP, s -> menuItem6Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_STAFF, () -> menuItem7Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_DESERTS, () -> menuItem8Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_DRINKS, () -> menuItem9Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_BARISTAS, () -> menuItem10Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_WAITERS, () -> menuItem11Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_MIN_DISCOUNT, () -> menuItem12Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_MAX_DISCOUNT, () -> menuItem13Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_MIN_DISCOUNT, () -> menuItem14Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_MAX_DISCOUNT, () -> menuItem15Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_AVG_DISCOUNT, () -> menuItem16Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_YOUNGEST_CUSTOMER, () -> menuItem17Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_OLDEST_CUSTOMER, () -> menuItem18Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_BIRTHDAY_TODAY, () -> menuItem19Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_WITHOUT_EMAIL, () -> menuItem20Execute());
+        menu.addMenuItem(MenuPublisher.UPDATE_COFFEE_PRICE, s -> menuItem21Execute(s));
+        menu.addMenuItem(MenuPublisher.UPDATE_PASTRY_CHEF_ADDRESS, s -> menuItem22Execute(s));
+        menu.addMenuItem(MenuPublisher.UPDATE_BARISTA_PHONE, s -> menuItem23Execute(s));
+        menu.addMenuItem(MenuPublisher.UPDATE_CUSTOMER_DISCOUNT, s -> menuItem24Execute(s));
+        menu.addMenuItem(MenuPublisher.DELETE_DESSERT, s -> menuItem25Execute(s));
+        menu.addMenuItem(MenuPublisher.DELETE_WAITER, s -> menuItem26Execute(s));
+        menu.addMenuItem(MenuPublisher.DELETE_BARISTA, s -> menuItem27Execute(s));
+        menu.addMenuItem(MenuPublisher.DELETE_CUSTOMER, s -> menuItem28Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_ORDERS_BY_DATE, s -> menuItem29Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_ORDERS_BY_DATE_RANGE, s -> menuItem30Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_DESSERT_ORDERS_COUNT_BY_DATE, s -> menuItem31Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_DRINK_ORDERS_COUNT_BY_DATE, s -> menuItem32Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_WITH_DRINKS_TODAY, () -> menuItem33Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_AVERAGE_ORDER_AMOUNT_BY_DATE, s -> menuItem34Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_MAX_ORDER_AMOUNT_BY_DATE, s -> menuItem35Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMER_WITH_MAX_ORDER_BY_DATE, s -> menuItem36Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_BARISTA_SCHEDULE_FOR_WEEK, s -> menuItem37Execute(s));
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_BARISTAS_SCHEDULE_FOR_WEEK, () -> menuItem38Execute());
+        menu.addMenuItem(MenuPublisher.SHOW_ALL_STAFF_SCHEDULE_FOR_WEEK, () -> menuItem39Execute());
+        menu.addMenuItem(MenuPublisher.TEST_ALL_DAO_METHODS, () -> menuItem40Execute());
+        menu.addMenuItem(MenuPublisher.EXIT, () -> menu.stop());
+        
+        menu.display();
     }
 
     public static void menuItem1Execute(Scanner scanner) {
         System.out.println("Please, enter the number of staff");
         int numberOfStaff = scanner.nextInt();
+        scanner.nextLine();
 
         List<String> shifts = shiftDao.findAllShiftsWithLessOrEqualStaffNumber(numberOfStaff);
 
@@ -238,6 +176,7 @@ public class MenuExecutor {
 
         System.out.println("Please, enter the staff id to assign");
         long staffId = scanner.nextLong();
+        scanner.nextLine();
 
         staffToCoffeeshopDao.assignStaffToCoffeeshop(staffId,coffeeshop_title);
     }
