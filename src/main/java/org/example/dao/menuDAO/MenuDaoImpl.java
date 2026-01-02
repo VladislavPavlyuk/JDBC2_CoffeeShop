@@ -1,10 +1,5 @@
 package org.example.dao.menuDAO;
 
-import org.example.dao.ConnectionProvider;
-import org.example.dao.exception.ExceptionHandler;
-import org.example.exception.ConnectionDBException;
-import org.example.model.MenuItem;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// handles database operations for menu items
+import org.example.dao.ConnectionProvider;
+import org.example.dao.exception.ExceptionHandler;
+import org.example.exception.ConnectionDBException;
+import org.example.model.MenuItem;
+
 public class MenuDaoImpl implements MenuDao {
     
     private final ConnectionProvider connectionProvider;
@@ -154,6 +153,12 @@ public class MenuDaoImpl implements MenuDao {
         return item;
     }
 }
+
+
+
+
+
+
 
 
 

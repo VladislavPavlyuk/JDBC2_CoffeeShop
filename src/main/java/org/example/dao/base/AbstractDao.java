@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// Base class for all DAO classes
 public abstract class AbstractDao<T, ID> implements CrudRepository<T, ID> {
 
     protected final ConnectionProvider connectionProvider;
@@ -79,7 +78,6 @@ public abstract class AbstractDao<T, ID> implements CrudRepository<T, ID> {
             }
             ps.executeBatch();
             
-            // get generated IDs from database
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 int index = 0;
                 while (generatedKeys.next() && index < entities.size()) {

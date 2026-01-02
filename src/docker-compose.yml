@@ -10,8 +10,32 @@ services:
       POSTGRES_USER: sa
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: coffeeshop_db
+      POSTGRES_HOST_AUTH_METHOD: md5
     volumes:
       - ts-db-coffeeshop:/var/lib/postgresql/data
 #      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5433:5432"
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sa -d coffeeshop_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  coffeeshop-app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: coffeeshop_app_container
+    restart: always
+    depends_on:
+      ts-postgres:
+        condition: service_healthy
+    environment:
+      - DB_HOST=ts-postgres
+      - DB_PORT=5432
+      - DB_NAME=coffeeshop_db
+      - DB_USER=sa
+      - DB_PASSWORD=admin
+    stdin_open: true
+    tty: true

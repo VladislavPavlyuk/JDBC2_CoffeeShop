@@ -1,21 +1,19 @@
 package org.example;
 
-import org.example.exception.FileException;
-import org.example.service.TxtFileReader;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.setProperty;
-import static org.junit.jupiter.api.Assertions.*;
+import org.example.exception.FileException;
+import org.example.service.TxtFileReader;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class TxtFileReaderTest {
 
     @BeforeAll
-    static void createProperty() {
-        setProperty("test", "true");
+    public static void setUp() {
+        System.setProperty("test", "true");
     }
 
     @Test

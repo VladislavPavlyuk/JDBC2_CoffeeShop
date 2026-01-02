@@ -147,7 +147,6 @@ public class StaffDaoImpl implements StaffDao {
              PreparedStatement ps = conn.prepareStatement(SAVE_STAFF)) {
 
             for (var currentStaff : staff) {
-                // limit names to 50 chars (database field size)
                 String firstName = currentStaff.getFirstName();
                 String lastName = currentStaff.getLastName();
                 if (firstName != null && firstName.length() > 50) {
@@ -213,8 +212,8 @@ public class StaffDaoImpl implements StaffDao {
 
             while (result.next()) {
                 Staff addStaff = new Staff();
-                addStaff.setId(result.getLong(1));  // id
-                addStaff.setFirstName(result.getString(2));  // firstname
+                addStaff.setId(result.getLong(1));
+                addStaff.setFirstName(result.getString(2));
                 addStaff.setLastName(result.getString(3));
                 addStaff.setPositionId(result.getLong(5));
                 addStaff.setShift_Id(result.getLong(6));
@@ -291,7 +290,6 @@ public class StaffDaoImpl implements StaffDao {
                     insertPs.executeUpdate();
                     return true;
                 } catch (SQLException e) {
-                    // if insert fails, return false
                     return false;
                 }
             }
@@ -313,7 +311,6 @@ public class StaffDaoImpl implements StaffDao {
             
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 0) {
-                // try to insert if doesn't exist
                 try (PreparedStatement insertPs = conn.prepareStatement(
                     "INSERT INTO staff_contacts (staff_id, contact_type, contact_value, is_primary, is_active) " +
                     "SELECT s.id, 'PHONE', ?, TRUE, TRUE " +
@@ -332,7 +329,6 @@ public class StaffDaoImpl implements StaffDao {
                     insertPs.executeUpdate();
                     return true;
                 } catch (SQLException e) {
-                    // if insert fails, return false
                     return false;
                 }
             }
@@ -354,7 +350,6 @@ public class StaffDaoImpl implements StaffDao {
             int rowsAffected = ps.executeUpdate();
             
             if (rowsAffected > 0) {
-                // deactivate contacts
                 try (PreparedStatement contactPs = conn.prepareStatement(
                     "UPDATE staff_contacts " +
                     "SET is_active = FALSE " +
@@ -391,7 +386,6 @@ public class StaffDaoImpl implements StaffDao {
             int rowsAffected = ps.executeUpdate();
             
             if (rowsAffected > 0) {
-                // deactivate contacts
                 try (PreparedStatement contactPs = conn.prepareStatement(
                     "UPDATE staff_contacts " +
                     "SET is_active = FALSE " +

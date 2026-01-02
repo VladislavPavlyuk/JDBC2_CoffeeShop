@@ -1,8 +1,0 @@
-org\example\service\PropertyReaderTest.class
-org\example\dao\mapper\StaffMapperTest.class
-org\example\dao\exception\ExceptionHandlerTest.class
-org\example\TxtFileReaderTest.class
-org\example\dao\mapper\ShiftMapperTest.class
-org\example\dao\base\AbstractDaoTest.class
-org\example\dao\mapper\CoffeeshopMapperTest.class
-org\example\dao\base\AbstractDaoTest$TestDao.class

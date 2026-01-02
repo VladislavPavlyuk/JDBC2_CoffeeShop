@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// handles database operations for customer discounts
 public class CustomerDiscountDaoImpl implements CustomerDiscountDao {
     
     private final ConnectionProvider connectionProvider;
@@ -209,7 +208,6 @@ public class CustomerDiscountDaoImpl implements CustomerDiscountDao {
             
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 0) {
-                // try to insert if doesn't exist
                 try (PreparedStatement insertPs = conn.prepareStatement(
                     "INSERT INTO customer_discounts (customer_id, discount_type_id, discount_value, valid_from, valid_to, is_active) " +
                     "SELECT c.id, " +
@@ -255,6 +253,12 @@ public class CustomerDiscountDaoImpl implements CustomerDiscountDao {
         return customer;
     }
 }
+
+
+
+
+
+
 
 
 

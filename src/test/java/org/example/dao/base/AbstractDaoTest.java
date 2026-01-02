@@ -1,23 +1,29 @@
 package org.example.dao.base;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
 import org.example.dao.ConnectionProvider;
 import org.example.dao.exception.DaoException;
 import org.example.dao.mapper.ResultSetMapper;
 import org.example.model.Staff;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.sql.*;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import org.mockito.Mock;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class AbstractDaoTest {
@@ -42,7 +48,6 @@ class AbstractDaoTest {
 
     private TestDao testDao;
 
-    // Тестовая реализация AbstractDao
     private static class TestDao extends AbstractDao<Staff, Long> {
         public TestDao(ConnectionProvider connectionProvider, ResultSetMapper<Staff> mapper) {
             super(connectionProvider, mapper);

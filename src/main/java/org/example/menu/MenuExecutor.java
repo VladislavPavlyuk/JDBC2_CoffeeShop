@@ -28,28 +28,25 @@ import org.example.dao.staffDAO.StaffDaoImpl;
 import static org.example.menu.MenuPublisher.showAverageDiscount;
 import static org.example.menu.MenuPublisher.showCoffeeshopList;
 import static org.example.menu.MenuPublisher.showCoffeeshopListStaff;
+import static org.example.menu.MenuPublisher.showCustomersWithBirthdayToday;
 import static org.example.menu.MenuPublisher.showCustomersWithMaxDiscount;
 import static org.example.menu.MenuPublisher.showCustomersWithMinDiscount;
-import static org.example.menu.MenuPublisher.showCustomersWithBirthdayToday;
 import static org.example.menu.MenuPublisher.showCustomersWithoutEmail;
 import static org.example.menu.MenuPublisher.showDesertsList;
 import static org.example.menu.MenuPublisher.showDrinksList;
 import static org.example.menu.MenuPublisher.showMaxDiscount;
-import static org.example.menu.MenuPublisher.showMenu;
 import static org.example.menu.MenuPublisher.showMinDiscount;
 import static org.example.menu.MenuPublisher.showOldestCustomers;
 import static org.example.menu.MenuPublisher.showShiftList;
 import static org.example.menu.MenuPublisher.showStaffList;
 import static org.example.menu.MenuPublisher.showStringList;
 import static org.example.menu.MenuPublisher.showYoungestCustomers;
-import org.example.menu.DaoMethodsTester;
 import org.example.model.Shift;
 import org.example.model.Staff;
 
 
 public class MenuExecutor {
     
-    // create DAO objects once to reuse them
     private static final org.example.dao.ConnectionProvider connectionProvider = ConnectionFactory.getInstance();
     private static final ShiftDao shiftDao = new ShiftDaoImpl();
     private static final StaffDao staffDao = new StaffDaoImpl(connectionProvider);

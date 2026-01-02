@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.example.dao.coffeeshopDAO.CoffeeshopDaoImplTest
--------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.552 s - in org.example.dao.coffeeshopDAO.CoffeeshopDaoImplTest

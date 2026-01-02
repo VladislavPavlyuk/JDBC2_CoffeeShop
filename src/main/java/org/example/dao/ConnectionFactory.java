@@ -1,16 +1,14 @@
 package org.example.dao;
 
-import org.example.exception.ConnectionDBException;
-import org.example.service.PropertyFactory;
-
+import static java.lang.Class.forName;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static java.lang.Class.forName;
+import org.example.exception.ConnectionDBException;
+import org.example.service.PropertyFactory;
 
-// creates database connections
 public class ConnectionFactory implements ConnectionProvider {
 
     private static final String DRIVER;
@@ -39,7 +37,11 @@ public class ConnectionFactory implements ConnectionProvider {
             }
             
             forName(DRIVER);
-            return DriverManager.getConnection(DBURL, USER, PASSWORD);
+            Properties props = new Properties();
+            props.setProperty("user", USER);
+            props.setProperty("password", PASSWORD);
+            props.setProperty("ssl", "false");
+            return DriverManager.getConnection(DBURL, props);
         } catch (ClassNotFoundException e) {
             throw new ConnectionDBException("Database driver not found: " + DRIVER + ". Please check if PostgreSQL driver is in classpath.", e);
         } catch (SQLException e) {

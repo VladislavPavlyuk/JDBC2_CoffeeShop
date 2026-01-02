@@ -1,10 +1,9 @@
 package org.example.service;
 
-import org.example.exception.PropertyFileException;
-
 import java.util.Properties;
 
-// singleton that provides app configuration
+import org.example.exception.PropertyFileException;
+
 public class PropertyFactory {
 
     private static PropertyFactory propertyFactory;

@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// handles database operations for customers
 public class CustomerDaoImpl implements CustomerDao {
     
     private final ConnectionProvider connectionProvider;
@@ -155,7 +154,6 @@ public class CustomerDaoImpl implements CustomerDao {
             int rowsAffected = ps.executeUpdate();
             
             if (rowsAffected > 0) {
-                // deactivate contacts
                 try (PreparedStatement contactPs = conn.prepareStatement(
                     "UPDATE customer_contacts " +
                     "SET is_active = FALSE " +
@@ -170,7 +168,6 @@ public class CustomerDaoImpl implements CustomerDao {
                     contactPs.executeUpdate();
                 }
                 
-                // deactivate discounts
                 try (PreparedStatement discountPs = conn.prepareStatement(
                     "UPDATE customer_discounts " +
                     "SET is_active = FALSE " +
@@ -208,6 +205,12 @@ public class CustomerDaoImpl implements CustomerDao {
         return customer;
     }
 }
+
+
+
+
+
+
 
 
 

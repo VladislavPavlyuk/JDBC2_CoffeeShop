@@ -1,11 +1,10 @@
 package org.example.dao.mapper;
 
-import org.example.model.Shift;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// converts database row to Shift object
+import org.example.model.Shift;
+
 public class ShiftMapper implements ResultSetMapper<Shift> {
 
     @Override
@@ -16,6 +15,12 @@ public class ShiftMapper implements ResultSetMapper<Shift> {
                 .build();
     }
 }
+
+
+
+
+
+
 
 
 

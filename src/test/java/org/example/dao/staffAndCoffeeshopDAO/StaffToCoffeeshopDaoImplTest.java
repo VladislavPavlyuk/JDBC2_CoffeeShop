@@ -1,10 +1,9 @@
 package org.example.dao.staffAndCoffeeshopDAO;
 
 import org.example.model.StaffToCoffeeshop;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StaffToCoffeeshopDaoImplTest {
 
@@ -46,7 +45,7 @@ class StaffToCoffeeshopDaoImplTest {
         Exception actualResult = null;
         try {
             staffToCoffeeshopDao.save(staffToCoffeeshop);
-            staffToCoffeeshopDao.save(staffToCoffeeshop); // Попытка сохранить дубликат
+            staffToCoffeeshopDao.save(staffToCoffeeshop);
         } catch (Exception e) {
             actualResult = e;
         }

@@ -1,11 +1,10 @@
 package org.example.dao.mapper;
 
-import org.example.model.Coffeeshop;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// converts database row to Coffeeshop object
+import org.example.model.Coffeeshop;
+
 public class CoffeeshopMapper implements ResultSetMapper<Coffeeshop> {
 
     @Override

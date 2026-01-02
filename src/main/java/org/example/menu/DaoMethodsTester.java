@@ -64,7 +64,6 @@ public class DaoMethodsTester {
                              ", Name=" + firstStaff.getFirstName() + " " + firstStaff.getLastName());
 
             System.out.println("2. Testing findAllFromCoffeeshops()...");
-            // Get first coffeeshop title for testing
             CoffeeshopDao coffeeshopDao = new CoffeeshopDaoImpl();
             List<Coffeeshop> coffeeshops = coffeeshopDao.findAll();
             if (!coffeeshops.isEmpty()) {
@@ -80,7 +79,6 @@ public class DaoMethodsTester {
             staffDao.update(firstStaff);
             System.out.println("   Updated staff ID=" + firstStaff.getId() + 
                              ", new first name: " + firstStaff.getFirstName());
-            // Restore original name
             firstStaff.setFirstName(originalFirstName);
             staffDao.update(firstStaff);
             System.out.println("   Restored original name");
@@ -89,7 +87,7 @@ public class DaoMethodsTester {
             Staff newStaff = new Staff();
             newStaff.setFirstName("Test");
             newStaff.setLastName("User");
-            newStaff.setPositionId(1); // Assuming position ID 1 exists
+            newStaff.setPositionId(1);
             if (!allStaff.isEmpty()) {
                 newStaff.setShift_Id(allStaff.get(0).getShift_Id());
             }
@@ -139,7 +137,6 @@ public class DaoMethodsTester {
                              " shifts with <= 10 staff members");
 
             System.out.println("3. Testing save()...");
-            // use direct SQL because table needs start_time and end_time
             try (Connection conn = org.example.dao.ConnectionFactory.getInstance().makeConnection();
                  PreparedStatement ps = conn.prepareStatement(
                      "INSERT INTO shifts(shift_code, start_time, end_time) VALUES(?, ?, ?)")) {
@@ -154,7 +151,6 @@ public class DaoMethodsTester {
             }
 
             System.out.println("4. Testing saveMany()...");
-            // use direct SQL for batch insert
             try (Connection conn = org.example.dao.ConnectionFactory.getInstance().makeConnection();
                  PreparedStatement ps = conn.prepareStatement(
                      "INSERT INTO shifts(shift_code, start_time, end_time) VALUES(?, ?, ?)")) {
@@ -181,7 +177,6 @@ public class DaoMethodsTester {
                 shiftDao.update(firstShift);
                 System.out.println("   Updated shift ID=" + firstShift.getId() + 
                                  ", new title: " + firstShift.getShiftTitle());
-                // Restore original title
                 firstShift.setShiftTitle(originalTitle);
                 shiftDao.update(firstShift);
                 System.out.println("   Restored original title");
@@ -190,7 +185,6 @@ public class DaoMethodsTester {
             }
 
             System.out.println("6. Testing delete()...");
-            // Find test shift to delete using direct SQL query
             try (Connection conn = org.example.dao.ConnectionFactory.getInstance().makeConnection();
                  PreparedStatement ps = conn.prepareStatement(
                      "SELECT id FROM shifts WHERE shift_code LIKE 'TEST_SHIFT%' LIMIT 1");
@@ -255,15 +249,13 @@ public class DaoMethodsTester {
             String originalTitle = firstCoffeeshop.getCoffeeshopTitle();
             firstCoffeeshop.setCoffeeshopTitle(originalTitle + "_test");
             coffeeshopDao.update(firstCoffeeshop);
-            System.out.println("   Updated coffeeshop ID=" + firstCoffeeshop.getId() + 
+                System.out.println("   Updated coffeeshop ID=" + firstCoffeeshop.getId() + 
                              ", new title: " + firstCoffeeshop.getCoffeeshopTitle());
-            // Restore original title
             firstCoffeeshop.setCoffeeshopTitle(originalTitle);
             coffeeshopDao.update(firstCoffeeshop);
             System.out.println("   Restored original title");
 
             System.out.println("6. Testing delete()...");
-            // Find test coffeeshop to delete
             List<Coffeeshop> allCoffeeshopsAfter = coffeeshopDao.findAll();
             Coffeeshop testCoffeeshopToDelete = allCoffeeshopsAfter.stream()
                 .filter(c -> c.getCoffeeshopTitle().startsWith("TEST_COFFEESHOP"))
@@ -344,6 +336,12 @@ public class DaoMethodsTester {
         return coffeeshop;
     }
 }
+
+
+
+
+
+
 
 
 

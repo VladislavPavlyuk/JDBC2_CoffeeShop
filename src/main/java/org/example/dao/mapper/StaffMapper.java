@@ -1,11 +1,10 @@
 package org.example.dao.mapper;
 
-import org.example.model.Staff;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// converts database row to Staff object
+import org.example.model.Staff;
+
 public class StaffMapper implements ResultSetMapper<Staff> {
 
     @Override
@@ -19,6 +18,12 @@ public class StaffMapper implements ResultSetMapper<Staff> {
                 .build();
     }
 }
+
+
+
+
+
+
 
 
 

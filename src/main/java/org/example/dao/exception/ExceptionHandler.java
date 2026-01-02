@@ -1,16 +1,14 @@
 package org.example.dao.exception;
 
-import org.example.exception.ConnectionDBException;
-
 import java.sql.SQLException;
 
-// handles exceptions from DAO layer
+import org.example.exception.ConnectionDBException;
+
 public class ExceptionHandler {
     
     private ExceptionHandler() {
     }
     
-    // converts different exceptions to DaoException
     public static DaoException handleException(Exception e) {
         if (e instanceof ConnectionDBException) {
             return new DaoException("Database connection error", e);
@@ -29,6 +27,12 @@ public class ExceptionHandler {
         }
     }
 }
+
+
+
+
+
+
 
 
 

@@ -13,7 +13,7 @@ class DatabaseConnectionCheckerTest {
         boolean actualResult = DatabaseConnectionChecker.isDatabaseAvailable();
 
         // Then
-        assertTrue(actualResult || !actualResult); // Проверка что метод возвращает boolean
+        assertTrue(actualResult || !actualResult);
     }
 
     @Test
@@ -27,8 +27,6 @@ class DatabaseConnectionCheckerTest {
         }
 
         // Then
-        // Метод может либо выполниться успешно, либо выбросить исключение
-        // в зависимости от доступности БД
         if (actualResult != null) {
             assertTrue(actualResult instanceof ConnectionDBException);
         } else {
@@ -47,8 +45,6 @@ class DatabaseConnectionCheckerTest {
         }
 
         // Then
-        // Метод может либо выполниться успешно, либо выбросить исключение
-        // в зависимости от доступности БД
         if (actualResult != null) {
             assertTrue(actualResult instanceof ConnectionDBException);
         } else {

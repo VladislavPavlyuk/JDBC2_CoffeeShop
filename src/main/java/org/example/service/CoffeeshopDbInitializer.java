@@ -48,7 +48,6 @@ public class CoffeeshopDbInitializer {
 
     public static void createTables() {
         try (Connection conn = ConnectionFactory.getInstance().makeConnection()) {
-            // check if tables need to be created
             boolean needToCreate = false;
             for (var tableName : TABLES_NAME_ARRAY) {
                 if (!tableExists(tableName.trim())) {
@@ -83,7 +82,6 @@ public class CoffeeshopDbInitializer {
                                 try {
                                     stmt.execute(trimmed);
                                 } catch (SQLException e) {
-                                    // ignore "already exists" errors
                                     String errorMsg = e.getMessage();
                                     if (errorMsg != null && 
                                         !errorMsg.contains("already exists") && 
@@ -134,7 +132,6 @@ public class CoffeeshopDbInitializer {
                     int errorCount = 0;
                     List<String> failedStatements = new ArrayList<>();
                     
-                    // first pass - create all tables
                     for (String statement : statements) {
                         String trimmed = statement.trim();
                         if (!trimmed.isEmpty() && !trimmed.startsWith("--")) {
@@ -153,13 +150,11 @@ public class CoffeeshopDbInitializer {
                                     if (errorMsg.contains("already exists") || 
                                         errorMsg.contains("duplicate key") ||
                                         errorMsg.contains("ON CONFLICT")) {
-                                        // ignore these errors
                                         if (tableName != null && trimmed.toUpperCase().contains("CREATE TABLE")) {
                                             System.out.println("Table '" + tableName + "' already exists (skipping)");
                                         }
                                     } else if (errorMsg.contains("does not exist") && 
                                                trimmed.toUpperCase().contains("CREATE TABLE")) {
-                                        // table creation failed, save for retry
                                         failedStatements.add(trimmed);
                                         if (tableName != null) {
                                             System.out.println("Deferred table creation (dependency missing): " + tableName);
@@ -189,7 +184,6 @@ public class CoffeeshopDbInitializer {
                                     System.out.println("Successfully created table (retry): " + tableName);
                                 }
                             } catch (SQLException e) {
-                                // ignore errors on retry if table already exists
                                 String errorMsg = e.getMessage();
                                 if (errorMsg != null) {
                                     String tableName = extractTableName(statement);
@@ -240,12 +234,10 @@ public class CoffeeshopDbInitializer {
     }
 
     public static void createRandomShifts() throws ConnectionDBException {
-        // use direct SQL because table needs start_time and end_time
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
              PreparedStatement ps = conn.prepareStatement(
                  "INSERT INTO shifts(shift_code, start_time, end_time) VALUES(?, ?, ?)")) {
             
-            // time ranges (end_time must be > start_time for CHECK constraint)
             String[] timeRanges = {
                 "08:00:00", "16:00:00",
                 "16:00:00", "23:59:59",
@@ -296,7 +288,6 @@ public class CoffeeshopDbInitializer {
             }
             e.printStackTrace();
             
-            // check if connection error (SQL State 08xxx)
             if (e.getSQLState() != null && e.getSQLState().startsWith("08")) {
                 throw new ConnectionDBException("Cannot create shifts: database connection failed", e);
             } else {
@@ -353,7 +344,6 @@ public class CoffeeshopDbInitializer {
         TxtFileReader txtFileReaderLastNames = new TxtFileReader("data.lastnames");
         List<String> randomLastNames = txtFileReaderLastNames.readFile();
 
-        // check if name lists are empty
         if (randomNames == null || randomNames.isEmpty()) {
             throw new FileException("Names file is empty or could not be read");
         }
@@ -364,12 +354,10 @@ public class CoffeeshopDbInitializer {
         ShiftDao shiftDao = new ShiftDaoImpl();
         List<Shift> shifts = shiftDao.findAll();
 
-        // check if shifts exist
         if (shifts == null || shifts.isEmpty()) {
             throw new IllegalStateException("No shifts found. Please create shifts first.");
         }
 
-        // get positions from database
         List<Long> positionIds = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getInstance().makeConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT id FROM positions WHERE is_active = TRUE");
@@ -434,20 +422,16 @@ public class CoffeeshopDbInitializer {
 
             StaffToCoffeeshopDao staffToCoffeeshopDao = new StaffToCoffeeshopDaoImpl();
             for (var currentStaff : staff) {
-                // each staff member works in 1-2 shops
                 int numCoffeeshops = RANDOM_GENERATOR.nextInt(2) + 1;
-                // use Set to avoid duplicate assignments
                 Set<Long> assignedCoffeeshops = new HashSet<>();
                 for (int count = 0; count < numCoffeeshops; count++) {
                     Long coffeeshopId;
                     int attempts = 0;
-                    // try to find unique shop (max 10 tries)
                     do {
                         coffeeshopId = coffeeshops.get(RANDOM_GENERATOR.nextInt(coffeeshops.size())).getId();
                         attempts++;
                     } while (assignedCoffeeshops.contains(coffeeshopId) && attempts < 10);
                     
-                    // if unique shop found, add assignment
                     if (!assignedCoffeeshops.contains(coffeeshopId)) {
                         assignedCoffeeshops.add(coffeeshopId);
                         StaffToCoffeeshop staffToCoffeeshop = new StaffToCoffeeshop();
@@ -478,7 +462,6 @@ public class CoffeeshopDbInitializer {
         while (i < sql.length()) {
             char c = sql.charAt(i);
             
-            // handle single-line comments (-- to end of line)
             if (c == '-' && i + 1 < sql.length() && sql.charAt(i + 1) == '-') {
                 while (i < sql.length() && sql.charAt(i) != '\n') {
                     i++;
@@ -489,11 +472,9 @@ public class CoffeeshopDbInitializer {
                 continue;
             }
             
-            // handle $$ blocks (PostgreSQL functions)
             if (c == '$' && i + 1 < sql.length() && sql.charAt(i + 1) == '$') {
                 int start = i;
                 i += 2;
-                // find closing $$
                 while (i < sql.length()) {
                     if (sql.charAt(i) == '$' && i + 1 < sql.length() && sql.charAt(i + 1) == '$') {
                         current.append(sql.substring(start, i + 2));
@@ -505,10 +486,8 @@ public class CoffeeshopDbInitializer {
                 continue;
             }
             
-            // handle regular statements
             if (c == ';') {
                 String statement = current.toString().trim();
-                // remove comments from start
                 while (statement.startsWith("--")) {
                     int newlinePos = statement.indexOf('\n');
                     if (newlinePos >= 0) {
@@ -528,7 +507,6 @@ public class CoffeeshopDbInitializer {
             i++;
         }
         
-        // add last statement if exists
         String last = current.toString().trim();
         while (last.startsWith("--")) {
             int newlinePos = last.indexOf('\n');

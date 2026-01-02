@@ -1,11 +1,11 @@
 package org.example.service;
 
-import org.example.dao.ConnectionFactory;
-import org.example.exception.ConnectionDBException;
-
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
+
+import org.example.dao.ConnectionFactory;
+import org.example.exception.ConnectionDBException;
 
 // checks if database is available
 public class DatabaseConnectionChecker {
@@ -62,7 +62,6 @@ public class DatabaseConnectionChecker {
                 try {
                     conn.close();
                 } catch (SQLException e) {
-                    // ignore close errors
                 }
             }
         }

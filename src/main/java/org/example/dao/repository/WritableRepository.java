@@ -2,7 +2,6 @@ package org.example.dao.repository;
 
 import java.util.List;
 
-// write operations for database
 public interface WritableRepository<T> {
     T save(T entity);
 
@@ -14,6 +13,12 @@ public interface WritableRepository<T> {
 
     void deleteAll();
 }
+
+
+
+
+
+
 
 
 

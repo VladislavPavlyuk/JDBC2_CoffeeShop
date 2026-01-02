@@ -1,10 +1,10 @@
 package org.example.service;
 
 
+import static java.lang.System.setProperty;
+
 import org.example.exception.ConnectionDBException;
 import org.example.exception.FileException;
-
-import static java.lang.System.setProperty;
 
 public class CoffeeshopInitializer {
 
@@ -12,7 +12,6 @@ public class CoffeeshopInitializer {
         setProperty("test", "false");
         
         try {
-            // check database connection before init
             System.out.println("Checking database connection...");
             DatabaseConnectionChecker.checkDatabaseConnection();
             

@@ -6,7 +6,6 @@ public class App {
     public static void main(String[] args) {
         System.setProperty("test", "false");
 
-        // check command line arguments
         boolean skipInit = false;
         boolean showHelp = false;
         
@@ -31,11 +30,12 @@ public class App {
                 System.out.println("Skipping database initialization (--skip-init flag)");
             }
             
-            // start menu if init was successful or skipped
             org.example.menu.MenuExecutor.startMenu();
         } catch (Exception e) {
             System.err.println("Application failed to start: " + e.getMessage());
-            e.printStackTrace();
+            if (System.getProperty("debug") != null && e.getCause() != null) {
+                System.err.println("Cause: " + e.getCause().getMessage());
+            }
             System.exit(1);
         }
     }

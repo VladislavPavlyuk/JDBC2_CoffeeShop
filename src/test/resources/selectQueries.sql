@@ -207,3 +207,9 @@ AND (cd.valid_to IS NULL OR CURRENT_DATE <= cd.valid_to);
 
 
 
+
+
+
+
+
+
