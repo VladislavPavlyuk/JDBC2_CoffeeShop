@@ -25,34 +25,41 @@ import org.example.model.StaffSchedule;
 public class MenuPublisher {
 
     private static final String  ACTION_STRING = "To do action press the number";
-    public static final String  FIND_ALL_SHIFTS = "Find all shifts with less or equal staffs number";
-    public static final String  FIND_ALL_STAFF = "Find all staff related to the coffeshop with the given name";
+    
+    public static final String  FIND_ALL_SHIFTS = "Find all shifts with less or equal staff number";
+    public static final String  FIND_ALL_STAFF = "Find all staff related to the coffeeshop with the given name";
     public static final String  ADD_STAFF = "Add a new staff";
     public static final String  DELETE_STAFF = "Delete a staff by the STAFF_ID";
-    public static final String  ADD_STAFF_TO_COFFESHOP = "Add a staff to the coffeshop (from a list)";
-    public static final String  REMOVE_STAFF_FROM_COFFEESHOP = "Remove the staff from one of coffeshops.";
-    public static final String  SHOW_ALL_STAFF = "Show all staff";
-    public static final String  SHOW_ALL_DESERTS = "Show all deserts";
+    public static final String  ADD_STAFF_TO_COFFESHOP = "Add a staff to the coffeeshop (from a list)";
+    public static final String  REMOVE_STAFF_FROM_COFFEESHOP = "Remove the staff from one of coffeeshops";
+    
     public static final String  SHOW_ALL_DRINKS = "Show all drinks and beverages";
+    public static final String  SHOW_ALL_DESERTS = "Show all deserts";
     public static final String  SHOW_ALL_BARISTAS = "Show all baristas";
     public static final String  SHOW_ALL_WAITERS = "Show all waiters";
+    public static final String  SHOW_ALL_STAFF = "Show all staff";
+    
     public static final String  SHOW_MIN_DISCOUNT = "Show minimum discount for customer";
     public static final String  SHOW_MAX_DISCOUNT = "Show maximum discount for customer";
     public static final String  SHOW_CUSTOMERS_MIN_DISCOUNT = "Show customers with minimum discount";
     public static final String  SHOW_CUSTOMERS_MAX_DISCOUNT = "Show customers with maximum discount";
     public static final String  SHOW_AVG_DISCOUNT = "Show average discount value";
+    
     public static final String  SHOW_YOUNGEST_CUSTOMER = "Show youngest customer";
     public static final String  SHOW_OLDEST_CUSTOMER = "Show oldest customer";
     public static final String  SHOW_CUSTOMERS_BIRTHDAY_TODAY = "Show customers with birthday today";
     public static final String  SHOW_CUSTOMERS_WITHOUT_EMAIL = "Show customers without email";
+    
     public static final String  UPDATE_COFFEE_PRICE = "Update coffee price";
     public static final String  UPDATE_PASTRY_CHEF_ADDRESS = "Update pastry chef address";
     public static final String  UPDATE_BARISTA_PHONE = "Update barista phone";
     public static final String  UPDATE_CUSTOMER_DISCOUNT = "Update customer discount";
+    
     public static final String  DELETE_DESSERT = "Delete dessert";
     public static final String  DELETE_WAITER = "Delete waiter";
     public static final String  DELETE_BARISTA = "Delete barista";
     public static final String  DELETE_CUSTOMER = "Delete customer";
+    
     public static final String  SHOW_ORDERS_BY_DATE = "Show orders by date";
     public static final String  SHOW_ORDERS_BY_DATE_RANGE = "Show orders by date range";
     public static final String  SHOW_DESSERT_ORDERS_COUNT_BY_DATE = "Show dessert orders count by date";
@@ -61,10 +68,11 @@ public class MenuPublisher {
     public static final String  SHOW_AVERAGE_ORDER_AMOUNT_BY_DATE = "Show average order amount by date";
     public static final String  SHOW_MAX_ORDER_AMOUNT_BY_DATE = "Show max order amount by date";
     public static final String  SHOW_CUSTOMER_WITH_MAX_ORDER_BY_DATE = "Show customer with max order by date";
+    
     public static final String  SHOW_BARISTA_SCHEDULE_FOR_WEEK = "Show barista schedule for week";
     public static final String  SHOW_ALL_BARISTAS_SCHEDULE_FOR_WEEK = "Show all baristas schedule for week";
     public static final String  SHOW_ALL_STAFF_SCHEDULE_FOR_WEEK = "Show all staff schedule for week";
-    public static final String  TEST_ALL_DAO_METHODS = "Test all DAO methods";
+    
     public static final String  EXIT = "Exit";
     private static final String  INVATION_STRING = "Please enter the number";
     private static final String  SEPARATOR = "-";
@@ -72,7 +80,7 @@ public class MenuPublisher {
     private static final String  END_LINE = "\n";
 
     private static final String  LIST_OF_SHIFTS = "List of shifts";
-    private static final String  LIST_OF_COFFEESHOPS = "List of coffeshops";
+    private static final String  LIST_OF_COFFEESHOPS = "List of coffeeshops";
     private static final String  LIST_OF_STAFF = "List of staff";
     private static final String  LIST_OF_DESERTS = "List of deserts";
     private static final String  LIST_OF_DRINKS = "List of drinks and beverages";
@@ -111,15 +119,11 @@ public class MenuPublisher {
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
-                .append(SHOW_ALL_STAFF)
+                .append(SHOW_ALL_DRINKS)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(SHOW_ALL_DESERTS)
-                .append(END_LINE)
-                .append(menuLine++)
-                .append(DOT_SPACE)
-                .append(SHOW_ALL_DRINKS)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
@@ -128,6 +132,10 @@ public class MenuPublisher {
                 .append(menuLine++)
                 .append(DOT_SPACE)
                 .append(SHOW_ALL_WAITERS)
+                .append(END_LINE)
+                .append(menuLine++)
+                .append(DOT_SPACE)
+                .append(SHOW_ALL_STAFF)
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
@@ -243,10 +251,6 @@ public class MenuPublisher {
                 .append(END_LINE)
                 .append(menuLine++)
                 .append(DOT_SPACE)
-                .append(TEST_ALL_DAO_METHODS)
-                .append(END_LINE)
-                .append(menuLine++)
-                .append(DOT_SPACE)
                 .append(EXIT)
                 .append(END_LINE)
                 .append(SEPARATOR.repeat(60))
@@ -315,12 +319,12 @@ public class MenuPublisher {
                 .append(SEPARATOR.repeat(60))
                 .append(END_LINE);
 
-        for (var currentCoffeshop : coffeeshops) {
+        for (var currentCoffeeshop : coffeeshops) {
             resultString.append(menuLine++)
                     .append(DOT_SPACE)
-                    .append(currentCoffeshop.getCoffeeshopTitle())
+                    .append(currentCoffeeshop.getCoffeeshopTitle())
                     .append(DOT_SPACE)
-                    .append(currentCoffeshop.getCoffeeshopDescription())
+                    .append(currentCoffeeshop.getCoffeeshopDescription())
                     .append(END_LINE);
         }
         resultString.append(SEPARATOR.repeat(60))

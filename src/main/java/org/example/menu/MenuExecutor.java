@@ -59,71 +59,181 @@ public class MenuExecutor {
     private static final ScheduleDao scheduleDao = new ScheduleDaoImpl(connectionProvider);
 
     public static void startMenu() {
-        startInteractiveMenu();
-    }
-    
-    public static void startInteractiveMenu() {
-        InteractiveMenu menu = new InteractiveMenu();
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
         
-        menu.addMenuItem(MenuPublisher.FIND_ALL_SHIFTS, s -> menuItem1Execute(s));
-        menu.addMenuItem(MenuPublisher.FIND_ALL_STAFF, s -> menuItem2Execute(s));
-        menu.addMenuItem(MenuPublisher.ADD_STAFF, s -> menuItem3Execute(s));
-        menu.addMenuItem(MenuPublisher.DELETE_STAFF, s -> menuItem4Execute(s));
-        menu.addMenuItem(MenuPublisher.ADD_STAFF_TO_COFFESHOP, s -> menuItem5Execute(s));
-        menu.addMenuItem(MenuPublisher.REMOVE_STAFF_FROM_COFFEESHOP, s -> menuItem6Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_STAFF, () -> menuItem7Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_DESERTS, () -> menuItem8Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_DRINKS, () -> menuItem9Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_BARISTAS, () -> menuItem10Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_WAITERS, () -> menuItem11Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_MIN_DISCOUNT, () -> menuItem12Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_MAX_DISCOUNT, () -> menuItem13Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_MIN_DISCOUNT, () -> menuItem14Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_MAX_DISCOUNT, () -> menuItem15Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_AVG_DISCOUNT, () -> menuItem16Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_YOUNGEST_CUSTOMER, () -> menuItem17Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_OLDEST_CUSTOMER, () -> menuItem18Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_BIRTHDAY_TODAY, () -> menuItem19Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_WITHOUT_EMAIL, () -> menuItem20Execute());
-        menu.addMenuItem(MenuPublisher.UPDATE_COFFEE_PRICE, s -> menuItem21Execute(s));
-        menu.addMenuItem(MenuPublisher.UPDATE_PASTRY_CHEF_ADDRESS, s -> menuItem22Execute(s));
-        menu.addMenuItem(MenuPublisher.UPDATE_BARISTA_PHONE, s -> menuItem23Execute(s));
-        menu.addMenuItem(MenuPublisher.UPDATE_CUSTOMER_DISCOUNT, s -> menuItem24Execute(s));
-        menu.addMenuItem(MenuPublisher.DELETE_DESSERT, s -> menuItem25Execute(s));
-        menu.addMenuItem(MenuPublisher.DELETE_WAITER, s -> menuItem26Execute(s));
-        menu.addMenuItem(MenuPublisher.DELETE_BARISTA, s -> menuItem27Execute(s));
-        menu.addMenuItem(MenuPublisher.DELETE_CUSTOMER, s -> menuItem28Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_ORDERS_BY_DATE, s -> menuItem29Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_ORDERS_BY_DATE_RANGE, s -> menuItem30Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_DESSERT_ORDERS_COUNT_BY_DATE, s -> menuItem31Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_DRINK_ORDERS_COUNT_BY_DATE, s -> menuItem32Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMERS_WITH_DRINKS_TODAY, () -> menuItem33Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_AVERAGE_ORDER_AMOUNT_BY_DATE, s -> menuItem34Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_MAX_ORDER_AMOUNT_BY_DATE, s -> menuItem35Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_CUSTOMER_WITH_MAX_ORDER_BY_DATE, s -> menuItem36Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_BARISTA_SCHEDULE_FOR_WEEK, s -> menuItem37Execute(s));
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_BARISTAS_SCHEDULE_FOR_WEEK, () -> menuItem38Execute());
-        menu.addMenuItem(MenuPublisher.SHOW_ALL_STAFF_SCHEDULE_FOR_WEEK, () -> menuItem39Execute());
-        menu.addMenuItem(MenuPublisher.TEST_ALL_DAO_METHODS, () -> menuItem40Execute());
-        menu.addMenuItem(MenuPublisher.EXIT, () -> menu.stop());
+        while (running) {
+            MenuPublisher.showMenu();
+            
+            try {
+                String input = scanner.nextLine().trim();
+                
+                if (input.isEmpty()) {
+                    continue;
+                }
+                
+                int choice;
+                try {
+                    choice = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    continue;
+                }
+                
+                switch (choice) {
+                    case 1:
+                        menuItem1Execute(scanner);
+                        break;
+                    case 2:
+                        menuItem2Execute(scanner);
+                        break;
+                    case 3:
+                        menuItem3Execute(scanner);
+                        break;
+                    case 4:
+                        menuItem4Execute(scanner);
+                        break;
+                    case 5:
+                        menuItem5Execute(scanner);
+                        break;
+                    case 6:
+                        menuItem6Execute(scanner);
+                        break;
+                    case 7:
+                        menuItem9Execute();
+                        break;
+                    case 8:
+                        menuItem8Execute();
+                        break;
+                    case 9:
+                        menuItem10Execute();
+                        break;
+                    case 10:
+                        menuItem11Execute();
+                        break;
+                    case 11:
+                        menuItem7Execute();
+                        break;
+                    case 12:
+                        menuItem12Execute();
+                        break;
+                    case 13:
+                        menuItem13Execute();
+                        break;
+                    case 14:
+                        menuItem14Execute();
+                        break;
+                    case 15:
+                        menuItem15Execute();
+                        break;
+                    case 16:
+                        menuItem16Execute();
+                        break;
+                    case 17:
+                        menuItem17Execute();
+                        break;
+                    case 18:
+                        menuItem18Execute();
+                        break;
+                    case 19:
+                        menuItem19Execute();
+                        break;
+                    case 20:
+                        menuItem20Execute();
+                        break;
+                    case 21:
+                        menuItem21Execute(scanner);
+                        break;
+                    case 22:
+                        menuItem22Execute(scanner);
+                        break;
+                    case 23:
+                        menuItem23Execute(scanner);
+                        break;
+                    case 24:
+                        menuItem24Execute(scanner);
+                        break;
+                    case 25:
+                        menuItem25Execute(scanner);
+                        break;
+                    case 26:
+                        menuItem26Execute(scanner);
+                        break;
+                    case 27:
+                        menuItem27Execute(scanner);
+                        break;
+                    case 28:
+                        menuItem28Execute(scanner);
+                        break;
+                    case 29:
+                        menuItem29Execute(scanner);
+                        break;
+                    case 30:
+                        menuItem30Execute(scanner);
+                        break;
+                    case 31:
+                        menuItem31Execute(scanner);
+                        break;
+                    case 32:
+                        menuItem32Execute(scanner);
+                        break;
+                    case 33:
+                        menuItem33Execute();
+                        break;
+                    case 34:
+                        menuItem34Execute(scanner);
+                        break;
+                    case 35:
+                        menuItem35Execute(scanner);
+                        break;
+                    case 36:
+                        menuItem36Execute(scanner);
+                        break;
+                    case 37:
+                        menuItem37Execute(scanner);
+                        break;
+                    case 38:
+                        menuItem38Execute();
+                        break;
+                    case 39:
+                        menuItem39Execute();
+                        break;
+                    case 40:
+                        running = false;
+                        System.out.println("Exiting application. Goodbye!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please select a number from the menu.");
+                }
+                
+                if (running && choice != 40) {
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+                System.out.println("\nPress Enter to continue...");
+                scanner.nextLine();
+            }
+        }
         
-        menu.display();
+        scanner.close();
     }
 
     public static void menuItem1Execute(Scanner scanner) {
-        System.out.println("Please, enter the number of staff");
+        System.out.println("Please enter the number of staff:");
         int numberOfStaff = scanner.nextInt();
         scanner.nextLine();
 
         List<String> shifts = shiftDao.findAllShiftsWithLessOrEqualStaffNumber(numberOfStaff);
 
-        System.out.println("Shifts with less ore equal staff are");
+        System.out.println("Shifts with less or equal staff:");
         showStringList(shifts);
     }
 
     public static void menuItem2Execute(Scanner scanner) {
         showCoffeeshopList(coffeeshopDao);
-        System.out.println("Please, enter the coffeshop title");
+        System.out.println("Please enter the coffeeshop title:");
         String coffeeshop_title = scanner.nextLine();
 
         List<Staff> staff = staffDao.findAllFromCoffeeshops(coffeeshop_title);
@@ -138,11 +248,11 @@ public class MenuExecutor {
 
     public static void menuItem3Execute(Scanner scanner) {
         showShiftList(shiftDao);
-        System.out.println("Please, enter the shift to add staff");
+        System.out.println("Please enter the shift to add staff:");
         String shiftTitle = scanner.nextLine();
-        System.out.println("Please, enter the first name of staff");
+        System.out.println("Please enter the first name of staff:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the last name of staff");
+        System.out.println("Please enter the last name of staff:");
         String lastName = scanner.nextLine();
 
         List<Shift> shifts = shiftDao.findAll();
@@ -160,18 +270,19 @@ public class MenuExecutor {
     }
 
     public static void menuItem4Execute(Scanner scanner) {
-        System.out.println("Please, enter the staff id for delete");
+        System.out.println("Please enter the staff id to delete:");
         long staffId = scanner.nextLong();
+        scanner.nextLine();
 
         staffDao.delete(staffId);
     }
 
     public static void menuItem5Execute(Scanner scanner) {
         showCoffeeshopList(coffeeshopDao);
-        System.out.println("Please, enter the coffeeshop titles, that assign to staff");
+        System.out.println("Please enter the coffeeshop title to assign to staff:");
         String coffeeshop_title = scanner.nextLine();
 
-        System.out.println("Please, enter the staff id to assign");
+        System.out.println("Please enter the staff id to assign:");
         long staffId = scanner.nextLong();
         scanner.nextLine();
 
@@ -179,12 +290,12 @@ public class MenuExecutor {
     }
 
     public static void menuItem6Execute(Scanner scanner) {
-        System.out.println("Please, enter the staff id to assign");
+        System.out.println("Please enter the staff id:");
         long staffId = scanner.nextLong();
         scanner.nextLine();
 
         showCoffeeshopListStaff(coffeeshopDao, staffId);
-        System.out.println("Please, enter the coffeeshop title to remove from staff");
+        System.out.println("Please enter the coffeeshop title to remove from staff:");
         String coffeeshop_title = scanner.nextLine();
 
         staffToCoffeeshopDao.deleteCoffeeshopFromStaff(staffId, coffeeshop_title);
@@ -248,9 +359,9 @@ public class MenuExecutor {
 
     public static void menuItem21Execute(Scanner scanner) {
         showDrinksList(menuDao);
-        System.out.println("Please, enter the coffee item code:");
+        System.out.println("Please enter the coffee item code:");
         String itemCode = scanner.nextLine();
-        System.out.println("Please, enter the new price:");
+        System.out.println("Please enter the new price:");
         double newPrice = scanner.nextDouble();
         scanner.nextLine();
         
@@ -263,11 +374,11 @@ public class MenuExecutor {
     }
 
     public static void menuItem22Execute(Scanner scanner) {
-        System.out.println("Please, enter the pastry chef first name:");
+        System.out.println("Please enter the pastry chef first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the pastry chef last name:");
+        System.out.println("Please enter the pastry chef last name:");
         String lastName = scanner.nextLine();
-        System.out.println("Please, enter the new address:");
+        System.out.println("Please enter the new address:");
         String newAddress = scanner.nextLine();
         
         boolean success = staffDao.updatePastryChefAddress(firstName, lastName, newAddress);
@@ -279,11 +390,11 @@ public class MenuExecutor {
     }
 
     public static void menuItem23Execute(Scanner scanner) {
-        System.out.println("Please, enter the barista first name:");
+        System.out.println("Please enter the barista first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the barista last name:");
+        System.out.println("Please enter the barista last name:");
         String lastName = scanner.nextLine();
-        System.out.println("Please, enter the new phone number:");
+        System.out.println("Please enter the new phone number:");
         String newPhone = scanner.nextLine();
         
         boolean success = staffDao.updateBaristaPhone(firstName, lastName, newPhone);
@@ -295,11 +406,11 @@ public class MenuExecutor {
     }
 
     public static void menuItem24Execute(Scanner scanner) {
-        System.out.println("Please, enter the customer first name:");
+        System.out.println("Please enter the customer first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the customer last name:");
+        System.out.println("Please enter the customer last name:");
         String lastName = scanner.nextLine();
-        System.out.println("Please, enter the new discount value:");
+        System.out.println("Please enter the new discount value:");
         double discountValue = scanner.nextDouble();
         scanner.nextLine();
         
@@ -314,7 +425,7 @@ public class MenuExecutor {
 
     public static void menuItem25Execute(Scanner scanner) {
         showDesertsList(menuDao);
-        System.out.println("Please, enter the dessert item code to delete:");
+        System.out.println("Please enter the dessert item code to delete:");
         String itemCode = scanner.nextLine();
         
         boolean success = menuDao.deleteDessert(itemCode);
@@ -326,9 +437,9 @@ public class MenuExecutor {
     }
 
     public static void menuItem26Execute(Scanner scanner) {
-        System.out.println("Please, enter the waiter first name:");
+        System.out.println("Please enter the waiter first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the waiter last name:");
+        System.out.println("Please enter the waiter last name:");
         String lastName = scanner.nextLine();
         
         boolean success = staffDao.deleteWaiter(firstName, lastName);
@@ -340,9 +451,9 @@ public class MenuExecutor {
     }
 
     public static void menuItem27Execute(Scanner scanner) {
-        System.out.println("Please, enter the barista first name:");
+        System.out.println("Please enter the barista first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the barista last name:");
+        System.out.println("Please enter the barista last name:");
         String lastName = scanner.nextLine();
         
         boolean success = staffDao.deleteBarista(firstName, lastName);
@@ -354,9 +465,9 @@ public class MenuExecutor {
     }
 
     public static void menuItem28Execute(Scanner scanner) {
-        System.out.println("Please, enter the customer first name:");
+        System.out.println("Please enter the customer first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the customer last name:");
+        System.out.println("Please enter the customer last name:");
         String lastName = scanner.nextLine();
         
         boolean success = customerDao.deleteCustomer(firstName, lastName);
@@ -368,7 +479,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem29Execute(Scanner scanner) {
-        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        System.out.println("Please enter the date (YYYY-MM-DD):");
         String dateStr = scanner.nextLine();
         try {
             java.sql.Date date = java.sql.Date.valueOf(dateStr);
@@ -379,9 +490,9 @@ public class MenuExecutor {
     }
 
     public static void menuItem30Execute(Scanner scanner) {
-        System.out.println("Please, enter the start date (YYYY-MM-DD):");
+        System.out.println("Please enter the start date (YYYY-MM-DD):");
         String startDateStr = scanner.nextLine();
-        System.out.println("Please, enter the end date (YYYY-MM-DD):");
+        System.out.println("Please enter the end date (YYYY-MM-DD):");
         String endDateStr = scanner.nextLine();
         try {
             java.sql.Date startDate = java.sql.Date.valueOf(startDateStr);
@@ -393,7 +504,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem31Execute(Scanner scanner) {
-        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        System.out.println("Please enter the date (YYYY-MM-DD):");
         String dateStr = scanner.nextLine();
         try {
             java.sql.Date date = java.sql.Date.valueOf(dateStr);
@@ -404,7 +515,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem32Execute(Scanner scanner) {
-        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        System.out.println("Please enter the date (YYYY-MM-DD):");
         String dateStr = scanner.nextLine();
         try {
             java.sql.Date date = java.sql.Date.valueOf(dateStr);
@@ -419,7 +530,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem34Execute(Scanner scanner) {
-        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        System.out.println("Please enter the date (YYYY-MM-DD):");
         String dateStr = scanner.nextLine();
         try {
             java.sql.Date date = java.sql.Date.valueOf(dateStr);
@@ -430,7 +541,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem35Execute(Scanner scanner) {
-        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        System.out.println("Please enter the date (YYYY-MM-DD):");
         String dateStr = scanner.nextLine();
         try {
             java.sql.Date date = java.sql.Date.valueOf(dateStr);
@@ -441,7 +552,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem36Execute(Scanner scanner) {
-        System.out.println("Please, enter the date (YYYY-MM-DD):");
+        System.out.println("Please enter the date (YYYY-MM-DD):");
         String dateStr = scanner.nextLine();
         try {
             java.sql.Date date = java.sql.Date.valueOf(dateStr);
@@ -452,9 +563,9 @@ public class MenuExecutor {
     }
 
     public static void menuItem37Execute(Scanner scanner) {
-        System.out.println("Please, enter the barista first name:");
+        System.out.println("Please enter the barista first name:");
         String firstName = scanner.nextLine();
-        System.out.println("Please, enter the barista last name:");
+        System.out.println("Please enter the barista last name:");
         String lastName = scanner.nextLine();
         
         MenuPublisher.showBaristaScheduleForWeek(scheduleDao, firstName, lastName);
@@ -466,10 +577,6 @@ public class MenuExecutor {
 
     public static void menuItem39Execute() {
         MenuPublisher.showAllStaffScheduleForWeek(scheduleDao);
-    }
-
-    public static void menuItem40Execute() {
-        DaoMethodsTester.testAllMethods();
     }
 
     private MenuExecutor() {    }
