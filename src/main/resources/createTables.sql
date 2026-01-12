@@ -461,10 +461,27 @@ CREATE TRIGGER update_orders_updated_at BEFORE UPDATE ON orders
 -- Функция для автоматического создания записи в истории цен
 CREATE OR REPLACE FUNCTION log_price_change()
 RETURNS TRIGGER AS $$
+DECLARE
+    table_exists BOOLEAN;
 BEGIN
     IF OLD.base_price IS DISTINCT FROM NEW.base_price THEN
-        INSERT INTO price_history (menu_item_id, old_price, new_price, changed_at)
-        VALUES (NEW.id, OLD.base_price, NEW.base_price, CURRENT_TIMESTAMP);
+        -- Check if price_history table exists
+        SELECT EXISTS (
+            SELECT FROM information_schema.tables 
+            WHERE table_schema = 'public' 
+            AND table_name = 'price_history'
+        ) INTO table_exists;
+        
+        IF table_exists THEN
+            BEGIN
+                INSERT INTO price_history (menu_item_id, old_price, new_price, changed_at)
+                VALUES (NEW.id, OLD.base_price, NEW.base_price, CURRENT_TIMESTAMP);
+            EXCEPTION
+                WHEN OTHERS THEN
+                    -- Ignore errors during initialization
+                    NULL;
+            END;
+        END IF;
     END IF;
     RETURN NEW;
 END;

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.example.dao.orderDAO.OrderDaoImplTest
+-------------------------------------------------------------------------------
+Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.485 s - in org.example.dao.orderDAO.OrderDaoImplTest

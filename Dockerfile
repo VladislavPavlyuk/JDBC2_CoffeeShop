@@ -24,3 +24,5 @@ CMD ["java", "-cp", "/app/classes:/app/lib/*", "org.example.App"]
 
 
 
+
+

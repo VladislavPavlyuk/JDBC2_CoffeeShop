@@ -39,6 +39,66 @@ public class CoffeeshopInitializer {
                 System.err.println("Skipping staff assignment.");
             }
             
+            System.out.println("Creating menu items (drinks and desserts)...");
+            try {
+                CoffeeshopDbInitializer.createMenuItems();
+                System.out.println("Menu items created successfully");
+            } catch (Exception e) {
+                System.err.println("Error creating menu items: " + e.getMessage());
+                if (e.getCause() != null) {
+                    System.err.println("Cause: " + e.getCause().getMessage());
+                }
+                throw e;
+            }
+            
+            System.out.println("Creating customers...");
+            try {
+                CoffeeshopDbInitializer.createRandomCustomers();
+                System.out.println("Customers created successfully");
+            } catch (Exception e) {
+                System.err.println("Error creating customers: " + e.getMessage());
+                if (e.getCause() != null) {
+                    System.err.println("Cause: " + e.getCause().getMessage());
+                }
+                throw e;
+            }
+            
+            System.out.println("Creating customer discounts...");
+            try {
+                CoffeeshopDbInitializer.createCustomerDiscounts();
+                System.out.println("Customer discounts created successfully");
+            } catch (Exception e) {
+                System.err.println("Error creating customer discounts: " + e.getMessage());
+                if (e.getCause() != null) {
+                    System.err.println("Cause: " + e.getCause().getMessage());
+                }
+                throw e;
+            }
+            
+            System.out.println("Creating orders...");
+            try {
+                CoffeeshopDbInitializer.createRandomOrders();
+                System.out.println("Orders created successfully");
+            } catch (Exception e) {
+                System.err.println("Error creating orders: " + e.getMessage());
+                if (e.getCause() != null) {
+                    System.err.println("Cause: " + e.getCause().getMessage());
+                }
+                throw e;
+            }
+            
+            System.out.println("Creating staff schedules...");
+            try {
+                CoffeeshopDbInitializer.createStaffSchedules();
+                System.out.println("Staff schedules created successfully");
+            } catch (Exception e) {
+                System.err.println("Error creating staff schedules: " + e.getMessage());
+                if (e.getCause() != null) {
+                    System.err.println("Cause: " + e.getCause().getMessage());
+                }
+                throw e;
+            }
+            
             System.out.println("\n=== Initialization completed successfully! ===");
         } catch (ConnectionDBException e) {
             System.err.println("\n=== Initialization FAILED: Database connection error ===");

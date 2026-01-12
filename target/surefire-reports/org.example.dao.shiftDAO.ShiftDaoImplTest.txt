@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.example.dao.shiftDAO.ShiftDaoImplTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.419 s - in org.example.dao.shiftDAO.ShiftDaoImplTest

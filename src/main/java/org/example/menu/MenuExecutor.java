@@ -100,19 +100,19 @@ public class MenuExecutor {
                         menuItem6Execute(scanner);
                         break;
                     case 7:
-                        menuItem9Execute();
+                        menuItem7Execute();
                         break;
                     case 8:
                         menuItem8Execute();
                         break;
                     case 9:
-                        menuItem10Execute();
+                        menuItem9Execute();
                         break;
                     case 10:
-                        menuItem11Execute();
+                        menuItem10Execute();
                         break;
                     case 11:
-                        menuItem7Execute();
+                        menuItem11Execute();
                         break;
                     case 12:
                         menuItem12Execute();
@@ -302,7 +302,7 @@ public class MenuExecutor {
     }
 
     public static void menuItem7Execute() {
-        showStaffList(staffDao);
+        showDrinksList(menuDao);
     }
 
     public static void menuItem8Execute() {
@@ -310,15 +310,15 @@ public class MenuExecutor {
     }
 
     public static void menuItem9Execute() {
-        showDrinksList(menuDao);
-    }
-
-    public static void menuItem10Execute() {
         MenuPublisher.showAllBaristas(staffDao);
     }
 
-    public static void menuItem11Execute() {
+    public static void menuItem10Execute() {
         MenuPublisher.showAllWaiters(staffDao);
+    }
+
+    public static void menuItem11Execute() {
+        showStaffList(staffDao);
     }
 
     public static void menuItem12Execute() {
