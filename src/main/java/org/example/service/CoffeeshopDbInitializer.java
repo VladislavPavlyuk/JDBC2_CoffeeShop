@@ -99,7 +99,7 @@ public class CoffeeshopDbInitializer {
                         }
                     }
                     
-                    // second pass - retry failed tables
+                    // retry failed tables
                     if (!failedStatements.isEmpty()) {
                         System.out.println("Retrying creation of " + failedStatements.size() + " tables with dependencies...");
                         for (String statement : failedStatements) {
@@ -193,7 +193,7 @@ public class CoffeeshopDbInitializer {
                         }
                     }
                     
-                    // second pass - retry failed tables
+                    // retry failed tables
                     if (!failedStatements.isEmpty()) {
                         System.out.println("Retrying creation of " + failedStatements.size() + " tables with dependencies...");
                         for (String statement : failedStatements) {
@@ -268,14 +268,11 @@ public class CoffeeshopDbInitializer {
                             String errorMsg = e.getMessage();
                             if (errorMsg != null) {
                                 if (errorMsg.contains("does not exist")) {
-                                    // Table doesn't exist, skip
                                     continue;
                                 }
                                 if (errorMsg.contains("current transaction is aborted")) {
-                                    // Transaction aborted, rollback and retry
                                     conn.rollback();
                                     conn.setAutoCommit(false);
-                                    // Skip remaining deletes in this transaction
                                     break;
                                 }
                             }
@@ -340,7 +337,6 @@ public class CoffeeshopDbInitializer {
             System.err.println("SQL State: " + e.getSQLState());
             System.err.println("Error Code: " + e.getErrorCode());
             
-            // check batch exceptions
             SQLException nextException = e.getNextException();
             if (nextException != null) {
                 System.err.println("Batch exception: " + nextException.getMessage());
@@ -444,10 +440,8 @@ public class CoffeeshopDbInitializer {
         List<Staff> staffToAdd = new ArrayList<>();
         for (int count = 0; count < maxStaffCount; count++) {
             Staff addStaff = new Staff();
-            // limit names to 50 chars (database field size)
             String firstNameLine = randomNames.get(RANDOM_GENERATOR.nextInt(randomNames.size()));
             String lastNameLine = randomLastNames.get(RANDOM_GENERATOR.nextInt(randomLastNames.size()));
-            // extract only the name part (before first dash if exists)
             String firstName = firstNameLine.contains(" - ") ? firstNameLine.split(" - ")[0].trim() : firstNameLine.trim();
             String lastName = lastNameLine.contains(" - ") ? lastNameLine.split(" - ")[0].trim() : lastNameLine.trim();
             addStaff.setFirstName(firstName.length() > 50 ? firstName.substring(0, 50) : firstName);
@@ -516,7 +510,7 @@ public class CoffeeshopDbInitializer {
         }
     }
 
-    // splits SQL into statements (handles $$ blocks for PostgreSQL functions)
+    // split SQL into statements
     private static List<String> splitSqlStatements(String sql) {
         List<String> statements = new ArrayList<>();
         StringBuilder current = new StringBuilder();
@@ -707,21 +701,18 @@ public class CoffeeshopDbInitializer {
     }
     
     private static Long insertMenuItem(Connection conn, Long typeId, String itemCode, double price) throws SQLException {
-        // Check if item already exists
         String checkSql = "SELECT id FROM menu_items WHERE item_code = ?";
         try (PreparedStatement checkPs = conn.prepareStatement(checkSql)) {
             checkPs.setString(1, itemCode);
             try (ResultSet rs = checkPs.executeQuery()) {
                 if (rs.next()) {
                     Long existingId = rs.getLong(1);
-                    // Temporarily disable trigger to avoid price_history issues during initialization
                     try (Statement disableTrigger = conn.createStatement()) {
                         disableTrigger.execute("ALTER TABLE menu_items DISABLE TRIGGER log_menu_item_price_change");
                     } catch (SQLException e) {
-                        // Trigger might not exist, ignore
+                        // ignore
                     }
                     try {
-                        // Update existing item to ensure it's active and has correct price
                         String updateSql = "UPDATE menu_items SET base_price = ?, is_available = TRUE, is_active = TRUE WHERE id = ?";
                         try (PreparedStatement updatePs = conn.prepareStatement(updateSql)) {
                             updatePs.setBigDecimal(1, java.math.BigDecimal.valueOf(price));
@@ -729,11 +720,10 @@ public class CoffeeshopDbInitializer {
                             updatePs.executeUpdate();
                         }
                     } finally {
-                        // Re-enable trigger
                         try (Statement enableTrigger = conn.createStatement()) {
                             enableTrigger.execute("ALTER TABLE menu_items ENABLE TRIGGER log_menu_item_price_change");
                         } catch (SQLException e) {
-                            // Ignore
+                            // ignore
                         }
                     }
                     return existingId;
@@ -741,7 +731,6 @@ public class CoffeeshopDbInitializer {
             }
         }
         
-        // Item doesn't exist, insert it
         String sql = "INSERT INTO menu_items (type_id, item_code, base_price, is_available, is_active, sort_order) " +
                      "VALUES (?, ?, ?, TRUE, TRUE, 0) RETURNING id";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -782,7 +771,7 @@ public class CoffeeshopDbInitializer {
             throw new FileException("Last names file is empty or could not be read");
         }
         
-        // Ensure customer_contacts table exists
+        // create table if missing
         try (Connection conn = ConnectionFactory.getInstance().makeConnection()) {
             if (!tableExists("customer_contacts")) {
                 System.out.println("Creating customer_contacts table...");
@@ -798,7 +787,6 @@ public class CoffeeshopDbInitializer {
                     ")";
                 try (Statement stmt = conn.createStatement()) {
                     stmt.execute(createTableSql);
-                    // Create unique index separately
                     String createIndexSql = 
                         "CREATE UNIQUE INDEX IF NOT EXISTS idx_customer_contacts_unique_active " +
                         "ON customer_contacts (customer_id, contact_type, contact_value) " +

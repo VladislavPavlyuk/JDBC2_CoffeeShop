@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.example.dao.ConnectionFactory;
 import org.example.exception.ConnectionDBException;
 
-// checks if database is available
+// check database connection
 public class DatabaseConnectionChecker {
 
     private DatabaseConnectionChecker() {

@@ -7,7 +7,7 @@ import org.example.service.CoffeeshopInitializer;
 
 public class App {
     public static void main(String[] args) {
-        // Set UTF-8 encoding for console output
+        // set UTF-8 for console
         System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
         System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
         

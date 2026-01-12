@@ -271,7 +271,7 @@ public class StaffDaoImpl implements StaffDao {
             
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 0) {
-                // try to insert if doesn't exist
+                // insert if not exists
                 try (PreparedStatement insertPs = conn.prepareStatement(
                     "INSERT INTO staff_contacts (staff_id, contact_type, contact_value, is_primary, is_active) " +
                     "SELECT s.id, 'ADDRESS', ?, FALSE, TRUE " +
