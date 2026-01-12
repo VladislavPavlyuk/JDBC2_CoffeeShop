@@ -41,6 +41,8 @@ public class ConnectionFactory implements ConnectionProvider {
             props.setProperty("user", USER);
             props.setProperty("password", PASSWORD);
             props.setProperty("ssl", "false");
+            props.setProperty("characterEncoding", "UTF-8");
+            props.setProperty("useUnicode", "true");
             return DriverManager.getConnection(DBURL, props);
         } catch (ClassNotFoundException e) {
             throw new ConnectionDBException("Database driver not found: " + DRIVER + ". Please check if PostgreSQL driver is in classpath.", e);

@@ -1,9 +1,16 @@
 package org.example;
 
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+
 import org.example.service.CoffeeshopInitializer;
 
 public class App {
     public static void main(String[] args) {
+        // Set UTF-8 encoding for console output
+        System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
+        System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
+        
         System.setProperty("test", "false");
 
         boolean skipInit = false;

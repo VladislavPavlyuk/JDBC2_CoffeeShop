@@ -281,8 +281,7 @@ CREATE TABLE IF NOT EXISTS staff_contacts (
     contact_value VARCHAR(255) NOT NULL,
     is_primary BOOLEAN DEFAULT FALSE,
     is_active BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (staff_id) REFERENCES staff (id) ON DELETE CASCADE,
-    UNIQUE (staff_id, contact_type, contact_value) WHERE is_active = TRUE
+    FOREIGN KEY (staff_id) REFERENCES staff (id) ON DELETE CASCADE
 );
 
 -- Таблица клиентов
@@ -305,8 +304,7 @@ CREATE TABLE IF NOT EXISTS customer_contacts (
     contact_value VARCHAR(255) NOT NULL,
     is_primary BOOLEAN DEFAULT FALSE,
     is_active BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE,
-    UNIQUE (customer_id, contact_type, contact_value) WHERE is_active = TRUE
+    FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE
 );
 
 -- Таблица скидок клиентов (расширяемая система скидок)
@@ -402,11 +400,17 @@ CREATE INDEX IF NOT EXISTS idx_category_translations ON menu_category_translatio
 -- Индексы для персонала
 CREATE INDEX IF NOT EXISTS idx_staff_position ON staff(position_id);
 CREATE INDEX IF NOT EXISTS idx_staff_active ON staff(is_active);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_staff_contacts_unique_active 
+    ON staff_contacts (staff_id, contact_type, contact_value) 
+    WHERE is_active = TRUE;
 CREATE INDEX IF NOT EXISTS idx_staff_contacts_staff ON staff_contacts(staff_id, contact_type);
 CREATE INDEX IF NOT EXISTS idx_staff_contacts_primary ON staff_contacts(staff_id, is_primary) WHERE is_primary = TRUE;
 
 -- Индексы для клиентов
 CREATE INDEX IF NOT EXISTS idx_customers_active ON customers(is_active);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_customer_contacts_unique_active 
+    ON customer_contacts (customer_id, contact_type, contact_value) 
+    WHERE is_active = TRUE;
 CREATE INDEX IF NOT EXISTS idx_customer_contacts_customer ON customer_contacts(customer_id, contact_type);
 CREATE INDEX IF NOT EXISTS idx_customer_contacts_primary ON customer_contacts(customer_id, is_primary) WHERE is_primary = TRUE;
 CREATE INDEX IF NOT EXISTS idx_customer_discounts_customer ON customer_discounts(customer_id, is_active);

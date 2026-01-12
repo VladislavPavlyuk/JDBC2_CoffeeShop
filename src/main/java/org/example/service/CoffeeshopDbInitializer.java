@@ -266,9 +266,18 @@ public class CoffeeshopDbInitializer {
                             }
                         } catch (SQLException e) {
                             String errorMsg = e.getMessage();
-                            if (errorMsg != null && errorMsg.contains("does not exist")) {
-                                // Table doesn't exist, skip
-                                continue;
+                            if (errorMsg != null) {
+                                if (errorMsg.contains("does not exist")) {
+                                    // Table doesn't exist, skip
+                                    continue;
+                                }
+                                if (errorMsg.contains("current transaction is aborted")) {
+                                    // Transaction aborted, rollback and retry
+                                    conn.rollback();
+                                    conn.setAutoCommit(false);
+                                    // Skip remaining deletes in this transaction
+                                    break;
+                                }
                             }
                             System.err.println("Warning: Error deleting from table: " + sql + " - " + errorMsg);
                             // Continue with other tables even if one fails
